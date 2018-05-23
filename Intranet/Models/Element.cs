@@ -10,6 +10,7 @@ namespace Intranet.Models
     {
         [Key]
         public int Id { get; set; }
+        public virtual Collaborateur Collaborateur { get; set; }
     }
 
     

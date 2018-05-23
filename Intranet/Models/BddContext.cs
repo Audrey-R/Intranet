@@ -10,6 +10,6 @@ namespace Intranet.Models
     {
         public DbSet<Element> Elements { get; set; }
         public DbSet<Composant_Communautaire> Composants_Communautaires { get; set; }
-        public DbSet<Ressource> Ressources { get; set; }
+        public DbSet<Composant_General> Composants_Generaux { get; set; }
     }
 }

@@ -16,7 +16,7 @@ namespace Intranet.Models
 
         public void CreerComposantCommunautaire(string libelle)
         {
-            bdd.Composants_Communautaires.Add(new Composant_Communautaire { Libelle = libelle });
+            bdd.Composants_Communautaires.Add(new Composant_Communautaire { LibelleComposantCommunautaire = libelle });
             bdd.SaveChanges();
         }
 
@@ -25,7 +25,7 @@ namespace Intranet.Models
             Composant_Communautaire composantTrouve = bdd.Composants_Communautaires.FirstOrDefault(composant => composant.Id == id);
             if (composantTrouve != null)
             {
-                composantTrouve.Libelle = libelle;
+                composantTrouve.LibelleComposantCommunautaire = libelle;
                 bdd.SaveChanges();
             }
         }

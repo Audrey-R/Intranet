@@ -1,0 +1,72 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Intranet.Models;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+namespace Intranet.Tests.Models
+{
+    [TestClass]
+    public class DalComposantGeneralTests
+    {
+        //[TestInitialize]
+        //public void Init_AvantChaqueTest()
+        //{
+        //    IDatabaseInitializer<BddContext> init = new DropCreateDatabaseAlways<BddContext>();
+        //    Database.SetInitializer(init);
+        //    init.InitializeDatabase(new BddContext());
+        //}
+
+        [TestMethod]
+        public void CreerComposantGeneral_AvecUnNouveauComposantGeneral_ObtientTousLesComposantsGenerauxRenvoitBienLeComposantGeneral()
+        {
+            using (IDalComposantGeneral dal = new DalComposantGeneral())
+            {
+                dal.CreerComposantGeneral("Catégorie");
+                List<Composant_General> composants = dal.ObtientTousLesComposantsGeneraux();
+
+                Assert.IsNotNull(composants);
+                Assert.AreEqual(1, composants.Count);
+                Assert.AreEqual("Catégorie", composants[0].LibelleComposantGeneral);
+            }
+        }
+
+        //[TestMethod]
+        //public void ModifierComposantGeneral_CreationDUnNouveauComposantGeneralEtChangementLibelle_LaModificationEstCorrecteApresRechargement()
+        //{
+        //    using (IDalComposantGeneral dal = new DalComposantGeneral())
+        //    {
+        //        dal.CreerComposantGeneral("Catégorie");
+        //        List<Composant_General> composants = dal.ObtientTousLesComposantsGeneraux();
+        //        int id = composants.First(composant => composant.LibelleComposantGeneral == "Catégorie").Id;
+
+        //        dal.ModifierComposantGeneral(id, "Thème");
+
+        //        composants = dal.ObtientTousLesComposantsGeneraux();
+        //        Assert.IsNotNull(composants);
+        //        Assert.AreEqual(1, composants.Count);
+        //        Assert.AreEqual("Thème", composants[0].LibelleComposantGeneral);
+        //    }
+        //}
+
+        //[TestMethod]
+        //public void SupprimerComposantGeneral_CreationPuisSuppressionDUnComposantGeneralRenvoiDUneListeVide_SupprimeBienLeComposantGeneral()
+        //{
+        //    using (IDalComposantGeneral dal = new DalComposantGeneral())
+        //    {
+        //        dal.CreerComposantGeneral("Catégorie");
+        //        List<Composant_General> composants = dal.ObtientTousLesComposantsGeneraux();
+        //        int id = composants.First(composant => composant.LibelleComposantGeneral == "Catégorie").Id;
+
+        //        dal.SupprimerComposantGeneral(id);
+
+        //        composants = dal.ObtientTousLesComposantsGeneraux();
+        //        Assert.IsNotNull(composants);
+        //        Assert.AreEqual(0, composants.Count);
+        //    }
+        //}
+    }
+}
