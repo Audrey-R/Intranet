@@ -6,11 +6,10 @@ using System.Web;
 
 namespace Intranet.Models
 {
-    public class Element
+    public class Composant_Communautaire : Element
     {
         [Key]
-        public int Id { get; set; }
+        public int IdComposant { get; set; }
+        public string Libelle { get; set; }
     }
-
-    
 }
