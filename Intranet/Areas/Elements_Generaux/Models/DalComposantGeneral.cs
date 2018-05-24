@@ -40,7 +40,7 @@ namespace Intranet.Models
             }
         }
 
-        public List<Composant_General> ObtientTousLesComposantsGeneraux()
+        public List<Composant_General> ListerTousLesComposantsGeneraux()
         {
             return bdd.Composants_Generaux.ToList();
         }

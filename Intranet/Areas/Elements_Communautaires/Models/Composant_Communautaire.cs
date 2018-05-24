@@ -8,8 +8,7 @@ namespace Intranet.Models
 {
     public class Composant_Communautaire : Element
     {
-        [Key]
-        public int IdComposantCommunautaire { get; set; }
         public string LibelleComposantCommunautaire { get; set; }
     }
+
 }

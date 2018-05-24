@@ -10,6 +10,6 @@ namespace Intranet.Models
         void CreerComposantGeneral(string libelle);
         void ModifierComposantGeneral(int id, string libelle);
         void SupprimerComposantGeneral(int id);
-        List<Composant_General> ObtientTousLesComposantsGeneraux();
+        List<Composant_General> ListerTousLesComposantsGeneraux();
     }
 }
