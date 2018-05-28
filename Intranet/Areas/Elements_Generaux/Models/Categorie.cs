@@ -11,17 +11,7 @@ namespace Intranet.Areas.Elements_Generaux.Models
     public class Categorie : Composant_General
     {
         [Key]
-        public int IdCategorie { get; set; }
+        public int Id { get; set; }
         public int LibelleCategorie { get; set; }
-
-        public Categorie()
-        {
-            using (IDalComposantGeneral dal = new DalComposantGeneral())
-            {
-                //Incrémentation de l'IdComposantCommunautaire
-                //List<Categorie> ListeCategorie = dal.ListerToutesLesCategories();
-                //IdCategorie = ListeCategorie.Count + 1;
-            }
-        }
     }
 }

@@ -4,23 +4,13 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
+using Intranet.Areas.Elements_Generaux.Models;
 
 namespace Intranet.Models
 {
-    public class Composant_General : Element
+    public class Composant_General 
     {
-        [Key]
-        public int IdComposantGeneral { get; set; }
-        public string LibelleComposantGeneral { get; set; }
-
-        public Composant_General()
-        {
-            using (IDalComposantGeneral dal = new DalComposantGeneral())
-            {
-                //Incrémentation de l'IdComposantCommunautaire
-                List<Composant_General> ListeComposantsGeneral = dal.ListerTousLesComposantsGeneraux();
-                IdComposantGeneral = ListeComposantsGeneral.Count + 1;
-            }
-        }
+        public Element Element { get; set; }
+        public Fraction Fraction { get; set; }
     }
 }

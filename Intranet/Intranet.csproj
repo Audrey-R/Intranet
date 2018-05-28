@@ -146,23 +146,24 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Areas\Elements\ElementsAreaRegistration.cs" />
     <Compile Include="Areas\Elements_Communautaires\Elements_CommunautairesAreaRegistration.cs" />
     <Compile Include="Areas\Elements_Communautaires\Models\Media.cs" />
     <Compile Include="Areas\Elements_Generaux\Elements_GenerauxAreaRegistration.cs" />
     <Compile Include="Areas\Elements_Generaux\Models\Categorie.cs" />
     <Compile Include="Areas\Elements_Generaux\Models\Composant_General.cs" />
     <Compile Include="Areas\Elements_Generaux\Models\DalComposantGeneral.cs" />
+    <Compile Include="Areas\Elements_Generaux\Models\Fraction.cs" />
     <Compile Include="Areas\Elements_Generaux\Models\IDalComposantGeneral.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\RessourceController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\BddContext.cs" />
-    <Compile Include="Models\Collaborateur.cs" />
+    <Compile Include="Areas\Elements\Models\BddContext.cs" />
+    <Compile Include="Areas\Elements\Models\Collaborateur.cs" />
     <Compile Include="Areas\Elements_Communautaires\Models\Composant_Communautaire.cs" />
     <Compile Include="Areas\Elements_Communautaires\Models\DalComposantCommunautaire.cs" />
-    <Compile Include="Models\Element.cs" />
+    <Compile Include="Areas\Elements\Models\Element.cs" />
     <Compile Include="Areas\Elements_Communautaires\Models\IDalComposantCommunautaire.cs" />
     <Compile Include="Areas\Elements_Communautaires\Models\Ressource.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -204,6 +205,7 @@
     <Content Include="Scripts\esm\popper-utils.js.map" />
     <Content Include="Areas\Elements_Communautaires\Views\web.config" />
     <Content Include="Areas\Elements_Generaux\Views\web.config" />
+    <Content Include="Areas\Elements\Views\web.config" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -241,7 +243,6 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Ressource\Index.cshtml" />
     <Content Include="Scripts\umd\popper.min.js.map" />
     <Content Include="Scripts\umd\popper.js.map" />
     <Content Include="Scripts\umd\popper-utils.min.js.map" />
@@ -254,10 +255,13 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Elements\Controllers\" />
+    <Folder Include="Areas\Elements\Views\Shared\" />
     <Folder Include="Areas\Elements_Communautaires\Controllers\" />
     <Folder Include="Areas\Elements_Communautaires\Views\Shared\" />
     <Folder Include="Areas\Elements_Generaux\Controllers\" />
     <Folder Include="Areas\Elements_Generaux\Views\Shared\" />
+    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

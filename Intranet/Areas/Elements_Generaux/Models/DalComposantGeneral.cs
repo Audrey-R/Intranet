@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using Intranet.Areas.Elements_Generaux.Models;
 
 namespace Intranet.Models
 {
@@ -14,35 +15,36 @@ namespace Intranet.Models
             bdd = new BddContext();
         }
 
-        public void CreerComposantGeneral(string libelle)
+        public void CreerFraction(string libelle)
         {
-            bdd.Composants_Generaux.Add(new Composant_General { LibelleComposantGeneral = libelle });
+            Element element = bdd.Elements.Add(new Element { ComposantCommunautaire = false, ComposantGeneral = true });
+            bdd.Fractions.Add(new Fraction { LibelleFraction = libelle, Element = element });
             bdd.SaveChanges();
         }
 
-        public void ModifierComposantGeneral(int id, string libelle)
+        public void ModifierFraction(int id, string libelle)
         {
-            Composant_General composantTrouve = bdd.Composants_Generaux.FirstOrDefault(composant => composant.Id == id);
-            if (composantTrouve != null)
+            Fraction fractionTrouvee = bdd.Fractions.FirstOrDefault(fraction => fraction.Element.Id == id);
+            if (fractionTrouvee != null)
             {
-                composantTrouve.LibelleComposantGeneral = libelle;
+                fractionTrouvee.LibelleFraction = libelle;
                 bdd.SaveChanges();
             }
         }
 
-        public void SupprimerComposantGeneral(int id)
+        public void SupprimerFraction(int id)
         {
-            Composant_General composantTrouve = bdd.Composants_Generaux.FirstOrDefault(composant => composant.Id == id);
-            if (composantTrouve != null)
+            Fraction fractionTrouvee = bdd.Fractions.FirstOrDefault(fraction => fraction.Element.Id == id);
+            if (fractionTrouvee != null)
             {
-                bdd.Composants_Generaux.Remove(composantTrouve);
+                bdd.Fractions.Remove(fractionTrouvee);
                 bdd.SaveChanges();
             }
         }
 
-        public List<Composant_General> ListerTousLesComposantsGeneraux()
+        public List<Fraction> ListerToutesLesFractions()
         {
-            return bdd.Composants_Generaux.ToList();
+            return bdd.Fractions.ToList();
         }
 
 

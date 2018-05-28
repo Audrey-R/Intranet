@@ -4,6 +4,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Intranet.Areas.Elements_Generaux.Models;
 using Intranet.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -20,6 +21,26 @@ namespace Intranet.Tests.Models
         //    init.InitializeDatabase(new BddContext());
         //}
 
+
+        [TestMethod]
+        public void CreerFraction_DeuxNouvellesFractions_ListeToutesLesFractions()
+        {
+            IDatabaseInitializer<BddContext> init = new DropCreateDatabaseAlways<BddContext>();
+            Database.SetInitializer(init);
+            init.InitializeDatabase(new BddContext());
+
+            using (IDalComposantGeneral dal = new DalComposantGeneral())
+            {
+                dal.CreerFraction("Média");
+                dal.CreerFraction("Ressource");
+                List<Fraction> fractions = dal.ListerToutesLesFractions();
+
+                Assert.IsNotNull(fractions);
+                Assert.AreEqual(2, fractions.Count);
+                Assert.AreEqual("Média", fractions[0].LibelleFraction);
+                Assert.AreEqual("Ressource", fractions[1].LibelleFraction);
+            }
+        }
         //[TestMethod]
         //public void CreerComposantGeneral_AvecUnNouveauComposantGeneral_ObtientTousLesComposantsGenerauxRenvoitBienLeComposantGeneral()
         //{

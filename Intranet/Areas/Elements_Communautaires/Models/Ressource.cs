@@ -9,13 +9,11 @@ using Intranet.Areas.Elements_Generaux.Models;
 
 namespace Intranet.Models
 {
-    public class Ressource : Element
+    public class Ressource : Composant_Communautaire
     {
-        //[Key]
-        //public int IdRessource { get; set; }
-        public Composant_Communautaire ComposantCommunautaire { get; set; }
+        [Key]
+        public int Id{ get; set; }
         public string Titre { get; set; }
         public List<Media> ListeMediasAssocies { get; set; }
-        //public virtual Categorie Categorie {get; set;}
     }
 }
