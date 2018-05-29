@@ -8,9 +8,10 @@ namespace Intranet.Models
 {
     public interface IDalComposantGeneral : IDisposable
     {
-        void CreerFraction(string libelle);
-        void ModifierFraction(int id, string libelle);
-        void SupprimerFraction(int id);
-        List<Fraction> ListerToutesLesFractions();
+        void Creer(string libelle);
+        void Modifier(int id, string libelle);
+        void Masquer(int id);
+        void Supprimer(int id);
+        IEnumerable <Composant_General> Lister();
     }
 }

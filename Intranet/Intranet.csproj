@@ -146,26 +146,31 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Areas\Elements\ElementsAreaRegistration.cs" />
+    <Compile Include="Areas\Composants\ElementsAreaRegistration.cs" />
+    <Compile Include="Areas\Composants\Models\Collaborateurs\DalCollaborateur.cs" />
+    <Compile Include="Areas\Composants\Models\Elements\DalElement.cs" />
     <Compile Include="Areas\Elements_Communautaires\Elements_CommunautairesAreaRegistration.cs" />
-    <Compile Include="Areas\Elements_Communautaires\Models\Media.cs" />
+    <Compile Include="Areas\Elements_Communautaires\Models\Medias\DalMedia.cs" />
+    <Compile Include="Areas\Elements_Communautaires\Models\Medias\Media.cs" />
+    <Compile Include="Areas\Elements_Communautaires\Models\Ressources\DalRessource.cs" />
     <Compile Include="Areas\Elements_Generaux\Elements_GenerauxAreaRegistration.cs" />
-    <Compile Include="Areas\Elements_Generaux\Models\Categorie.cs" />
+    <Compile Include="Areas\Elements_Generaux\Models\Etats\Etat.cs" />
+    <Compile Include="Areas\Elements_Generaux\Models\Etats\DalEtat.cs" />
+    <Compile Include="Areas\Elements_Generaux\Models\Categories\Categorie.cs" />
+    <Compile Include="Areas\Elements_Generaux\Models\Categories\DalCategorie.cs" />
     <Compile Include="Areas\Elements_Generaux\Models\Composant_General.cs" />
-    <Compile Include="Areas\Elements_Generaux\Models\DalComposantGeneral.cs" />
-    <Compile Include="Areas\Elements_Generaux\Models\Fraction.cs" />
+    <Compile Include="Areas\Elements_Generaux\Models\Fractions\DalFraction.cs" />
+    <Compile Include="Areas\Elements_Generaux\Models\Fractions\Fraction.cs" />
     <Compile Include="Areas\Elements_Generaux\Models\IDalComposantGeneral.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Areas\Elements\Models\BddContext.cs" />
-    <Compile Include="Areas\Elements\Models\Collaborateur.cs" />
+    <Compile Include="Areas\Composants\Models\BDD\BddContext.cs" />
+    <Compile Include="Areas\Composants\Models\Collaborateurs\Collaborateur.cs" />
     <Compile Include="Areas\Elements_Communautaires\Models\Composant_Communautaire.cs" />
-    <Compile Include="Areas\Elements_Communautaires\Models\DalComposantCommunautaire.cs" />
-    <Compile Include="Areas\Elements\Models\Element.cs" />
-    <Compile Include="Areas\Elements_Communautaires\Models\IDalComposantCommunautaire.cs" />
-    <Compile Include="Areas\Elements_Communautaires\Models\Ressource.cs" />
+    <Compile Include="Areas\Composants\Models\Elements\Element.cs" />
+    <Compile Include="Areas\Elements_Communautaires\Models\Ressources\Ressource.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -205,7 +210,7 @@
     <Content Include="Scripts\esm\popper-utils.js.map" />
     <Content Include="Areas\Elements_Communautaires\Views\web.config" />
     <Content Include="Areas\Elements_Generaux\Views\web.config" />
-    <Content Include="Areas\Elements\Views\web.config" />
+    <Content Include="Areas\Composants\Views\web.config" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -255,8 +260,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Elements\Controllers\" />
-    <Folder Include="Areas\Elements\Views\Shared\" />
+    <Folder Include="Areas\Composants\Controllers\" />
+    <Folder Include="Areas\Composants\Views\Shared\" />
     <Folder Include="Areas\Elements_Communautaires\Controllers\" />
     <Folder Include="Areas\Elements_Communautaires\Views\Shared\" />
     <Folder Include="Areas\Elements_Generaux\Controllers\" />

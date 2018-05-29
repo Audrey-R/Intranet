@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Web;
-using Intranet.Areas.Elements_Communautaires.Models;
-using Intranet.Areas.Elements_Generaux.Models;
+using Intranet.Areas.Elements_Communautaires.Models.Medias;
+using Intranet.Models;
 
-namespace Intranet.Models
+namespace Intranet.Areas.Elements_Communautaires.Models.Ressources
 {
     public class Ressource : Composant_Communautaire
     {

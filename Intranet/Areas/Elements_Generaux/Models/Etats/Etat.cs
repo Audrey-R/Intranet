@@ -6,12 +6,12 @@ using System.Linq;
 using System.Web;
 using Intranet.Models;
 
-namespace Intranet.Areas.Elements_Generaux.Models
+namespace Intranet.Areas.Elements_Generaux.Models.Etats
 {
-    public class Categorie : Composant_General
+    public class Etat : Composant_General
     {
         [Key]
         public int Id { get; set; }
-        public int LibelleCategorie { get; set; }
+        public int Libelle { get; set; }
     }
 }

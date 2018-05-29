@@ -4,14 +4,16 @@ using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Intranet.Areas.Composants.Models.BDD;
 using Intranet.Areas.Elements_Generaux.Models;
+using Intranet.Areas.Elements_Generaux.Models.Fractions;
 using Intranet.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Intranet.Tests.Models
 {
     [TestClass]
-    public class DalComposantGeneralTests
+    public class DalFractionTests
     {
         //[TestInitialize]
         //public void Init_AvantChaqueTest()
@@ -29,16 +31,16 @@ namespace Intranet.Tests.Models
             Database.SetInitializer(init);
             init.InitializeDatabase(new BddContext());
 
-            using (IDalComposantGeneral dal = new DalComposantGeneral())
+            using ( IDalComposantGeneral dal = new DalFraction())
             {
-                dal.CreerFraction("Média");
-                dal.CreerFraction("Ressource");
-                List<Fraction> fractions = dal.ListerToutesLesFractions();
+                dal.Creer("Média");
+                dal.Creer("Ressource");
+                List<Fraction> fractions = (List<Fraction>)dal.Lister();
 
                 Assert.IsNotNull(fractions);
                 Assert.AreEqual(2, fractions.Count);
-                Assert.AreEqual("Média", fractions[0].LibelleFraction);
-                Assert.AreEqual("Ressource", fractions[1].LibelleFraction);
+                Assert.AreEqual("Média", fractions[0].Libelle);
+                Assert.AreEqual("Ressource", fractions[1].Libelle);
             }
         }
         //[TestMethod]
