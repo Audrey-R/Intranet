@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Intranet.Areas.Composants.Models.BDD;
 using Intranet.Areas.Composants.Models.Elements;
-using Intranet.Areas.Elements_Generaux.Models.Fractions;
 using Intranet.Models;
 
 namespace Intranet.Areas.Elements_Communautaires.Models.Medias
@@ -24,15 +23,15 @@ namespace Intranet.Areas.Elements_Communautaires.Models.Medias
             // Création de l'élément de type Média, puis du média
             if (fractionComposantCommunautaireTrouvee != null)
             {
-                Element element = bdd.Elements.Add(new Element { ElementCommunautaire = true, ElementGeneral = false });
-                bdd.Medias.Add(new Media { Titre = titre, Description = description, Chemin = chemin, Element = element, Fraction = fractionComposantCommunautaireTrouvee });
+                Element_Communautaire element = bdd.ComposantsCommunautaires.Add(new Element_Communautaire {  Fraction_Element = fractionComposantCommunautaireTrouvee });
+                bdd.Medias.Add(new Media { Titre = titre, Description = description, Chemin = chemin, ElementCommunautaire = element });
                 bdd.SaveChanges();
             }
         }
 
         public void Modifier(int id, string titre, string description, string chemin)
         {
-            Media mediaTrouve = bdd.Medias.FirstOrDefault(media => media.Element.Id == id);
+            Media mediaTrouve = bdd.Medias.FirstOrDefault(media => media.ElementCommunautaire.Id == id);
             if (mediaTrouve != null)
             {
                 mediaTrouve.Titre = titre;
@@ -45,11 +44,11 @@ namespace Intranet.Areas.Elements_Communautaires.Models.Medias
 
         public void Supprimer(int id)
         {
-            Media mediaTrouve = bdd.Medias.FirstOrDefault(media => media.Element.Id == id);
+            Media mediaTrouve = bdd.Medias.FirstOrDefault(media => media.ElementCommunautaire.Id == id);
             if (mediaTrouve != null)
             {
                 bdd.Medias.Remove(mediaTrouve);
-                bdd.Elements.Remove(mediaTrouve.Element);
+                bdd.Elements.Remove(mediaTrouve.ElementCommunautaire);
                 bdd.SaveChanges();
             }
         }

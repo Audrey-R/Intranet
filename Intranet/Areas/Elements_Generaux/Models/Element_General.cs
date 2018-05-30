@@ -6,13 +6,11 @@ using System.Linq;
 using System.Web;
 using Intranet.Areas.Composants.Models.Elements;
 using Intranet.Areas.Elements_Generaux.Models;
-using Intranet.Areas.Elements_Generaux.Models.Fractions;
 
-namespace Intranet.Models
+namespace Intranet.Areas.Elements_Generaux.Models
 {
-    public class Composant_General 
+    public class Element_General : Fraction
     {
-        public Element Element { get; set; }
-        public Fraction Fraction { get; set; }
+        //public Fraction Fraction { get; set; }
     }
 }

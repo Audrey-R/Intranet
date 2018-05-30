@@ -89,9 +89,10 @@
     <Reference Include="System.Net.Http.WebRequest" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\DalCategorieTests.cs" />
     <Compile Include="Models\DalFractionTests.cs" />
     <Compile Include="Models\DalMediaTests.cs" />
-    <Compile Include="Models\DalRessourceTest.cs" />
+    <Compile Include="Models\DalRessourceTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controllers\HomeControllerTest.cs" />
   </ItemGroup>

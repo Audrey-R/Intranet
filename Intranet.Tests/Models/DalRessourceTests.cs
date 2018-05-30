@@ -9,7 +9,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Intranet.Tests.Models
 {
     [TestClass]
-    class DalRessourceTest
+    public class DalRessourceTests
     {
         //[TestInitialize]
         //public void Init_AvantChaqueTest()

@@ -5,8 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Intranet.Areas.Composants.Models.BDD;
+using Intranet.Areas.Composants.Models.Elements;
 using Intranet.Areas.Elements_Generaux.Models;
-using Intranet.Areas.Elements_Generaux.Models.Fractions;
 using Intranet.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -27,21 +27,16 @@ namespace Intranet.Tests.Models
         [TestMethod]
         public void CreerFraction_DeuxNouvellesFractions_ListeToutesLesFractions()
         {
-            IDatabaseInitializer<BddContext> init = new DropCreateDatabaseAlways<BddContext>();
-            Database.SetInitializer(init);
-            init.InitializeDatabase(new BddContext());
-
-            using ( IDalComposantGeneral dal = new DalFraction())
-            {
+            DalFraction dal = new DalFraction();
+            
                 dal.Creer("Média");
                 dal.Creer("Ressource");
-                List<Fraction> fractions = (List<Fraction>)dal.Lister();
+                List<Fraction> fractions = dal.Lister();
 
                 Assert.IsNotNull(fractions);
                 Assert.AreEqual(2, fractions.Count);
                 Assert.AreEqual("Média", fractions[0].Libelle);
-                Assert.AreEqual("Ressource", fractions[1].Libelle);
-            }
+                Assert.AreEqual("Ressource", fractions[1].Libelle);}
         }
         //[TestMethod]
         //public void CreerComposantGeneral_AvecUnNouveauComposantGeneral_ObtientTousLesComposantsGenerauxRenvoitBienLeComposantGeneral()
@@ -92,4 +87,3 @@ namespace Intranet.Tests.Models
         //    }
         //}
     }
-}

@@ -6,7 +6,7 @@ using Intranet.Models;
 
 namespace Intranet.Areas.Elements_Generaux.Models.Etats
 {
-    public class DalEtat : IDalComposantGeneral
+    public class DalEtat : IDalElement_General
     {
         public void Creer(string libelle)
         {
@@ -18,7 +18,7 @@ namespace Intranet.Areas.Elements_Generaux.Models.Etats
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Composant_General> Lister()
+        public List<Etat> Lister()
         {
             throw new NotImplementedException();
         }
@@ -37,5 +37,6 @@ namespace Intranet.Areas.Elements_Generaux.Models.Etats
         {
             throw new NotImplementedException();
         }
+        
     }
 }

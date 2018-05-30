@@ -7,7 +7,7 @@ using Intranet.Areas.Composants.Models.BDD;
 using Intranet.Areas.Composants.Models.Elements;
 using Intranet.Areas.Elements_Generaux.Models;
 using Intranet.Areas.Elements_Communautaires.Models.Medias;
-using Intranet.Areas.Elements_Generaux.Models.Fractions;
+using Intranet.Models;
 
 namespace Intranet.Areas.Elements_Communautaires.Models.Ressources
 {
@@ -28,8 +28,8 @@ namespace Intranet.Areas.Elements_Communautaires.Models.Ressources
             if (fractionComposantCommunautaireTrouvee != null)
             {
                 // Création de l'élément de type Ressource, puis de la ressource
-                Element element = bdd.Elements.Add(new Element { ElementCommunautaire = true, ElementGeneral = false });
-                Ressource ressource = bdd.Ressources.Add(new Ressource { Titre = titre, Element = element, Fraction = fractionComposantCommunautaireTrouvee });
+                Element_Communautaire element = bdd.ComposantsCommunautaires.Add(new Element_Communautaire { Fraction_Element = fractionComposantCommunautaireTrouvee});
+                Ressource ressource = bdd.Ressources.Add(new Ressource { Titre = titre, ElementCommunautaire = element });
                 bdd.SaveChanges();
 
                 //Recherche du dernier média créé
@@ -37,7 +37,7 @@ namespace Intranet.Areas.Elements_Communautaires.Models.Ressources
                 Media dernierMediaCree = medias.LastOrDefault();
 
                 //Ajout du dernier média créé à la ressource
-                AjouterUnMediaAUneRessource(ressource.Element.Id, dernierMediaCree);
+                AjouterUnMediaAUneRessource(ressource.ElementCommunautaire.Id, dernierMediaCree);
                 bdd.SaveChanges();
             }
         }
@@ -45,7 +45,7 @@ namespace Intranet.Areas.Elements_Communautaires.Models.Ressources
         public void AjouterUnMediaAUneRessource(int id, Media media)
         {
             //Recherche de la ressource dans la BDD
-            Ressource ressourceTrouvee = bdd.Ressources.FirstOrDefault(ressource => ressource.Element.Id == id);
+            Ressource ressourceTrouvee = bdd.Ressources.FirstOrDefault(ressource => ressource.ElementCommunautaire.Id == id);
             if (ressourceTrouvee != null)
             {
                 //Création d'une liste de médias à associer
@@ -73,7 +73,7 @@ namespace Intranet.Areas.Elements_Communautaires.Models.Ressources
 
         public void ModifierRessource(int id, string titre, List<Media> listeMediasAssocies)
         {
-            Ressource ressourceTrouvee = bdd.Ressources.FirstOrDefault(ressource => ressource.Element.Id == id);
+            Ressource ressourceTrouvee = bdd.Ressources.FirstOrDefault(ressource => ressource.ElementCommunautaire.Id == id);
             if (ressourceTrouvee != null)
             {
                 ressourceTrouvee.Titre = titre;
@@ -85,7 +85,7 @@ namespace Intranet.Areas.Elements_Communautaires.Models.Ressources
 
         public void SupprimerRessource(int id)
         {
-            Ressource ressourceTrouvee = bdd.Ressources.FirstOrDefault(ressource => ressource.Element.Id == id);
+            Ressource ressourceTrouvee = bdd.Ressources.FirstOrDefault(ressource => ressource.ElementCommunautaire.Id == id);
 
             if (ressourceTrouvee != null)
             {
@@ -93,7 +93,7 @@ namespace Intranet.Areas.Elements_Communautaires.Models.Ressources
                 {
                     bdd.Medias.Remove(media);
                     ressourceTrouvee.ListeMediasAssocies.Remove(media);
-                    bdd.Elements.Remove(media.Element);
+                    bdd.Elements.Remove(media.ElementCommunautaire);
                 }
 
                 if (ressourceTrouvee.ListeMediasAssocies == null)
