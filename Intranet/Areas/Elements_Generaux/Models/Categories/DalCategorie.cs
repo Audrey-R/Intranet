@@ -19,25 +19,54 @@ namespace Intranet.Areas.Elements_Generaux.Models.Categories
 
         public void Creer(string libelle)
         {
-
             // Recherche de la fraction "Catégorie"
-            Fraction fractionComposantGeneralTrouvee = bdd.Fractions.FirstOrDefault(fraction => fraction.Libelle.Contains(libelle));
-            // Création de l'élément de type Catégorie, puis de la catégorie
-            if (fractionComposantGeneralTrouvee != null)
+            Fraction rechercheCategorieDansFractions = bdd.Fractions.FirstOrDefault(fraction => fraction.Libelle.Contains("Catégorie"));
+
+            // Création de l'élément de type Catégorie
+            Element_General element = bdd.ElementsGeneraux.Add(new Element_General());
+            
+            //List<Categorie> listeCategories = new List<Categorie>();
+
+            if (rechercheCategorieDansFractions == null)
             {
-                Element_General element = bdd.ComposantsGeneraux.Add(new Element_General { Fraction_Element = fractionComposantGeneralTrouvee });
-                bdd.Categories.Add(new Categorie { Libelle = libelle,  ElementGeneral = element });
+                // Création de la fraction "Catégorie"
+                Fraction fraction = bdd.Fractions.Add(new Fraction { Libelle = "Catégorie", Element = element });
                 bdd.SaveChanges();
             }
-            else
+
+            // Nouvelle recherche de la fraction "Catégorie"
+            Fraction fractionCategorieTrouvee = bdd.Fractions.FirstOrDefault(fraction => fraction.Libelle.Contains("Catégorie"));
+
+            if (fractionCategorieTrouvee != null)
             {
-                Fraction fraction = bdd.Fractions.Add(new Fraction { Libelle = libelle });
-                bdd.SaveChanges();
-                Element_General element = bdd.ComposantsGeneraux.Add(new Element_General { Fraction_Element = fractionComposantGeneralTrouvee });
-                bdd.Categories.Add(new Categorie { Libelle = libelle, ElementGeneral = element });
+                //    List<Categorie> CategoriesExistantes = element.Categories ;
+                //    List<Categorie> listeCategories = new List<Categorie>();
+                //Categorie categorie = 
+                bdd.Categories.Add(new Categorie { Libelle = libelle, Element = element });
+                //    listeCategories.Add(categorie);
+
+                //    if (CategoriesExistantes == null)
+                //    {
+                //        element.Categories = listeCategories;
+                //    }
+                //    else
+                //    {
+                //        element.Categories.AddRange(listeCategories);
+                //    }
                 bdd.SaveChanges();
             }
+
         }
+
+        //public Element_General RetournerElementGeneral(int id)
+        //{
+        //    Element_General elementTrouvee = bdd.ElementsGeneraux.FirstOrDefault(element => element.Id == id);
+        //    if (elementTrouvee != null)
+        //    {
+        //        return elementTrouvee;
+        //    }
+        //    return null;
+        //}
 
         public void Modifier(int id, string libelle)
         {
@@ -59,10 +88,20 @@ namespace Intranet.Areas.Elements_Generaux.Models.Categories
             }
         }
 
-        public virtual List<Categorie> Lister()
+        public virtual List<Element_General> Lister()
         {
-            return bdd.Categories.ToList();
+            return bdd.ElementsGeneraux.ToList();
         }
+
+        //public virtual IEnumerable<Element_General> Lister(IEnumerable<Element_General> categories)
+        //{
+        //    List<Categorie> ListeCategories = new List<Categorie>();
+        //    foreach(Categorie categorie in categories)
+        //    {
+        //        ListeCategories.AddRange(categorie.ListeCategories);
+        //    }
+        //    return ListeCategories;
+        //}
 
         public void Dispose()
         {

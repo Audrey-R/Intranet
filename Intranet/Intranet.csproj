@@ -155,8 +155,6 @@
     <Compile Include="Areas\Elements_Communautaires\Models\Medias\Media.cs" />
     <Compile Include="Areas\Elements_Communautaires\Models\Ressources\DalRessource.cs" />
     <Compile Include="Areas\Elements_Generaux\Elements_GenerauxAreaRegistration.cs" />
-    <Compile Include="Areas\Elements_Generaux\Models\General.cs" />
-    <Compile Include="Areas\Elements_Generaux\Models\IElement_General.cs" />
     <Compile Include="Areas\Elements_Generaux\Models\Etats\Etat.cs" />
     <Compile Include="Areas\Elements_Generaux\Models\Etats\DalEtat.cs" />
     <Compile Include="Areas\Elements_Generaux\Models\Categories\Categorie.cs" />
@@ -164,7 +162,8 @@
     <Compile Include="Areas\Elements_Generaux\Models\Element_General.cs" />
     <Compile Include="Areas\Composants\Models\Elements\DalFraction.cs" />
     <Compile Include="Areas\Composants\Models\Elements\Fraction.cs" />
-    <Compile Include="Areas\Elements_Generaux\Models\IDalElementGeneral.cs" />
+    <Compile Include="Areas\Elements_Generaux\Models\IDalElement_General.cs" />
+    <Compile Include="Areas\Elements_Generaux\Models\IElement_General.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

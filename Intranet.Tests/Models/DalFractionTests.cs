@@ -34,10 +34,13 @@ namespace Intranet.Tests.Models
                 List<Fraction> fractions = dal.Lister();
 
                 Assert.IsNotNull(fractions);
-                Assert.AreEqual(2, fractions.Count);
-                Assert.AreEqual("Média", fractions[0].Libelle);
-                Assert.AreEqual("Ressource", fractions[1].Libelle);}
+                Assert.AreEqual(3, fractions.Count);
+                Assert.AreEqual("Catégorie", fractions[0].Libelle);
+                Assert.AreEqual("Média", fractions[1].Libelle);
+                Assert.AreEqual("Ressource", fractions[2].Libelle);
+                
         }
+}
         //[TestMethod]
         //public void CreerComposantGeneral_AvecUnNouveauComposantGeneral_ObtientTousLesComposantsGenerauxRenvoitBienLeComposantGeneral()
         //{

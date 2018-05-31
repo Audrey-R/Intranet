@@ -1,15 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
-using Intranet.Models;
+using System.Text;
+using System.Threading.Tasks;
+using Intranet.Areas.Composants.Models.Elements;
 
 namespace Intranet.Areas.Elements_Generaux.Models
 {
-    public interface IElement_General : IDisposable
+    interface IElement_General
     {
-        int Id { get; set; }
-        string Libelle { get; set; }
-        Element_General ElementGeneral { get; set; }
+        Element Element { get; set; }
     }
 }

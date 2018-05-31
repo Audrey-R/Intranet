@@ -9,10 +9,10 @@ using Intranet.Models;
 
 namespace Intranet.Areas.Elements_Generaux.Models.Categories
 {
-    public class Categorie 
+    public class Categorie : IElement_General
     {
         public int Id { get; set; }
         public string Libelle { get; set; }
-        public Element_General ElementGeneral { get; set; }
+        public Element Element { get; set; }
     }
 }

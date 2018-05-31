@@ -33,19 +33,21 @@ namespace Intranet.Tests.Models
             Database.SetInitializer(init);
             init.InitializeDatabase(new BddContext());
 
-            DalCategorie dalCategorie = new DalCategorie();
-            DalFraction dalFraction = new DalFraction();
+            using (IDalElement_General dal = new DalCategorie())
+            {
+                dal.Creer("Entreprise");
+                dal.Creer("Communauté");
+                //IEnumerable<Fraction_Generale> liste = dal.Lister();
+                List<Element_General> categories = dal.Lister();
 
-
-                dalCategorie.Creer("Entreprise");
-                dalCategorie.Creer("Communauté");
-                List<Categorie> categories = dalCategorie.Lister();
+                //List<Categorie> ListeCategories = (List<Categorie>)dal.Lister(categories);
 
                 Assert.IsNotNull(categories);
-                //Assert.AreEqual(2, categories.Count);
+                //Assert.IsNotNull(ListeCategories);
+                Assert.AreEqual(2, categories.Count);
                 //Assert.AreEqual("Entreprise", categories[0].Libelle);
                 //Assert.AreEqual("Communauté", categories[1].Libelle);
-            
+            }
         }
     }
 }

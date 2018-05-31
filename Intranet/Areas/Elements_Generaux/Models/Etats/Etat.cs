@@ -9,10 +9,13 @@ using Intranet.Models;
 
 namespace Intranet.Areas.Elements_Generaux.Models.Etats
 {
-    public class Etat 
+    public class Etat : IElement_General
     {
         public int Id { get; set; }
         public string Libelle { get; set; }
-        public Element_General ElementGeneral { get; set; }
+        public Element Element { get; set; }
+        //public int Id { get; set; }
+        //public string Libelle { get; set; }
+        //public Element_General ElementGeneral { get; set; }
     }
 }

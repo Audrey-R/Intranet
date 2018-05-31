@@ -11,6 +11,6 @@ namespace Intranet.Areas.Elements_Communautaires.Models.Ressources
         public int Id{ get; set; }
         public string Titre { get; set; }
         public List<Media> ListeMediasAssocies { get; set; }
-        public Element_Communautaire ElementCommunautaire { get ; set; }
+        public Element Element { get ; set; }
     }
 }

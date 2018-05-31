@@ -10,6 +10,6 @@ namespace Intranet.Areas.Elements_Communautaires.Models.Medias
         public string Titre { get; set; }
         public string Description { get; set; }
         public string Chemin { get; set; }
-        public Element_Communautaire ElementCommunautaire { get; set; }
+        public Element Element { get; set; }
     }
 }

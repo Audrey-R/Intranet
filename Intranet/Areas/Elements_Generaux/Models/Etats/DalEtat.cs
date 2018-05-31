@@ -18,10 +18,12 @@ namespace Intranet.Areas.Elements_Generaux.Models.Etats
             throw new NotImplementedException();
         }
 
-        public List<Etat> Lister()
+        public List<Element_General> Lister()
         {
             throw new NotImplementedException();
         }
+
+       
 
         public void Masquer(int id)
         {

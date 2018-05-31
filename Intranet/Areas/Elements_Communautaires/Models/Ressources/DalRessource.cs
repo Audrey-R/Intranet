@@ -23,13 +23,23 @@ namespace Intranet.Areas.Elements_Communautaires.Models.Ressources
         public void CreerRessource(string titre)
         {
             // Recherche de la fraction "Ressource"
-            Fraction fractionComposantCommunautaireTrouvee = bdd.Fractions.First(fraction => fraction.Libelle == "Ressource");
+            Fraction rechercheRessourceDansFractions = bdd.Fractions.FirstOrDefault(fraction => fraction.Libelle.Contains("Ressource"));
+            // Création de l'élément de type Ressource
+            Element_Communautaire element = bdd.ElementsCommunautaires.Add(new Element_Communautaire());
 
-            if (fractionComposantCommunautaireTrouvee != null)
+            if (rechercheRessourceDansFractions == null)
             {
-                // Création de l'élément de type Ressource, puis de la ressource
-                Element_Communautaire element = bdd.ComposantsCommunautaires.Add(new Element_Communautaire { Fraction_Element = fractionComposantCommunautaireTrouvee});
-                Ressource ressource = bdd.Ressources.Add(new Ressource { Titre = titre, ElementCommunautaire = element });
+                // Création de la fraction "Ressource"
+                Fraction fraction = bdd.Fractions.Add(new Fraction { Libelle = "Ressource", Element = element });
+                bdd.SaveChanges();
+            }
+
+            // Nouvelle recherche de la fraction "Ressource"
+            Fraction fractionRessourceTrouvee = bdd.Fractions.FirstOrDefault(fraction => fraction.Libelle.Contains("Ressource"));
+
+            if (rechercheRessourceDansFractions != null || fractionRessourceTrouvee != null)
+            {
+                Ressource ressource = bdd.Ressources.Add(new Ressource { Titre = titre, Element= element });
                 bdd.SaveChanges();
 
                 //Recherche du dernier média créé
@@ -37,7 +47,7 @@ namespace Intranet.Areas.Elements_Communautaires.Models.Ressources
                 Media dernierMediaCree = medias.LastOrDefault();
 
                 //Ajout du dernier média créé à la ressource
-                AjouterUnMediaAUneRessource(ressource.ElementCommunautaire.Id, dernierMediaCree);
+                AjouterUnMediaAUneRessource(ressource.Element.Id, dernierMediaCree);
                 bdd.SaveChanges();
             }
         }
@@ -45,7 +55,7 @@ namespace Intranet.Areas.Elements_Communautaires.Models.Ressources
         public void AjouterUnMediaAUneRessource(int id, Media media)
         {
             //Recherche de la ressource dans la BDD
-            Ressource ressourceTrouvee = bdd.Ressources.FirstOrDefault(ressource => ressource.ElementCommunautaire.Id == id);
+            Ressource ressourceTrouvee = bdd.Ressources.FirstOrDefault(ressource => ressource.Element.Id == id);
             if (ressourceTrouvee != null)
             {
                 //Création d'une liste de médias à associer
@@ -73,7 +83,7 @@ namespace Intranet.Areas.Elements_Communautaires.Models.Ressources
 
         public void ModifierRessource(int id, string titre, List<Media> listeMediasAssocies)
         {
-            Ressource ressourceTrouvee = bdd.Ressources.FirstOrDefault(ressource => ressource.ElementCommunautaire.Id == id);
+            Ressource ressourceTrouvee = bdd.Ressources.FirstOrDefault(ressource => ressource.Element.Id == id);
             if (ressourceTrouvee != null)
             {
                 ressourceTrouvee.Titre = titre;
@@ -85,7 +95,7 @@ namespace Intranet.Areas.Elements_Communautaires.Models.Ressources
 
         public void SupprimerRessource(int id)
         {
-            Ressource ressourceTrouvee = bdd.Ressources.FirstOrDefault(ressource => ressource.ElementCommunautaire.Id == id);
+            Ressource ressourceTrouvee = bdd.Ressources.FirstOrDefault(ressource => ressource.Element.Id == id);
 
             if (ressourceTrouvee != null)
             {
@@ -93,7 +103,7 @@ namespace Intranet.Areas.Elements_Communautaires.Models.Ressources
                 {
                     bdd.Medias.Remove(media);
                     ressourceTrouvee.ListeMediasAssocies.Remove(media);
-                    bdd.Elements.Remove(media.ElementCommunautaire);
+                    bdd.Elements.Remove(media.Element);
                 }
 
                 if (ressourceTrouvee.ListeMediasAssocies == null)

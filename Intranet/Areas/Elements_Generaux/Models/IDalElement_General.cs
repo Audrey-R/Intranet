@@ -13,6 +13,6 @@ namespace Intranet.Areas.Elements_Generaux.Models
         void Modifier(int id, string libelle);
         void Masquer(int id);
         void Supprimer(int id);
-        //IEnumerable <Object> Lister();
+        List <Element_General> Lister();
     }
 }

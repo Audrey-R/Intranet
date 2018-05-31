@@ -19,19 +19,30 @@ namespace Intranet.Areas.Elements_Communautaires.Models.Medias
         public void Creer(string titre, string description, string chemin)
         {
             // Recherche de la fraction "Média"
-            Fraction fractionComposantCommunautaireTrouvee = bdd.Fractions.First(fraction => fraction.Libelle == "Média");
-            // Création de l'élément de type Média, puis du média
-            if (fractionComposantCommunautaireTrouvee != null)
+            Fraction rechercheMediaDansFractions = bdd.Fractions.FirstOrDefault(fraction => fraction.Libelle.Contains("Média"));
+            // Création de l'élément de type Média
+            Element_Communautaire element = bdd.ElementsCommunautaires.Add(new Element_Communautaire());
+
+            if (rechercheMediaDansFractions == null)
             {
-                Element_Communautaire element = bdd.ComposantsCommunautaires.Add(new Element_Communautaire {  Fraction_Element = fractionComposantCommunautaireTrouvee });
-                bdd.Medias.Add(new Media { Titre = titre, Description = description, Chemin = chemin, ElementCommunautaire = element });
+                // Création de la fraction "Média"
+                Fraction fraction = bdd.Fractions.Add(new Fraction { Libelle = "Média", Element = element });
+                bdd.SaveChanges();
+            }
+
+            // Nouvelle recherche de la fraction "Média"
+            Fraction fractionMediaTrouvee = bdd.Fractions.FirstOrDefault(fraction => fraction.Libelle.Contains("Média"));
+
+            if (rechercheMediaDansFractions != null || fractionMediaTrouvee != null)
+            {
+                bdd.Medias.Add(new Media { Titre = titre, Description = description, Chemin = chemin, Element = element });
                 bdd.SaveChanges();
             }
         }
 
         public void Modifier(int id, string titre, string description, string chemin)
         {
-            Media mediaTrouve = bdd.Medias.FirstOrDefault(media => media.ElementCommunautaire.Id == id);
+            Media mediaTrouve = bdd.Medias.FirstOrDefault(media => media.Element.Id == id);
             if (mediaTrouve != null)
             {
                 mediaTrouve.Titre = titre;
@@ -44,11 +55,11 @@ namespace Intranet.Areas.Elements_Communautaires.Models.Medias
 
         public void Supprimer(int id)
         {
-            Media mediaTrouve = bdd.Medias.FirstOrDefault(media => media.ElementCommunautaire.Id == id);
+            Media mediaTrouve = bdd.Medias.FirstOrDefault(media => media.Element.Id == id);
             if (mediaTrouve != null)
             {
                 bdd.Medias.Remove(mediaTrouve);
-                bdd.Elements.Remove(mediaTrouve.ElementCommunautaire);
+                bdd.Elements.Remove(mediaTrouve.Element);
                 bdd.SaveChanges();
             }
         }

@@ -7,8 +7,9 @@ using Intranet.Areas.Composants.Models.Elements;
 
 namespace Intranet.Models
 {
-    public class Element_Communautaire : Fraction
+    public class Element_Communautaire : Element
     {
+        //public string Libelle { get; set; }
         //public Fraction Fraction { get; set; }
     }
 

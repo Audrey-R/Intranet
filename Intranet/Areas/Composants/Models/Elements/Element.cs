@@ -5,9 +5,8 @@ using Intranet.Models;
 
 namespace Intranet.Areas.Composants.Models.Elements
 {
-    public class Element 
+    public class Element
     {
-        [Key]
         public int Id { get; set; }
         public DateTime Date_Creation { get; set; }
         public Collaborateur Collaborateur { get; set; }
