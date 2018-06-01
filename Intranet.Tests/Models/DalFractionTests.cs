@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Intranet.Areas.Composants.Models.BDD;
 using Intranet.Areas.Composants.Models.Elements;
 using Intranet.Areas.Elements_Generaux.Models;
+using Intranet.Areas.Elements_Generaux.Models.Fractions;
 using Intranet.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -31,7 +32,7 @@ namespace Intranet.Tests.Models
             
                 dal.Creer("Média");
                 dal.Creer("Ressource");
-                List<Fraction> fractions = dal.Lister();
+                List<Fraction> fractions = (List<Fraction>)dal.Lister();
 
                 Assert.IsNotNull(fractions);
                 Assert.AreEqual(3, fractions.Count);

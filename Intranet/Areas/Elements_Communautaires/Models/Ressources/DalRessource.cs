@@ -8,6 +8,7 @@ using Intranet.Areas.Composants.Models.Elements;
 using Intranet.Areas.Elements_Generaux.Models;
 using Intranet.Areas.Elements_Communautaires.Models.Medias;
 using Intranet.Models;
+using Intranet.Areas.Elements_Generaux.Models.Fractions;
 
 namespace Intranet.Areas.Elements_Communautaires.Models.Ressources
 {

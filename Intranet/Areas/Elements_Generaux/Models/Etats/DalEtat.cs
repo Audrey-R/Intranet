@@ -18,7 +18,7 @@ namespace Intranet.Areas.Elements_Generaux.Models.Etats
             throw new NotImplementedException();
         }
 
-        public List<Element_General> Lister()
+        public IEnumerable<Element_General_Objet> Lister()
         {
             throw new NotImplementedException();
         }

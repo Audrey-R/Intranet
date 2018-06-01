@@ -6,6 +6,7 @@ using Intranet.Areas.Composants.Models.Collaborateurs;
 using Intranet.Areas.Elements_Generaux.Models.Categories;
 using Intranet.Models;
 using Intranet.Areas.Elements_Generaux.Models;
+using Intranet.Areas.Elements_Generaux.Models.Fractions;
 
 namespace Intranet.Areas.Composants.Models.BDD
 {

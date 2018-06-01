@@ -38,15 +38,15 @@ namespace Intranet.Tests.Models
                 dal.Creer("Entreprise");
                 dal.Creer("Communauté");
                 //IEnumerable<Fraction_Generale> liste = dal.Lister();
-                List<Element_General> categories = dal.Lister();
+                List<Categorie> categories = (List<Categorie>)dal.Lister();
 
                 //List<Categorie> ListeCategories = (List<Categorie>)dal.Lister(categories);
 
                 Assert.IsNotNull(categories);
                 //Assert.IsNotNull(ListeCategories);
                 Assert.AreEqual(2, categories.Count);
-                //Assert.AreEqual("Entreprise", categories[0].Libelle);
-                //Assert.AreEqual("Communauté", categories[1].Libelle);
+                Assert.AreEqual("Entreprise", categories[0].Libelle);
+                Assert.AreEqual("Communauté", categories[1].Libelle);
             }
         }
     }

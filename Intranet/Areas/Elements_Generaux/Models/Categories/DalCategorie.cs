@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using Intranet.Areas.Composants.Models.BDD;
 using Intranet.Areas.Composants.Models.Elements;
+using Intranet.Areas.Elements_Generaux.Models.Fractions;
 using Intranet.Models;
 
 namespace Intranet.Areas.Elements_Generaux.Models.Categories
@@ -88,9 +89,9 @@ namespace Intranet.Areas.Elements_Generaux.Models.Categories
             }
         }
 
-        public virtual List<Element_General> Lister()
+        public virtual IEnumerable<Element_General_Objet> Lister()
         {
-            return bdd.ElementsGeneraux.ToList();
+            return bdd.Categories.ToList();
         }
 
         //public virtual IEnumerable<Element_General> Lister(IEnumerable<Element_General> categories)

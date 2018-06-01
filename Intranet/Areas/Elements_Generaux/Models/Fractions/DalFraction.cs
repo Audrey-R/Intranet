@@ -8,7 +8,7 @@ using Intranet.Areas.Elements_Generaux.Models;
 using Intranet.Areas.Elements_Generaux.Models.Categories;
 using Intranet.Models;
 
-namespace Intranet.Areas.Composants.Models.Elements
+namespace Intranet.Areas.Elements_Generaux.Models.Fractions
 {
     public class DalFraction 
     {
@@ -84,7 +84,7 @@ namespace Intranet.Areas.Composants.Models.Elements
             }
         }
 
-        public List<Fraction> Lister()
+        public IEnumerable<Element_General_Objet> Lister()
         {
             return bdd.Fractions.ToList();
         }

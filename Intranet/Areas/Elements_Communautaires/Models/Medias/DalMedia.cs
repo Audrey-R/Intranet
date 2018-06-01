@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Intranet.Areas.Composants.Models.BDD;
 using Intranet.Areas.Composants.Models.Elements;
+using Intranet.Areas.Elements_Generaux.Models.Fractions;
 using Intranet.Models;
 
 namespace Intranet.Areas.Elements_Communautaires.Models.Medias
