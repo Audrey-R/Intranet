@@ -149,6 +149,7 @@
     <Compile Include="Areas\Composants\ElementsAreaRegistration.cs" />
     <Compile Include="Areas\Composants\Models\Collaborateurs\DalCollaborateur.cs" />
     <Compile Include="Areas\Composants\Models\Elements\DalElement.cs" />
+    <Compile Include="Areas\Composants\Models\Operations\Operation.cs" />
     <Compile Include="Areas\Elements_Communautaires\Elements_CommunautairesAreaRegistration.cs" />
     <Compile Include="Areas\Elements_Communautaires\Models\IElement_Communautaire.cs" />
     <Compile Include="Areas\Elements_Communautaires\Models\Medias\DalMedia.cs" />

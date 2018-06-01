@@ -4,6 +4,7 @@ using System.Linq;
 using Intranet.Areas.Composants.Models.BDD;
 using Intranet.Areas.Composants.Models.Elements;
 using Intranet.Areas.Elements_Generaux.Models.Fractions;
+using Intranet.Areas.Composants.Models.Operations ;
 using Intranet.Models;
 
 namespace Intranet.Areas.Elements_Communautaires.Models.Medias
@@ -37,6 +38,8 @@ namespace Intranet.Areas.Elements_Communautaires.Models.Medias
             if (rechercheMediaDansFractions != null || fractionMediaTrouvee != null)
             {
                 bdd.Medias.Add(new Media { Titre = titre, Description = description, Chemin = chemin, Element = element });
+                bdd.Operations.Add(new Operation { Element = element, Type = Operation.Operations.Création });
+
                 bdd.SaveChanges();
             }
         }

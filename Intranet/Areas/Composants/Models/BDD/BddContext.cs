@@ -7,11 +7,13 @@ using Intranet.Areas.Elements_Generaux.Models.Categories;
 using Intranet.Models;
 using Intranet.Areas.Elements_Generaux.Models;
 using Intranet.Areas.Elements_Generaux.Models.Fractions;
+using Intranet.Areas.Composants.Models.Operations;
 
 namespace Intranet.Areas.Composants.Models.BDD
 {
     public class BddContext : DbContext
     {
+        public DbSet<Operation> Operations { get; set; }
         public DbSet<Collaborateur> Collaborateurs { get; set; }
         public DbSet<Element> Elements { get; set; }
         public DbSet<Fraction> Fractions { get; set; }
