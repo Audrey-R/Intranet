@@ -6,6 +6,8 @@ using Intranet.Areas.Composants.Models.Elements;
 using Intranet.Areas.Elements_Generaux.Models.Fractions;
 using Intranet.Areas.Composants.Models.Operations ;
 using Intranet.Models;
+using Intranet.Areas.Elements_Generaux.Models.Etats;
+using Intranet.Areas.Elements_Generaux.Models;
 
 namespace Intranet.Areas.Elements_Communautaires.Models.Medias
 {
@@ -22,9 +24,21 @@ namespace Intranet.Areas.Elements_Communautaires.Models.Medias
         {
             // Recherche de la fraction "Média"
             Fraction rechercheMediaDansFractions = bdd.Fractions.FirstOrDefault(fraction => fraction.Libelle.Contains("Média"));
-            // Création de l'élément de type Média
-            Element_Communautaire element = bdd.ElementsCommunautaires.Add(new Element_Communautaire());
+            //// Recherche de l'état "Publié"
+            //Etat etatPublie = bdd.Etats.FirstOrDefault(etat => etat.Libelle.Contains("Publié"));
+            //if (etatPublie == null)
+            //{
+            //    //Création de l'élément de type Etat
+            //    Element_General elementEtat = bdd.ElementsGeneraux.Add(new Element_General());
+            //    // Création de l'état "Publié"
+            //    etatPublie = bdd.Etats.Add(new Etat { Libelle = "Publié", Element = elementEtat });
+            //    //elementEtat.Etat = etatPublie;
+            //    bdd.SaveChanges();
+            //}
 
+            //Création de l'élément de type Média
+            Element_Communautaire element = bdd.ElementsCommunautaires.Add(new Element_Communautaire ());
+            
             if (rechercheMediaDansFractions == null)
             {
                 // Création de la fraction "Média"
@@ -38,8 +52,7 @@ namespace Intranet.Areas.Elements_Communautaires.Models.Medias
             if (rechercheMediaDansFractions != null || fractionMediaTrouvee != null)
             {
                 bdd.Medias.Add(new Media { Titre = titre, Description = description, Chemin = chemin, Element = element });
-                bdd.Operations.Add(new Operation { Element = element, Type = Operation.Operations.Création });
-
+                bdd.Operations.Add(new Operation { Element = element, Type = Operation.Operations.Création.ToString() });
                 bdd.SaveChanges();
             }
         }

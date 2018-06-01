@@ -8,6 +8,7 @@ using Intranet.Models;
 using Intranet.Areas.Elements_Generaux.Models;
 using Intranet.Areas.Elements_Generaux.Models.Fractions;
 using Intranet.Areas.Composants.Models.Operations;
+using Intranet.Areas.Elements_Generaux.Models.Etats;
 
 namespace Intranet.Areas.Composants.Models.BDD
 {
@@ -20,6 +21,7 @@ namespace Intranet.Areas.Composants.Models.BDD
         public DbSet<Element_General> ElementsGeneraux { get; set; }
         public DbSet<Element_Communautaire> ElementsCommunautaires { get; set; }
         public DbSet<Categorie> Categories { get; set; }
+        public DbSet<Etat> Etats { get; set; }
         public DbSet<Media> Medias { get; set; }
         public DbSet<Ressource> Ressources { get; set; }
     }

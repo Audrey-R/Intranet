@@ -11,10 +11,5 @@ namespace Intranet.Areas.Elements_Generaux.Models.Fractions
 {
     public class Fraction : Element_General_Objet, IElement_General
     {
-        //public string Libelle { get; set; }
-        //public Fraction Fraction_Concernee { get; set; }
-        public int Id { get; set; }
-        public string Libelle { get; set; }
-        public Element Element { get; set; }
     }
 }

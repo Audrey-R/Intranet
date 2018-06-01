@@ -92,7 +92,7 @@
     <Compile Include="Models\DalCategorieTests.cs" />
     <Compile Include="Models\DalFractionTests.cs" />
     <Compile Include="Models\DalMediaTests.cs" />
-    <Compile Include="Models\DalOperationTests.cs" />
+    <Compile Include="Models\DalEtatTests.cs" />
     <Compile Include="Models\DalRessourceTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controllers\HomeControllerTest.cs" />

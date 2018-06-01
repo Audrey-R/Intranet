@@ -4,8 +4,8 @@ namespace Intranet.Areas.Composants.Models.Collaborateurs
 {
     public class Collaborateur
     {
-        [Key]
         public int Id { get; set; }
+        public int Matricule { get; set; }
         public string Prenom { get; set; }
         public string Nom { get; set; }
     }
