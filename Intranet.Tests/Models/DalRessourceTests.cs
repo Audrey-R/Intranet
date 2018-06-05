@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Intranet.Areas.Composants.Models.Elements;
 using Intranet.Areas.Elements_Communautaires.Models.Ressources;
+using Intranet.Areas.Elements_Generaux.Models.Themes;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Intranet.Tests.Models
@@ -19,17 +21,36 @@ namespace Intranet.Tests.Models
         //    init.InitializeDatabase(new BddContext());
         //}
 
-        [TestMethod]
-        public void CreerRessource_NouvelleRessource_ListeToutesLesRessources()
-        {
-            DalRessource dal = new DalRessource();
-            
-                dal.CreerRessource("Ressource1");
-                List<Ressource> ressources = dal.ListerToutesLesRessources();
+        //[TestMethod]
+        //public void CreerRessource_NouvelleRessource_ListeToutesLesRessources()
+        //{
+        //    DalRessource dal = new DalRessource();
 
-                Assert.IsNotNull(ressources);
-                Assert.AreEqual(1, ressources.Count);
-                Assert.AreEqual("Ressource1", ressources[0].Titre);
+        //    dal.CreerRessource("Ressource1");
+        //    List<Ressource> ressources = dal.ListerToutesLesRessources();
+
+        //    Assert.IsNotNull(ressources);
+        //    Assert.AreEqual(1, ressources.Count);
+        //    Assert.AreEqual("Ressource1", ressources[0].Titre);
+        //}
+
+        [TestMethod]
+        public void CreerRessource_ModifierRessourceEnAjoutantThemeSecurite_AssociationReussie()
+        {
+            DalRessource dalRessource = new DalRessource();
+            
+            //Création de la ressource
+            dalRessource.CreerRessource("Ressource1");
+            List<Ressource> ressources = dalRessource.ListerToutesLesRessources();
+            Ressource dernirereRessource = ressources.FirstOrDefault(ressource => ressource.Titre == "Ressource1");
+            
+            //Ajout d'un thème à la ressource
+            dalRessource.AjouterUnThemeAUneRessource(dernirereRessource, "Sécurité");
+            
+            Assert.IsNotNull(ressources);
+            Assert.AreEqual(1, ressources.Count);
+            Assert.AreEqual("Ressource1", ressources[0].Titre);
+            Assert.AreEqual("Ressource1", dernirereRessource.Titre);
         }
 
         //[TestMethod]

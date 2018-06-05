@@ -10,8 +10,8 @@ namespace Intranet.Areas.Composants.Models.Operations
         public DateTime Date { get; set; }
         public Collaborateur Collaborateur { get; set; }
         public Element Element { get; set; }
-        public enum Operations { Création, Modification, Masquage, Supression };
-        public string Type { get; set; } 
+        public enum Operations { Création, Modification, Masquage, Suppression };
+        public Operations Type_Operation { get; set; } 
 
         public Operation()
         {

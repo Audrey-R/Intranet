@@ -9,8 +9,7 @@ namespace Intranet.Models
 {
     public class Element_Communautaire : Element
     {
-        //public string Libelle { get; set; }
-        //public Fraction Fraction { get; set; }
+        
     }
 
 }

@@ -9,6 +9,7 @@ using Intranet.Areas.Elements_Generaux.Models;
 using Intranet.Areas.Elements_Communautaires.Models.Medias;
 using Intranet.Models;
 using Intranet.Areas.Elements_Generaux.Models.Fractions;
+using Intranet.Areas.Elements_Generaux.Models.Themes;
 
 namespace Intranet.Areas.Elements_Communautaires.Models.Ressources
 {
@@ -48,7 +49,7 @@ namespace Intranet.Areas.Elements_Communautaires.Models.Ressources
                 Media dernierMediaCree = medias.LastOrDefault();
 
                 //Ajout du dernier média créé à la ressource
-                AjouterUnMediaAUneRessource(ressource.Element.Id, dernierMediaCree);
+                AjouterUnMediaAUneRessource(ressource.Element.IdElement, dernierMediaCree);
                 bdd.SaveChanges();
             }
         }
@@ -56,7 +57,7 @@ namespace Intranet.Areas.Elements_Communautaires.Models.Ressources
         public void AjouterUnMediaAUneRessource(int id, Media media)
         {
             //Recherche de la ressource dans la BDD
-            Ressource ressourceTrouvee = bdd.Ressources.FirstOrDefault(ressource => ressource.Element.Id == id);
+            Ressource ressourceTrouvee = bdd.Ressources.FirstOrDefault(ressource => ressource.Element.IdElement == id);
             if (ressourceTrouvee != null)
             {
                 //Création d'une liste de médias à associer
@@ -82,9 +83,20 @@ namespace Intranet.Areas.Elements_Communautaires.Models.Ressources
             }
         }
 
+        public void AjouterUnThemeAUneRessource(Ressource ressource, string theme)
+        {
+            Element elementAAjouter = ExtraireElement(ressource);
+            List<Theme> themes = bdd.Themes.ToList();
+            Theme themeAAjouter = themes.FirstOrDefault(t => t.Libelle == theme);
+            
+            Element elmt =  bdd.Elements.Single(a => a.IdElement == elementAAjouter.IdElement);
+            elmt.ListeThemesAssocies.Add(themeAAjouter) ;
+            bdd.SaveChanges();
+        }
+
         public void ModifierRessource(int id, string titre, List<Media> listeMediasAssocies)
         {
-            Ressource ressourceTrouvee = bdd.Ressources.FirstOrDefault(ressource => ressource.Element.Id == id);
+            Ressource ressourceTrouvee = bdd.Ressources.FirstOrDefault(ressource => ressource.Element.IdElement == id);
             if (ressourceTrouvee != null)
             {
                 ressourceTrouvee.Titre = titre;
@@ -96,7 +108,7 @@ namespace Intranet.Areas.Elements_Communautaires.Models.Ressources
 
         public void SupprimerRessource(int id)
         {
-            Ressource ressourceTrouvee = bdd.Ressources.FirstOrDefault(ressource => ressource.Element.Id == id);
+            Ressource ressourceTrouvee = bdd.Ressources.FirstOrDefault(ressource => ressource.Element.IdElement == id);
 
             if (ressourceTrouvee != null)
             {
@@ -118,6 +130,11 @@ namespace Intranet.Areas.Elements_Communautaires.Models.Ressources
         public List<Ressource> ListerToutesLesRessources()
         {
             return bdd.Ressources.ToList();
+        }
+
+        public Element ExtraireElement(Ressource ressource)
+        {
+            return ressource.Element;
         }
 
         public void Dispose()

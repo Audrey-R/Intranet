@@ -8,7 +8,7 @@ using Intranet.Models;
 using Intranet.Areas.Elements_Generaux.Models;
 using Intranet.Areas.Elements_Generaux.Models.Fractions;
 using Intranet.Areas.Composants.Models.Operations;
-using Intranet.Areas.Elements_Generaux.Models.Etats;
+using Intranet.Areas.Elements_Generaux.Models.Themes;
 
 namespace Intranet.Areas.Composants.Models.BDD
 {
@@ -21,8 +21,22 @@ namespace Intranet.Areas.Composants.Models.BDD
         public DbSet<Element_General> ElementsGeneraux { get; set; }
         public DbSet<Element_Communautaire> ElementsCommunautaires { get; set; }
         public DbSet<Categorie> Categories { get; set; }
-        public DbSet<Etat> Etats { get; set; }
+        public DbSet<Theme> Themes { get; set; }
+        //public DbSet<ThemeElement> ThemesElement { get; set; }
         public DbSet<Media> Medias { get; set; }
         public DbSet<Ressource> Ressources { get; set; }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Element>()
+               .HasMany<Theme>(element => element.ListeThemesAssocies)
+               .WithMany(theme => theme.ListeElementsAssocies)
+               .Map(cs =>
+               {
+                   cs.MapLeftKey("Element_Id");
+                   cs.MapRightKey("Theme_Id");
+                   cs.ToTable("Theme_Element");
+               });
+        }
     }
 }

@@ -1,16 +1,30 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using Intranet.Areas.Composants.Models.BDD;
 using Intranet.Areas.Composants.Models.Collaborateurs;
 using Intranet.Areas.Elements_Generaux.Models;
-using Intranet.Areas.Elements_Generaux.Models.Etats;
+using Intranet.Areas.Elements_Generaux.Models.Themes;
 
 namespace Intranet.Areas.Composants.Models.Elements
 {
     public class Element
     {
-        public int Id { get; set; }
+        [Key]
+        public int IdElement { get; set; }
         public Collaborateur Collaborateur { get; set; }
-        //public Etat Etat { get; set; }
+        public enum Etats { Publié, En_attente_de_traitement, Traité, Modifié, Masqué };
+        public Etats Etat { get; set; }
+
+        
+        public virtual ICollection<Theme> ListeThemesAssocies { get; set; }
+
+        public Element()
+        {
+            
+            this.ListeThemesAssocies = new HashSet<Theme>();
+        }
     }
 }

@@ -6,13 +6,13 @@ using Intranet.Areas.Composants.Models.BDD;
 using Intranet.Areas.Elements_Generaux.Models.Fractions;
 using Intranet.Models;
 
-namespace Intranet.Areas.Elements_Generaux.Models.Etats
+namespace Intranet.Areas.Elements_Generaux.Models.Themes
 {
-    public class DalEtat : IDalElement_General
+    public class DalTheme : IDalElement_General
     {
         private BddContext bdd;
 
-        public DalEtat()
+        public DalTheme()
         {
             bdd = new BddContext();
         }
@@ -20,8 +20,8 @@ namespace Intranet.Areas.Elements_Generaux.Models.Etats
 
         public void Creer(string libelle)
         {
-            // Recherche de la fraction "Catégorie"
-            Fraction fraction = bdd.Fractions.FirstOrDefault(fractionEtatTrouvee => fractionEtatTrouvee.Libelle.Contains("Etat"));
+            // Recherche de la fraction "Thème"
+            Fraction fraction = bdd.Fractions.FirstOrDefault(fractionEtatTrouvee => fractionEtatTrouvee.Libelle.Contains("Thème"));
 
             // Création de l'élément de type Catégorie
             Element_General element = bdd.ElementsGeneraux.Add(new Element_General());
@@ -31,28 +31,12 @@ namespace Intranet.Areas.Elements_Generaux.Models.Etats
             if (fraction == null)
             {
                 // Création de la fraction "Catégorie"
-                fraction = bdd.Fractions.Add(new Fraction { Libelle = "Etat", Element = element });
+                fraction = bdd.Fractions.Add(new Fraction { Libelle = "Thème", Element = element });
                 bdd.SaveChanges();
             }
-            
-            //if (fraction != null)
-            //{
-                //    List<Categorie> CategoriesExistantes = element.Categories ;
-                //    List<Categorie> listeCategories = new List<Categorie>();
-                //Categorie categorie = 
-                bdd.Etats.Add(new Etat { Libelle = libelle, Element = element });
-                //    listeCategories.Add(categorie);
-
-                //    if (CategoriesExistantes == null)
-                //    {
-                //        element.Categories = listeCategories;
-                //    }
-                //    else
-                //    {
-                //        element.Categories.AddRange(listeCategories);
-                //    }
-                bdd.SaveChanges();
-           // }
+             
+            bdd.Themes.Add(new Theme { Libelle = libelle, Element = element });
+            bdd.SaveChanges();
         }
 
         public void Dispose()
@@ -62,7 +46,7 @@ namespace Intranet.Areas.Elements_Generaux.Models.Etats
 
         public IEnumerable<Element_General_Objet> Lister()
         {
-            return bdd.Etats.ToList();
+            return bdd.Themes.ToList();
         }
 
        
@@ -75,6 +59,12 @@ namespace Intranet.Areas.Elements_Generaux.Models.Etats
         public void Modifier(int id, string libelle)
         {
             throw new NotImplementedException();
+        }
+
+        public Element_General_Objet Obtenir(string libelle)
+        {
+            Theme themeTrouve = bdd.Themes.FirstOrDefault(theme => theme.Libelle == libelle);
+            return themeTrouve;
         }
 
         public void Supprimer(int id)

@@ -2,6 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using Intranet.Areas.Composants.Models.Elements;
 using Intranet.Areas.Elements_Communautaires.Models.Medias;
+using Intranet.Areas.Elements_Generaux.Models.Themes;
 using Intranet.Models;
 
 namespace Intranet.Areas.Elements_Communautaires.Models.Ressources

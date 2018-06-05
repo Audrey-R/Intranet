@@ -118,5 +118,10 @@ namespace Intranet.Areas.Elements_Generaux.Models.Categories
         {
             throw new NotImplementedException();
         }
+
+        public Element_General_Objet Obtenir(string libelle)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

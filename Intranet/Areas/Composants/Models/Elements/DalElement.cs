@@ -2,12 +2,20 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using Intranet.Areas.Composants.Models.BDD;
 using Intranet.Areas.Composants.Models.Collaborateurs;
 
 namespace Intranet.Areas.Composants.Models.Elements
 {
     public class DalElement
     {
+        private BddContext bdd;
+
+        public DalElement()
+        {
+            bdd = new BddContext();
+        }
+
         public void CreerElement(Collaborateur collaborateur, bool elementCommunautaire, bool elementGeneral)
         {
             throw new NotImplementedException();
@@ -20,7 +28,7 @@ namespace Intranet.Areas.Composants.Models.Elements
 
         public List<Element> ListerTousLesElements()
         {
-            throw new NotImplementedException();
+            return bdd.Elements.ToList();
         }
 
         public List<Element> ListerTousLesElementsCommunautaires()

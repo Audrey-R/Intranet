@@ -6,7 +6,6 @@ using Intranet.Areas.Composants.Models.Elements;
 using Intranet.Areas.Elements_Generaux.Models.Fractions;
 using Intranet.Areas.Composants.Models.Operations ;
 using Intranet.Models;
-using Intranet.Areas.Elements_Generaux.Models.Etats;
 using Intranet.Areas.Elements_Generaux.Models;
 
 namespace Intranet.Areas.Elements_Communautaires.Models.Medias
@@ -37,7 +36,7 @@ namespace Intranet.Areas.Elements_Communautaires.Models.Medias
             //}
 
             //Création de l'élément de type Média
-            Element_Communautaire element = bdd.ElementsCommunautaires.Add(new Element_Communautaire ());
+            Element_Communautaire element = bdd.ElementsCommunautaires.Add(new Element_Communautaire { Etat = Element.Etats.Publié });
             
             if (rechercheMediaDansFractions == null)
             {
@@ -52,14 +51,14 @@ namespace Intranet.Areas.Elements_Communautaires.Models.Medias
             if (rechercheMediaDansFractions != null || fractionMediaTrouvee != null)
             {
                 bdd.Medias.Add(new Media { Titre = titre, Description = description, Chemin = chemin, Element = element });
-                bdd.Operations.Add(new Operation { Element = element, Type = Operation.Operations.Création.ToString() });
+                bdd.Operations.Add(new Operation { Element = element, Type_Operation = Operation.Operations.Création });
                 bdd.SaveChanges();
             }
         }
 
         public void Modifier(int id, string titre, string description, string chemin)
         {
-            Media mediaTrouve = bdd.Medias.FirstOrDefault(media => media.Element.Id == id);
+            Media mediaTrouve = bdd.Medias.FirstOrDefault(media => media.Element.IdElement == id);
             if (mediaTrouve != null)
             {
                 mediaTrouve.Titre = titre;
@@ -72,7 +71,7 @@ namespace Intranet.Areas.Elements_Communautaires.Models.Medias
 
         public void Supprimer(int id)
         {
-            Media mediaTrouve = bdd.Medias.FirstOrDefault(media => media.Element.Id == id);
+            Media mediaTrouve = bdd.Medias.FirstOrDefault(media => media.Element.IdElement == id);
             if (mediaTrouve != null)
             {
                 bdd.Medias.Remove(mediaTrouve);
