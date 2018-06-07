@@ -42,8 +42,9 @@ namespace Intranet.Areas.Elements_Generaux.Models.Categories
             {
                 //    List<Categorie> CategoriesExistantes = element.Categories ;
                 //    List<Categorie> listeCategories = new List<Categorie>();
-                //Categorie categorie = 
-                bdd.Categories.Add(new Categorie { Libelle = libelle, Element = element });
+                //Categorie categorie =
+                element.Fraction = fractionCategorieTrouvee;
+                bdd.Categories.Add(new Categorie { Libelle = libelle, Element = element, Fraction = fractionCategorieTrouvee });
                 //    listeCategories.Add(categorie);
 
                 //    if (CategoriesExistantes == null)

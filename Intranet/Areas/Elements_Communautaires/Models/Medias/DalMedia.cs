@@ -23,18 +23,7 @@ namespace Intranet.Areas.Elements_Communautaires.Models.Medias
         {
             // Recherche de la fraction "Média"
             Fraction rechercheMediaDansFractions = bdd.Fractions.FirstOrDefault(fraction => fraction.Libelle.Contains("Média"));
-            //// Recherche de l'état "Publié"
-            //Etat etatPublie = bdd.Etats.FirstOrDefault(etat => etat.Libelle.Contains("Publié"));
-            //if (etatPublie == null)
-            //{
-            //    //Création de l'élément de type Etat
-            //    Element_General elementEtat = bdd.ElementsGeneraux.Add(new Element_General());
-            //    // Création de l'état "Publié"
-            //    etatPublie = bdd.Etats.Add(new Etat { Libelle = "Publié", Element = elementEtat });
-            //    //elementEtat.Etat = etatPublie;
-            //    bdd.SaveChanges();
-            //}
-
+           
             //Création de l'élément de type Média
             Element_Communautaire element = bdd.ElementsCommunautaires.Add(new Element_Communautaire { Etat = Element.Etats.Publié });
             
@@ -50,7 +39,8 @@ namespace Intranet.Areas.Elements_Communautaires.Models.Medias
 
             if (rechercheMediaDansFractions != null || fractionMediaTrouvee != null)
             {
-                bdd.Medias.Add(new Media { Titre = titre, Description = description, Chemin = chemin, Element = element });
+                element.Fraction = fractionMediaTrouvee;
+                bdd.Medias.Add(new Media { Titre = titre, Description = description, Chemin = chemin, Element = element});
                 bdd.Operations.Add(new Operation { Element = element, Type_Operation = Operation.Operations.Création });
                 bdd.SaveChanges();
             }

@@ -25,16 +25,15 @@ namespace Intranet.Areas.Elements_Generaux.Models.Themes
 
             // Création de l'élément de type Catégorie
             Element_General element = bdd.ElementsGeneraux.Add(new Element_General());
-
-            //List<Categorie> listeCategories = new List<Categorie>();
-
+            
             if (fraction == null)
             {
                 // Création de la fraction "Catégorie"
                 fraction = bdd.Fractions.Add(new Fraction { Libelle = "Thème", Element = element });
                 bdd.SaveChanges();
             }
-             
+
+            element.Fraction = fraction ;
             bdd.Themes.Add(new Theme { Libelle = libelle, Element = element });
             bdd.SaveChanges();
         }

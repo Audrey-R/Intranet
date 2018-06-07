@@ -12,13 +12,11 @@ namespace Intranet.Areas.Elements_Generaux.Models.Themes
 {
     public class Theme : Element_General_Objet, IElement_General
     {
-       
         public virtual ICollection<Element> ListeElementsAssocies { get; set; }
 
         public Theme()
         {
             this.ListeElementsAssocies = new HashSet<Element>();
         }
-
     }
 }

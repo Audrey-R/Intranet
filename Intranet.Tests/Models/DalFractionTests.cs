@@ -30,15 +30,17 @@ namespace Intranet.Tests.Models
         {
             DalFraction dal = new DalFraction();
             
+                dal.Creer("Fraction");
                 dal.Creer("Média");
                 dal.Creer("Ressource");
                 List<Fraction> fractions = (List<Fraction>)dal.Lister();
 
                 Assert.IsNotNull(fractions);
-                Assert.AreEqual(3, fractions.Count);
+                Assert.AreEqual(4, fractions.Count);
                 Assert.AreEqual("Catégorie", fractions[0].Libelle);
-                Assert.AreEqual("Média", fractions[1].Libelle);
-                Assert.AreEqual("Ressource", fractions[2].Libelle);
+                Assert.AreEqual("Fraction", fractions[1].Libelle);
+                Assert.AreEqual("Média", fractions[2].Libelle);
+                Assert.AreEqual("Ressource", fractions[3].Libelle);
                 
         }
 }

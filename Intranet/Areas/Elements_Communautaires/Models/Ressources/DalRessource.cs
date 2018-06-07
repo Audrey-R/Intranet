@@ -41,7 +41,8 @@ namespace Intranet.Areas.Elements_Communautaires.Models.Ressources
 
             if (rechercheRessourceDansFractions != null || fractionRessourceTrouvee != null)
             {
-                Ressource ressource = bdd.Ressources.Add(new Ressource { Titre = titre, Element= element });
+                element.Fraction = fractionRessourceTrouvee;
+                Ressource ressource = bdd.Ressources.Add(new Ressource { Titre = titre, Element= element});
                 bdd.SaveChanges();
 
                 //Recherche du dernier média créé

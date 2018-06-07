@@ -2,6 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using Intranet.Areas.Composants.Models.Elements;
 using Intranet.Areas.Elements_Communautaires.Models.Medias;
+using Intranet.Areas.Elements_Generaux.Models.Fractions;
 using Intranet.Areas.Elements_Generaux.Models.Themes;
 using Intranet.Models;
 
@@ -13,5 +14,6 @@ namespace Intranet.Areas.Elements_Communautaires.Models.Ressources
         public string Titre { get; set; }
         public List<Media> ListeMediasAssocies { get; set; }
         public Element Element { get ; set; }
+        public Fraction Fraction { get; set; }
     }
 }

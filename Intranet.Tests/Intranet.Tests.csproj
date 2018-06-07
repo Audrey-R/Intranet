@@ -90,6 +90,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\DalCategorieTests.cs" />
+    <Compile Include="Models\DalElementTests.cs" />
     <Compile Include="Models\DalFractionTests.cs" />
     <Compile Include="Models\DalMediaTests.cs" />
     <Compile Include="Models\DalThemeTests.cs" />

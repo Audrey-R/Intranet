@@ -29,14 +29,23 @@ namespace Intranet.Areas.Composants.Models.BDD
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Element>()
-               .HasMany<Theme>(element => element.ListeThemesAssocies)
-               .WithMany(theme => theme.ListeElementsAssocies)
-               .Map(cs =>
+               .HasMany<Theme>(e => e.ListeThemesAssocies)
+               .WithMany(t => t.ListeElementsAssocies)
+               .Map(et =>
                {
-                   cs.MapLeftKey("Element_Id");
-                   cs.MapRightKey("Theme_Id");
-                   cs.ToTable("Theme_Element");
+                   et.MapLeftKey("Element_Id");
+                   et.MapRightKey("Theme_Id");
+                   et.ToTable("Theme_Element");
                });
+
+            modelBuilder.Entity<Fraction>()
+                .HasRequired(f => f.Element)
+                .WithMany();
+
+
+            modelBuilder.Entity<Element>()
+                .HasOptional(e => e.Fraction)
+                .WithMany();
         }
     }
 }

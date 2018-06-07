@@ -4,6 +4,10 @@ using System.Linq;
 using System.Web;
 using Intranet.Areas.Composants.Models.BDD;
 using Intranet.Areas.Composants.Models.Collaborateurs;
+using Intranet.Areas.Elements_Generaux.Models;
+using Intranet.Areas.Elements_Generaux.Models.Categories;
+using Intranet.Areas.Elements_Generaux.Models.Fractions;
+using Intranet.Models;
 
 namespace Intranet.Areas.Composants.Models.Elements
 {
@@ -33,12 +37,25 @@ namespace Intranet.Areas.Composants.Models.Elements
 
         public List<Element> ListerTousLesElementsCommunautaires()
         {
-            throw new NotImplementedException();
+            return bdd.Elements.Where(e => (e is Element_Communautaire)).ToList();
         }
 
         public List<Element> ListerTousLesElementsGeneraux()
         {
-            throw new NotImplementedException();
+            return bdd.Elements.Where(e => (e is Element_General)).ToList();
+        }
+
+        public List<Element> ListerTousLesElements(string libelleFraction)
+        {
+            var query =     from fraction in bdd.Fractions
+                            join element in bdd.Elements on fraction.Id  equals element.Fraction.Id
+
+                            where fraction.Libelle == libelleFraction
+                            select new { Element = element};
+            var objects =  query.ToList().Select(
+                           e => new Element { IdElement = e.Element.IdElement }).ToList();
+
+            return objects;
         }
 
         public void MasquerElement(int id)
