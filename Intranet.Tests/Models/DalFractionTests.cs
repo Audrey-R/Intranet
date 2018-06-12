@@ -26,10 +26,11 @@ namespace Intranet.Tests.Models
 
 
         [TestMethod]
-        public void CreerFraction_DeuxNouvellesFractions_ListeToutesLesFractions()
+        public void CreerFraction_TroisNouvellesFractions_ListeToutesLesFractions()
         {
-            DalFraction dal = new DalFraction();
-            
+            using (IDalElement_General dal = new DalFraction())
+            {
+
                 dal.Creer("Fraction");
                 dal.Creer("Média");
                 dal.Creer("Ressource");
@@ -41,55 +42,36 @@ namespace Intranet.Tests.Models
                 Assert.AreEqual("Fraction", fractions[1].Libelle);
                 Assert.AreEqual("Média", fractions[2].Libelle);
                 Assert.AreEqual("Ressource", fractions[3].Libelle);
-                
+            }
         }
+
+        [TestMethod]
+        public void ModifierFraction_LibelleMédiaEnLibelleMedia_ModificationReussie()
+        {
+            using (IDalElement_General dal = new DalFraction())
+            {
+                dal.Modifier(4, "Media");
+
+                List<Fraction> fractions = (List<Fraction>)dal.Lister();
+
+                Assert.IsNotNull(fractions);
+                Assert.AreEqual("Media", fractions[2].Libelle);
+            }
+        }
+
+        [TestMethod]
+        public void SupprimerFraction_SiNonLieeAUnElement_SuppressionReussie()
+        {
+            using (IDalElement_General dal = new DalFraction())
+            {
+                dal.Creer("fractionFictive");
+                dal.Supprimer(6);
+
+                List<Fraction> fractions = (List<Fraction>)dal.Lister();
+
+                Assert.IsNotNull(fractions);
+                Assert.AreEqual("Media", fractions[2].Libelle);
+            }
+        }
+    }   
 }
-        //[TestMethod]
-        //public void CreerComposantGeneral_AvecUnNouveauComposantGeneral_ObtientTousLesComposantsGenerauxRenvoitBienLeComposantGeneral()
-        //{
-        //    using (IDalComposantGeneral dal = new DalComposantGeneral())
-        //    {
-        //        dal.CreerComposantGeneral("Catégorie");
-        //        List<Composant_General> composants = dal.ListerTousLesComposantsGeneraux();
-
-        //        Assert.IsNotNull(composants);
-        //        Assert.AreEqual(1, composants.Count);
-        //        Assert.AreEqual("Catégorie", composants[0].LibelleComposantGeneral);
-        //    }
-        //}
-
-        //[TestMethod]
-        //public void ModifierComposantGeneral_CreationDUnNouveauComposantGeneralEtChangementLibelle_LaModificationEstCorrecteApresRechargement()
-        //{
-        //    using (IDalComposantGeneral dal = new DalComposantGeneral())
-        //    {
-        //        dal.CreerComposantGeneral("Catégorie");
-        //        List<Composant_General> composants = dal.ListerTousLesComposantsGeneraux();
-        //        int id = composants.First(composant => composant.LibelleComposantGeneral == "Catégorie").Id;
-
-        //        dal.ModifierComposantGeneral(id, "Thème");
-
-        //        composants = dal.ListerTousLesComposantsGeneraux();
-        //        Assert.IsNotNull(composants);
-        //        Assert.AreEqual(1, composants.Count);
-        //        Assert.AreEqual("Thème", composants[0].LibelleComposantGeneral);
-        //    }
-        //}
-
-        //[TestMethod]
-        //public void SupprimerComposantGeneral_CreationPuisSuppressionDUnComposantGeneralRenvoiDUneListeVide_SupprimeBienLeComposantGeneral()
-        //{
-        //    using (IDalComposantGeneral dal = new DalComposantGeneral())
-        //    {
-        //        dal.CreerComposantGeneral("Catégorie");
-        //        List<Composant_General> composants = dal.ListerTousLesComposantsGeneraux();
-        //        int id = composants.First(composant => composant.LibelleComposantGeneral == "Catégorie").Id;
-
-        //        dal.SupprimerComposantGeneral(id);
-
-        //        composants = dal.ListerTousLesComposantsGeneraux();
-        //        Assert.IsNotNull(composants);
-        //        Assert.AreEqual(0, composants.Count);
-        //    }
-        //}
-    }

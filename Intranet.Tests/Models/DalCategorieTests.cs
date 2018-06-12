@@ -37,16 +37,57 @@ namespace Intranet.Tests.Models
             {
                 dal.Creer("Entreprise");
                 dal.Creer("Communauté");
-                //IEnumerable<Fraction_Generale> liste = dal.Lister();
+
                 List<Categorie> categories = (List<Categorie>)dal.Lister();
-
-                //List<Categorie> ListeCategories = (List<Categorie>)dal.Lister(categories);
-
+                
                 Assert.IsNotNull(categories);
-                //Assert.IsNotNull(ListeCategories);
                 Assert.AreEqual(2, categories.Count);
                 Assert.AreEqual("Entreprise", categories[0].Libelle);
                 Assert.AreEqual("Communauté", categories[1].Libelle);
+            }
+        }
+
+        [TestMethod]
+        public void ModifierCategorie_LibelleEntrepriseEnLibelleEntrepris_ModificationReussie()
+        {
+            using (IDalElement_General dal = new DalCategorie())
+            {
+                dal.Modifier(1, "Entrepris");
+
+                List<Categorie> categories = (List<Categorie>)dal.Lister();
+
+                Assert.IsNotNull(categories);
+                Assert.AreEqual("Entrepris", categories[0].Libelle);
+            }
+        }
+
+        //[TestMethod]
+        //public void SupprimerCategorie_SiNonLieeAUneRessourceEtSiNonLieeAAutreElement_SuppressionReussie()
+        //{
+        //    using (IDalElement_General dal = new DalCategorie())
+        //    {
+        //        //dal.Creer("categorieFictive");
+        //        dal.Supprimer(1);
+
+        //        List<Categorie> categories = (List<Categorie>)dal.Lister();
+
+        //        Assert.IsNotNull(categories);
+        //        Assert.AreEqual(1, categories.Count);
+        //    }
+        //}
+
+        [TestMethod]
+        public void MasquerCategorie_EtTousLesElementsLies_MasquageReussi()
+        {
+            using (IDalElement_General dal = new DalCategorie())
+            {
+                //dal.Creer("categorieFictive");
+                dal.Masquer(1);
+
+                List<Categorie> categories = (List<Categorie>)dal.Lister();
+
+                Assert.IsNotNull(categories);
+                Assert.AreEqual("Masqué", categories[0].Element.Etat.ToString());
             }
         }
     }

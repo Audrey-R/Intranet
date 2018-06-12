@@ -26,79 +26,26 @@ namespace Intranet.Tests.Models
 
                 List<Media> medias = dal.Lister();
 
-                //Assert.IsNotNull(medias);
-                //Assert.AreEqual(2, medias.Count);
-                //Assert.AreEqual("Média1", medias[0].Titre);
-                //Assert.AreEqual("Ceci est un test", medias[0].Description);
-                //Assert.AreEqual("https://openclassrooms.com/dashboard", medias[0].Chemin);
-                //Assert.AreEqual("Média2", medias[1].Titre);
-                //Assert.AreEqual("Ceci est un test", medias[1].Description);
-                //Assert.AreEqual("~/Shared/Img/img1.jpg", medias[1].Chemin);
+                Assert.IsNotNull(medias);
+                Assert.AreEqual(2, medias.Count);
+                Assert.AreEqual("Média1", medias[0].Titre);
+                Assert.AreEqual("Ceci est un test", medias[0].Description);
+                Assert.AreEqual("https://openclassrooms.com/dashboard", medias[0].Chemin);
+                Assert.AreEqual("Média2", medias[1].Titre);
+                Assert.AreEqual("Ceci est un test", medias[1].Description);
+                Assert.AreEqual("~/Shared/Img/img1.jpg", medias[1].Chemin);
         }
 
         //[TestMethod]
-        //public void ModifierRessource_AjouterUnMedia_ListeTousLesMediasAssociesALaRessource()
+        //public void ModifierFraction_LibelleMédiaEnLibelleMedia_ModificationReussie()
         //{
-        //    using (IDalComposantCommunautaire dal = new DalComposantCommunautaire())
-        //    {
-        //        dal.AjouterUnMediaAUneRessource(5, dal.ListerTousLesMedias()[0]);
+        //    DalMedia dal = new DalMedia();
+        //    dal.Modifier("Média", "Media");
 
+        //    List<Fraction> fractions = (List<Fraction>)dal.Lister();
 
-        //        //List<Media> medias = dal.ListerTousLesMedias();
-        //        //Media dernierMediaCree = medias.LastOrDefault();
-
-        //        //List<Ressource> ressources = dal.ListerToutesLesRessources();
-        //        //Ressource derniereRessource = ressources.LastOrDefault();
-
-        //        //dal.ListerTousLesMedias();
-
-
-        //        //Assert.IsNotNull(ressources);
-        //        //Assert.IsNotNull(medias);
-        //        //Assert.AreEqual(0, medias.Count);
-        //        //Assert.AreEqual(1, ressources.Count);
-        //        //Assert.AreEqual("Ressource1", ressources[0].Titre);
-        //        //Assert.AreEqual(mediasAssocies.IndexOf(dernierMediaEnregistre), ressources[0].ListeMediasAssocies[1]);
-        //        //Assert.AreEqual("Média2", medias[IndexDernierMediaEnregistre].Titre);
-        //        //Assert.AreEqual("Ceci est un test", medias[IndexDernierMediaEnregistre].Description);
-        //        //Assert.AreEqual("~/Shared/Img/img1.jpg", medias[IndexDernierMediaEnregistre].Chemin);
-        //        //Assert.AreEqual(null, medias[IndexDernierMediaEnregistre].Date_Expiration);
-        //    }
+        //    Assert.IsNotNull(fractions);
+        //    Assert.AreEqual("Media", fractions[2].Libelle);
         //}
-
-            //[TestMethod]
-            //public void ModifierComposantCommunautaire_CreationDUnNouveauComposantCommunautaireEtChangementLibelle_LaModificationEstCorrecteApresRechargement()
-            //{
-            //    using (IDalComposantCommunautaire dal = new DalComposantCommunautaire())
-            //    {
-            //        dal.CreerComposantCommunautaire("Ressource");
-            //        List<Composant_Communautaire> composants = dal.ListerTousLesComposantsCommunautaires();
-            //        int id = composants.First(composant => composant.LibelleComposantCommunautaire == "Ressource").Id;
-
-            //        dal.ModifierComposantCommunautaire(id, "Evenement");
-
-            //        composants = dal.ListerTousLesComposantsCommunautaires();
-            //        Assert.IsNotNull(composants);
-            //        Assert.AreEqual(1, composants.Count);
-            //        Assert.AreEqual("Evenement", composants[0].LibelleComposantCommunautaire);
-            //    }
-            //}
-
-            //[TestMethod]
-            //public void SupprimerComposantCommunautaire_CreationPuisSuppressionDUnComposantCommunautaireRenvoiDUneListeVide_SupprimeBienLeComposantCommunautaire()
-            //{
-            //    using (IDalComposantCommunautaire dal = new DalComposantCommunautaire())
-            //    {
-            //        dal.CreerComposantCommunautaire("Ressource");
-            //        List<Composant_Communautaire> composants = dal.ListerTousLesComposantsCommunautaires();
-            //        int id = composants.First(composant => composant.LibelleComposantCommunautaire == "Ressource").Id;
-
-            //        dal.SupprimerComposantCommunautaire(id);
-
-            //        composants = dal.ListerTousLesComposantsCommunautaires();
-            //        Assert.IsNotNull(composants);
-            //        Assert.AreEqual(0, composants.Count);
-            //    }
-            //}
-       }
+    }
 }

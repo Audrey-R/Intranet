@@ -12,6 +12,5 @@ namespace Intranet.Areas.Elements_Generaux.Models.Categories
 {
     public class Categorie : Element_General_Objet, IElement_General
     {
-        public Fraction Fraction { get; set; }
     }
 }

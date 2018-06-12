@@ -66,8 +66,8 @@ namespace Intranet.Tests.Models
 
                 Assert.IsNotNull(listeElementsCategorie);
                 Assert.AreEqual(2, listeElementsCategorie.Count);
-                Assert.AreEqual(1, listeElementsCategorie[0].IdElement);
-                Assert.AreEqual(2, listeElementsCategorie[1].IdElement);
+                Assert.AreEqual(1, listeElementsCategorie[0].Id);
+                Assert.AreEqual(2, listeElementsCategorie[1].Id);
         }
         
         }

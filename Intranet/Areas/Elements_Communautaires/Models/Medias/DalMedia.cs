@@ -48,7 +48,7 @@ namespace Intranet.Areas.Elements_Communautaires.Models.Medias
 
         public void Modifier(int id, string titre, string description, string chemin)
         {
-            Media mediaTrouve = bdd.Medias.FirstOrDefault(media => media.Element.IdElement == id);
+            Media mediaTrouve = bdd.Medias.FirstOrDefault(media => media.Element.Id == id);
             if (mediaTrouve != null)
             {
                 mediaTrouve.Titre = titre;
@@ -61,7 +61,7 @@ namespace Intranet.Areas.Elements_Communautaires.Models.Medias
 
         public void Supprimer(int id)
         {
-            Media mediaTrouve = bdd.Medias.FirstOrDefault(media => media.Element.IdElement == id);
+            Media mediaTrouve = bdd.Medias.FirstOrDefault(media => media.Element.Id == id);
             if (mediaTrouve != null)
             {
                 bdd.Medias.Remove(mediaTrouve);

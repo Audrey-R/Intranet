@@ -22,43 +22,52 @@ namespace Intranet.Areas.Elements_Generaux.Models.Fractions
         public void Creer(string libelle)
         {
             // Recherche de la fraction "Fraction"
-            Fraction rechercheFractionDansFractions = bdd.Fractions.FirstOrDefault(fractionTrouvee => fractionTrouvee.Libelle.Contains("Fraction"));
+            Fraction fractionFraction = bdd.Fractions.FirstOrDefault(f => f.Libelle.Contains("Fraction"));
 
             // Création de l'élément de type Fraction, puis de la fraction
             Element_General element = bdd.ElementsGeneraux.Add(new Element_General());
             // bdd.SaveChanges();
             
-            if (rechercheFractionDansFractions == null)
+            if (fractionFraction == null)
             {
                 // Création de la fraction "Fraction"
-                rechercheFractionDansFractions = bdd.Fractions.Add(new Fraction { Libelle = "Fraction", Element = element });
+                fractionFraction = bdd.Fractions.Add(new Fraction { Libelle = "Fraction", Element = element });
                 bdd.SaveChanges();
             }
 
-            element.Fraction = rechercheFractionDansFractions;
-            if (rechercheFractionDansFractions.Libelle != libelle)
+            //Association de la fraction à l'élément et création de la fraction si ce n'est pas la fraction "Fraction"
+            element.Fraction = fractionFraction;
+            if (fractionFraction.Libelle != libelle)
             {
                 Fraction fraction = bdd.Fractions.Add(new Fraction { Libelle = libelle, Element = element });
             }
             bdd.SaveChanges();
         }
 
-        public void Modifier(int id, string libelle)
+        public void Modifier(int id, string nouveauLibelle)
         {
-            Fraction fractionTrouvee = bdd.Fractions.FirstOrDefault(fraction => fraction.Id == id);
-            if (fractionTrouvee != null)
+            Fraction fractionTrouvee = bdd.Fractions.FirstOrDefault(f => f.Element.Id == id);
+            if (fractionTrouvee != null && fractionTrouvee.Libelle != nouveauLibelle)
             {
-                fractionTrouvee.Libelle = libelle;
+                fractionTrouvee.Libelle = nouveauLibelle;
                 bdd.SaveChanges();
             }
         }
 
         public void Supprimer(int id)
         {
-            Fraction fractionTrouvee = bdd.Fractions.FirstOrDefault(fraction => fraction.Id == id);
-            if (fractionTrouvee != null)
+            Fraction fractionASupprimer = bdd.Fractions.FirstOrDefault(f => f.Element.Id == id);
+            //Suppression de la contrainte Fraction liée à l'élément créé pour la catégorie
+            Element elementASupprimer = bdd.Elements.FirstOrDefault(e => e.Id == id);
+            Fraction fractionAOter = elementASupprimer.Fraction;
+            fractionAOter = null;
+
+            //Suppression de la catégorie si elle n'est liee à aucune Ressource, et de son élément lié
+            Element elementTrouve = bdd.Elements.FirstOrDefault(e => e.Fraction.Element.Id == fractionASupprimer.Element.Id);
+            if (elementTrouve == null)
             {
-                bdd.Fractions.Remove(fractionTrouvee);
+                bdd.Fractions.Remove(fractionASupprimer);
+                bdd.Elements.Remove(elementASupprimer);
                 bdd.SaveChanges();
             }
         }
@@ -84,6 +93,11 @@ namespace Intranet.Areas.Elements_Generaux.Models.Fractions
         }
 
         public Element_General_Objet Obtenir(string libelle)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Element ExtraireElement(Element_General_Objet element)
         {
             throw new NotImplementedException();
         }

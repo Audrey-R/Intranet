@@ -47,15 +47,14 @@ namespace Intranet.Areas.Composants.Models.Elements
 
         public List<Element> ListerTousLesElements(string libelleFraction)
         {
-            var query =     from fraction in bdd.Fractions
+            var requete =   from fraction in bdd.Fractions
                             join element in bdd.Elements on fraction.Id  equals element.Fraction.Id
-
                             where fraction.Libelle == libelleFraction
                             select new { Element = element};
-            var objects =  query.ToList().Select(
-                           e => new Element { IdElement = e.Element.IdElement }).ToList();
+            var elements =  requete.ToList().Select(
+                            e => new Element { Id = e.Element.Id }).ToList();
 
-            return objects;
+            return elements;
         }
 
         public void MasquerElement(int id)

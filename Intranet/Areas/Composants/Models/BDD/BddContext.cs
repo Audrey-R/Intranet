@@ -22,7 +22,6 @@ namespace Intranet.Areas.Composants.Models.BDD
         public DbSet<Element_Communautaire> ElementsCommunautaires { get; set; }
         public DbSet<Categorie> Categories { get; set; }
         public DbSet<Theme> Themes { get; set; }
-        //public DbSet<ThemeElement> ThemesElement { get; set; }
         public DbSet<Media> Medias { get; set; }
         public DbSet<Ressource> Ressources { get; set; }
 
@@ -39,13 +38,15 @@ namespace Intranet.Areas.Composants.Models.BDD
                });
 
             modelBuilder.Entity<Fraction>()
-                .HasRequired(f => f.Element)
+                .HasOptional(f => f.Element)
                 .WithMany();
-
 
             modelBuilder.Entity<Element>()
-                .HasOptional(e => e.Fraction)
-                .WithMany();
+                .HasOptional(e => e.Fraction);
+
+            modelBuilder.Entity<Ressource>()
+              .HasMany<Media>(r => r.ListeMediasAssocies);
+            
         }
     }
 }

@@ -12,12 +12,14 @@ namespace Intranet.Areas.Elements_Communautaires
             }
         }
 
-        public override void RegisterArea(AreaRegistrationContext context) 
+        public override void RegisterArea(AreaRegistrationContext context)
         {
             context.MapRoute(
                 "Elements_Communautaires_default",
-                "Elements_Communautaires/{controller}/{action}/{id}",
-                new { action = "Index", id = UrlParameter.Optional }
+                "{controller}/{action}/{id}",
+                new { action = "Index", id = UrlParameter.Optional },
+                new { controller = "Ressources|Medias" },
+                new[] { "Intranet.Areas.Elements_Communautaires.Controllers" }
             );
         }
     }

@@ -14,7 +14,7 @@ namespace Intranet.Areas.Composants.Models.Elements
     public class Element
     {
         [Key]
-        public int IdElement { get; set; }
+        public int Id { get; set; }
         public Collaborateur Collaborateur { get; set; }
         public enum Etats { Publié, En_attente_de_traitement, Modifié, Masqué }
         public Etats Etat { get; set; }
