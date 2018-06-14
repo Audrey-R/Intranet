@@ -8,6 +8,7 @@ using Intranet.Areas.Elements_Generaux.Models;
 using Intranet.Areas.Elements_Generaux.Models.Categories;
 using Intranet.Areas.Elements_Generaux.Models.Fractions;
 using Intranet.Models;
+using System.Data.Entity;
 
 namespace Intranet.Areas.Composants.Models.Elements
 {
@@ -19,17 +20,7 @@ namespace Intranet.Areas.Composants.Models.Elements
         {
             bdd = new BddContext();
         }
-
-        public void CreerElement(Collaborateur collaborateur, bool elementCommunautaire, bool elementGeneral)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Dispose()
-        {
-            throw new NotImplementedException();
-        }
-
+        
         public List<Element> ListerTousLesElements()
         {
             return bdd.Elements.ToList();
@@ -37,12 +28,12 @@ namespace Intranet.Areas.Composants.Models.Elements
 
         public List<Element> ListerTousLesElementsCommunautaires()
         {
-            return bdd.Elements.Where(e => (e is Element_Communautaire)).ToList();
+            return bdd.Elements.Include(e => e.Fraction).Where(e => (e is Element_Communautaire)).ToList();
         }
 
         public List<Element> ListerTousLesElementsGeneraux()
         {
-            return bdd.Elements.Where(e => (e is Element_General)).ToList();
+            return bdd.Elements.Include(e=> e.Fraction).Where(e => (e is Element_General)).ToList();
         }
 
         public List<Element> ListerTousLesElements(string libelleFraction)
@@ -70,6 +61,11 @@ namespace Intranet.Areas.Composants.Models.Elements
         public void SupprimerElement(int id)
         {
             throw new NotImplementedException();
+        }
+
+        public void Dispose()
+        {
+            bdd.Dispose();
         }
     }
 }

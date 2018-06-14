@@ -1,25 +1,25 @@
 ﻿using System.Web.Mvc;
 
-namespace Intranet.Areas.Elements_Generaux
+namespace Intranet.Areas.Elements
 {
-    public class Elements_GenerauxAreaRegistration : AreaRegistration 
+    public class ComposantsAreaRegistration : AreaRegistration 
     {
         public override string AreaName 
         {
             get 
             {
-                return "Elements_Generaux";
+                return "Composants";
             }
         }
 
         public override void RegisterArea(AreaRegistrationContext context)
         {
             context.MapRoute(
-                "Elements_Generaux_default",
+                "Composants_default",
                 "{controller}/{action}/{id}",
                 new { action = "Index", id = UrlParameter.Optional },
-                new { controller = "Categories|Fractions|Themes" },
-                new[] { "Intranet.Areas.Elements_Generaux.Controllers" }
+                new { controller = "Elements|Operations" },
+                new[] { "Intranet.Areas.Composants.Controllers" }
             );
         }
     }

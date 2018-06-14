@@ -9,8 +9,11 @@ using System.Web.Mvc;
 using Intranet.Areas.Composants.Models.BDD;
 using Intranet.Areas.Elements_Communautaires.Models.Medias;
 using Intranet.Areas.Elements_Communautaires.Models.Ressources;
+using Intranet.Areas.Elements_Communautaires.ViewModels.Creer;
+using Intranet.Areas.Elements_Generaux.Models;
 using Intranet.Areas.Elements_Generaux.Models.Categories;
 using Intranet.Areas.Elements_Generaux.Models.Fractions;
+using Intranet.Areas.Elements_Generaux.Models.Themes;
 using Intranet.Models;
 
 namespace Intranet.Areas.Elements_Communautaires.Controllers
@@ -19,11 +22,50 @@ namespace Intranet.Areas.Elements_Communautaires.Controllers
     public class RessourcesController :Controller
     {
         private BddContext bdd = new BddContext();
+        private DalRessource dalRessource = new DalRessource();
+        private IDalElement_General dalCategorie = new DalCategorie();
+        private IDalElement_General dalTheme = new DalTheme();
+
+        //Initialisation de la liste des catégories disponibles dans la base de données
+        private IEnumerable<SelectListItem> ListeCategories()
+        {
+            List<SelectListItem> listSelectListItems = new List<SelectListItem>();
+            List<Categorie> listeCategories = (List<Categorie>)dalCategorie.Lister() ;
+
+            foreach (Categorie categorie in listeCategories)
+            {
+                SelectListItem selectList = new SelectListItem()
+                {
+                    Text = categorie.Libelle,
+                    Value = categorie.Id.ToString()
+                };
+                listSelectListItems.Add(selectList);
+            }
+            return listSelectListItems;
+        }
+
+        //Initialisation de la liste des thèmes disponibles dans la base de données
+        private IEnumerable<SelectListItem> ListeThemes()
+        {
+            List<SelectListItem> listSelectListItems = new List<SelectListItem>();
+            List<Theme> listeThemes = (List<Theme>)dalTheme.Lister();
+
+            foreach (Theme theme in listeThemes)
+            {
+                SelectListItem selectList = new SelectListItem()
+                {
+                    Text = theme.Libelle,
+                    Value = theme.Id.ToString()
+                };
+                listSelectListItems.Add(selectList);
+            }
+            return listSelectListItems;
+        }
 
         // GET: Elements_Communautaires/Ressources
         public ActionResult Index()
         {
-            return View(bdd.Ressources.ToList());
+            return View(dalRessource.ListerToutesLesRessources());
         }
 
         // GET: Elements_Communautaires/Ressources/Details/IdElementRessource
@@ -42,9 +84,20 @@ namespace Intranet.Areas.Elements_Communautaires.Controllers
         }
 
         // GET: Elements_Communautaires/Ressources/Create
-        public ActionResult Create()
+        public ActionResult Creer()
         {
-            return View();
+            // Vérification du match entre Id saisi et Id d'auteur
+            if (dalCategorie.Lister() != null && dalTheme.Lister() != null)
+            {
+               RessourceViewModel vm = new RessourceViewModel
+                {
+                    Message = "",
+                    Categorie = ListeCategories(),
+                    Theme = ListeThemes()
+                };
+                return View(vm);
+            }
+            return View("~/Pages_erreur/Erreur");
         }
 
         // POST: Elements_Communautaires/Ressources/Create
@@ -52,53 +105,18 @@ namespace Intranet.Areas.Elements_Communautaires.Controllers
         // plus de détails, voir  https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Titre")] Ressource ressource)
+        public ActionResult Creer(RessourceViewModel ressource)
         {
             if (ModelState.IsValid)
             {
-                using(DalRessource dal = new DalRessource())
-                {
-                    // Recherche de la fraction "Ressource"
-                    Fraction rechercheRessourceDansFractions = bdd.Fractions.FirstOrDefault(fraction => fraction.Libelle.Contains("Ressource"));
-                    // Création de l'élément de type Ressource
-                    Element_Communautaire element = bdd.ElementsCommunautaires.Add(new Element_Communautaire());
-
-                    if (rechercheRessourceDansFractions == null)
-                    {
-                        // Création de la fraction "Ressource"
-                        Fraction fraction = bdd.Fractions.Add(new Fraction { Libelle = "Ressource", Element = element });
-                        bdd.SaveChanges();
-                    }
-
-                    // Nouvelle recherche de la fraction "Ressource"
-                    Fraction fractionRessourceTrouvee = bdd.Fractions.FirstOrDefault(f => f.Libelle.Contains("Ressource"));
-                    Categorie categorie = bdd.Categories.FirstOrDefault(c => c.Element.Id == 1);
-                    if (rechercheRessourceDansFractions != null || fractionRessourceTrouvee != null)
-                    {
-                        element.Fraction = fractionRessourceTrouvee;
-                        Ressource ressourceAjoutee = bdd.Ressources.Add(ressource);
-
-                        ressourceAjoutee.Element = element;
-                        ressourceAjoutee.Categorie = categorie;
-                        bdd.SaveChanges();
-
-                        ////Recherche du dernier média créé
-                        //List<Media> medias = bdd.Medias.ToList();
-                        //Media dernierMediaCree = medias.LastOrDefault();
-
-                        ////Ajout du dernier média créé à la ressource
-                        //dal.AjouterUnMediaAUneRessource(ressource.Element.Id, dernierMediaCree);
-                        //bdd.SaveChanges();
-                    }
-                    return RedirectToAction("Index");
-                }
+                dalRessource.CreerRessource(ressource.Titre, ressource.DescriptionRessource);
+                return RedirectToAction("Index");
             }
-
             return View(ressource);
         }
 
         // GET: Elements_Communautaires/Ressources/Edit/5
-        public ActionResult Edit(int? id)
+        public ActionResult Modifier(int? id)
         {
             if (id == null)
             {
@@ -117,7 +135,7 @@ namespace Intranet.Areas.Elements_Communautaires.Controllers
         // plus de détails, voir  https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Titre")] Ressource ressource)
+        public ActionResult Modifier([Bind(Include = "Id,Titre,Description")] Ressource ressource)
         {
             if (ModelState.IsValid)
             {
@@ -129,7 +147,7 @@ namespace Intranet.Areas.Elements_Communautaires.Controllers
         }
 
         // GET: Elements_Communautaires/Ressources/Delete/5
-        public ActionResult Delete(int? id)
+        public ActionResult Supprimer(int? id)
         {
             if (id == null)
             {
@@ -144,7 +162,7 @@ namespace Intranet.Areas.Elements_Communautaires.Controllers
         }
 
         // POST: Elements_Communautaires/Ressources/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [HttpPost, ActionName("Supprimer")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {

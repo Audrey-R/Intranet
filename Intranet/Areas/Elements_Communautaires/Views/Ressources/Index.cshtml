@@ -9,11 +9,11 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
+    <title>Liste des Ressources</title>
 </head>
 <body>
     <p>
-        @Html.ActionLink("Create New", "Create")
+        @Html.ActionLink("Créer une nouvelle ressource", "Creer")
     </p>
     <table class="table">
         <tr>
@@ -29,9 +29,9 @@
                 @Html.DisplayFor(modelItem => item.Titre)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+                @Html.ActionLink("Modifier", "Modifier", new { id=item.Id }) |
                 @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-                @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+                @Html.ActionLink("Supprimer", "Supprimer", new { id=item.Id })
             </td>
         </tr>
     }

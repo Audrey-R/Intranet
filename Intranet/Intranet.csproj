@@ -246,6 +246,10 @@
     <Reference Include="Microsoft.Owin, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Owin.4.0.0\lib\net451\Microsoft.Owin.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Web.Administration, Version=7.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.Web.Mvc, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Mvc2Futures.2.0.50217.0\lib\Microsoft.Web.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Win32.Registry, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Win32.Registry.4.5.0\lib\net461\Microsoft.Win32.Registry.dll</HintPath>
     </Reference>
@@ -438,7 +442,8 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Areas\Composants\ElementsAreaRegistration.cs" />
+    <Compile Include="Areas\Composants\Controllers\ElementsController.cs" />
+    <Compile Include="Areas\Composants\ComposantsAreaRegistration.cs" />
     <Compile Include="Areas\Composants\Models\Collaborateurs\DalCollaborateur.cs" />
     <Compile Include="Areas\Composants\Models\Elements\DalElement.cs" />
     <Compile Include="Areas\Composants\Models\Operations\Operation.cs" />
@@ -448,6 +453,8 @@
     <Compile Include="Areas\Elements_Communautaires\Models\Medias\DalMedia.cs" />
     <Compile Include="Areas\Elements_Communautaires\Models\Medias\Media.cs" />
     <Compile Include="Areas\Elements_Communautaires\Models\Ressources\DalRessource.cs" />
+    <Compile Include="Areas\Elements_Communautaires\ViewModels\Creer\RessourceViewModel.cs" />
+    <Compile Include="Areas\Elements_Generaux\Controllers\CategoriesController.cs" />
     <Compile Include="Areas\Elements_Generaux\Elements_GenerauxAreaRegistration.cs" />
     <Compile Include="Areas\Elements_Generaux\Models\Element_General_Objet.cs" />
     <Compile Include="Areas\Elements_Generaux\Models\Themes\Theme.cs" />
@@ -459,6 +466,7 @@
     <Compile Include="Areas\Elements_Generaux\Models\Fractions\Fraction.cs" />
     <Compile Include="Areas\Elements_Generaux\Models\IDalElement_General.cs" />
     <Compile Include="Areas\Elements_Generaux\Models\IElement_General.cs" />
+    <Compile Include="Areas\Elements_Generaux\ViewModels\Creer\CategorieViewModel.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -468,6 +476,7 @@
     <Compile Include="Areas\Elements_Communautaires\Models\Element_Communautaire.cs" />
     <Compile Include="Areas\Composants\Models\Elements\Element.cs" />
     <Compile Include="Areas\Elements_Communautaires\Models\Ressources\Ressource.cs" />
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -508,11 +517,24 @@
     <Content Include="Areas\Elements_Communautaires\Views\web.config" />
     <Content Include="Areas\Elements_Generaux\Views\web.config" />
     <Content Include="Areas\Composants\Views\web.config" />
-    <Content Include="Areas\Elements_Communautaires\Views\Ressources\Create.cshtml" />
-    <Content Include="Areas\Elements_Communautaires\Views\Ressources\Delete.cshtml" />
+    <Content Include="Areas\Elements_Communautaires\Views\Ressources\Creer.cshtml" />
+    <Content Include="Areas\Elements_Communautaires\Views\Ressources\Supprimer.cshtml" />
     <Content Include="Areas\Elements_Communautaires\Views\Ressources\Details.cshtml" />
-    <Content Include="Areas\Elements_Communautaires\Views\Ressources\Edit.cshtml" />
+    <Content Include="Areas\Elements_Communautaires\Views\Ressources\Modifier.cshtml" />
     <Content Include="Areas\Elements_Communautaires\Views\Ressources\Index.cshtml" />
+    <Content Include="Areas\Elements_Generaux\Views\Categories\Creer.cshtml" />
+    <Content Include="Areas\Elements_Generaux\Views\Categories\Supprimer.cshtml" />
+    <Content Include="Areas\Elements_Generaux\Views\Categories\Details.cshtml" />
+    <Content Include="Areas\Elements_Generaux\Views\Categories\Modifier.cshtml" />
+    <Content Include="Areas\Elements_Generaux\Views\Categories\Index.cshtml" />
+    <Content Include="Areas\Composants\Views\Elements\Creer.cshtml" />
+    <Content Include="Areas\Composants\Views\Elements\Supprimer.cshtml" />
+    <Content Include="Areas\Composants\Views\Elements\Details.cshtml" />
+    <Content Include="Areas\Composants\Views\Elements\Modifier.cshtml" />
+    <Content Include="Areas\Composants\Views\Elements\Index.cshtml" />
+    <Content Include="Areas\Composants\Views\Elements\ListeElementsGeneraux.cshtml" />
+    <Content Include="Areas\Composants\Views\Elements\ListeElementsCommunautaires.cshtml" />
+    <Content Include="Areas\Composants\Views\Elements\ListeElementsFraction.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -545,7 +567,7 @@
     </Content>
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Shared\Erreur404.cshtml" />
+    <Content Include="Pages_Erreur\404.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
@@ -559,14 +581,12 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
-    <Content Include="Views\Shared\Erreur.cshtml" />
+    <Content Include="Pages_Erreur\Erreur.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Composants\Controllers\" />
     <Folder Include="Areas\Composants\Views\Shared\" />
     <Folder Include="Areas\Elements_Communautaires\Views\Shared\" />
-    <Folder Include="Areas\Elements_Generaux\Controllers\" />
     <Folder Include="Areas\Elements_Generaux\Views\Shared\" />
     <Folder Include="Models\" />
   </ItemGroup>

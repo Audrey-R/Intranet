@@ -40,7 +40,7 @@ namespace Intranet.Tests.Models
             DalRessource dalRessource = new DalRessource();
             
             //Création de la ressource
-            dalRessource.CreerRessource("Ressource1");
+            dalRessource.CreerRessource("Ressource1","blabla");
             List<Ressource> ressources = dalRessource.ListerToutesLesRessources();
             Ressource dernirereRessource = ressources.FirstOrDefault(ressource => ressource.Titre == "Ressource1");
             

@@ -23,7 +23,7 @@ namespace Intranet.Areas.Elements_Communautaires.Models.Ressources
             bdd = new BddContext();
         }
 
-        public void CreerRessource(string titre)
+        public void CreerRessource(string titre, string description)
         {
             // Recherche de la fraction "Ressource"
             Fraction rechercheRessourceDansFractions = bdd.Fractions.FirstOrDefault(fraction => fraction.Libelle.Contains("Ressource"));
@@ -43,7 +43,7 @@ namespace Intranet.Areas.Elements_Communautaires.Models.Ressources
             if (rechercheRessourceDansFractions != null || fractionRessourceTrouvee != null)
             {
                 element.Fraction = fractionRessourceTrouvee;
-                Ressource ressource = bdd.Ressources.Add(new Ressource { Titre = titre, Element= element, Categorie = categorie});
+                Ressource ressource = bdd.Ressources.Add(new Ressource { Titre = titre, Description = description, Element= element, Categorie = categorie});
                 bdd.SaveChanges();
 
                 //Recherche du dernier média créé
@@ -80,12 +80,13 @@ namespace Intranet.Areas.Elements_Communautaires.Models.Ressources
             }
         }
 
-        public void ModifierRessource(int id, string titre, List<Media> listeMediasAssocies)
+        public void ModifierRessource(int id, string titre, string description, List<Media> listeMediasAssocies)
         {
             Ressource ressourceTrouvee = bdd.Ressources.FirstOrDefault(ressource => ressource.Element.Id == id);
             if (ressourceTrouvee != null)
             {
                 ressourceTrouvee.Titre = titre;
+                ressourceTrouvee.Description = description;
                 ressourceTrouvee.ListeMediasAssocies = listeMediasAssocies;
                 bdd.SaveChanges();
             }

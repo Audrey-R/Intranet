@@ -7,6 +7,7 @@ using Intranet.Areas.Composants.Models.Elements;
 using Intranet.Areas.Elements_Communautaires.Models.Ressources;
 using Intranet.Areas.Elements_Generaux.Models.Fractions;
 using Intranet.Models;
+using System.Data.Entity;
 
 namespace Intranet.Areas.Elements_Generaux.Models.Categories
 {
@@ -48,7 +49,7 @@ namespace Intranet.Areas.Elements_Generaux.Models.Categories
 
         public void Modifier(int id, string nouveauLibelle)
         {
-            Categorie categorieTrouvee = bdd.Categories.FirstOrDefault(c => c.Element.Id == id);
+            Categorie categorieTrouvee = bdd.Categories.Include(c => c.Element).FirstOrDefault(c => c.Element.Id == id);
             if (categorieTrouvee != null && categorieTrouvee.Libelle != nouveauLibelle)
             {
                 categorieTrouvee.Libelle = nouveauLibelle;
@@ -63,7 +64,7 @@ namespace Intranet.Areas.Elements_Generaux.Models.Categories
 
         public void Supprimer(int id)
         {
-            Categorie categorieASupprimer = bdd.Categories.FirstOrDefault(c => c.Element.Id == id);
+            Categorie categorieASupprimer = bdd.Categories.Include(c => c.Element).FirstOrDefault(c => c.Id == id);
             
             //Suppression de la contrainte Fraction liée à l'élément créé pour la catégorie
             Element elementASupprimer = bdd.Elements.FirstOrDefault(e => e.Id == id);
@@ -76,7 +77,7 @@ namespace Intranet.Areas.Elements_Generaux.Models.Categories
             Element ElementContenantFractionASupprimer = bdd.Elements.FirstOrDefault(e => e.Fraction.Element.Id == id);
             
             //Suppression de la catégorie si elle n'est liee à aucune Ressource, et de son élément lié
-            Ressource ressourceTrouvee = bdd.Ressources.FirstOrDefault(r => r.Categorie.Element.Id == categorieASupprimer.Element.Id);
+            Ressource ressourceTrouvee = bdd.Ressources.Include(r => r.Element).FirstOrDefault(r => r.Categorie.Element.Id == id);
             if (ressourceTrouvee == null)
             {
                 bdd.Categories.Remove(categorieASupprimer);
@@ -96,7 +97,7 @@ namespace Intranet.Areas.Elements_Generaux.Models.Categories
 
         public virtual IEnumerable<Element_General_Objet> Lister()
         {
-            return bdd.Categories.ToList();
+            return bdd.Categories.Include(c => c.Element).ToList();
         }
         
         public void Dispose()
@@ -106,7 +107,7 @@ namespace Intranet.Areas.Elements_Generaux.Models.Categories
         
         public void Masquer(int id)
         {
-            Categorie categorieAMasquer = bdd.Categories.FirstOrDefault(c => c.Element.Id == id);
+            Categorie categorieAMasquer = bdd.Categories.Include(c => c.Element).FirstOrDefault(c => c.Element.Id == id);
 
             //Suppression de la contrainte Fraction liée à l'élément créé pour la catégorie
             Element elementAMasquer = bdd.Elements.FirstOrDefault(e => e.Id == id);
@@ -115,7 +116,7 @@ namespace Intranet.Areas.Elements_Generaux.Models.Categories
 
             //Fraction fractionASupprimer = bdd.Fractions.FirstOrDefault(f => f.Element.Id == id);
             
-            List<Ressource> ressources = bdd.Ressources.Where(r=> r.Categorie.Element.Id == categorieAMasquer.Element.Id).ToList();
+            List<Ressource> ressources = bdd.Ressources.Include(r => r.Element).Where(r=> r.Categorie.Element.Id == id).ToList();
             //List<Ressource> ressourcesContenantCategorie = ressources.Contains(r.categorieAMasquer);
             //Element elementRessourceAMasquer = bdd.Elements.FirstOrDefault(e => e.Id == elementRessource.Id);
 

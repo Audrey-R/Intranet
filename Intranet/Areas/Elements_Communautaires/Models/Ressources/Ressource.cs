@@ -12,7 +12,9 @@ namespace Intranet.Areas.Elements_Communautaires.Models.Ressources
     public class Ressource : IElement_Communautaire
     {
         public int Id{ get; set; }
+        [Required]
         public string Titre { get; set; }
+        public string Description { get; set; }
         public virtual ICollection<Media> ListeMediasAssocies { get; set; }
         public virtual Element Element { get ; set; }
         public virtual Categorie Categorie { get; set; }

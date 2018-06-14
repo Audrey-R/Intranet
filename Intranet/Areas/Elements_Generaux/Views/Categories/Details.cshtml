@@ -1,0 +1,34 @@
+﻿@model Intranet.Areas.Elements_Generaux.Models.Categories.Categorie
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Voir le détail d'une catégorie</title>
+</head>
+<body>
+    <div>
+        <h4>Categorie</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Libelle)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Libelle)
+            </dd>
+    
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Modifier", "Modifier", new { id = Model.Element.Id }) |
+        @Html.ActionLink("Revenir sur la liste des catégories", "Index")
+    </p>
+</body>
+</html>

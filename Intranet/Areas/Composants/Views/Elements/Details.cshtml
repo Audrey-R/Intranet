@@ -1,4 +1,4 @@
-﻿@model Intranet.Areas.Elements_Communautaires.Models.Ressources.Ressource
+﻿@model Intranet.Areas.Composants.Models.Elements.Element
 
 @{
     Layout = null;
@@ -9,26 +9,26 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>Voir le détail d'une ressource</title>
+    <title>Voir le détail d'un élément</title>
 </head>
 <body>
     <div>
-        <h4>Ressource</h4>
+        <h4>Element</h4>
         <hr />
         <dl class="dl-horizontal">
             <dt>
-                @Html.DisplayNameFor(model => model.Titre)
+                @Html.DisplayNameFor(model => model.Etat)
             </dt>
     
             <dd>
-                @Html.DisplayFor(model => model.Titre)
+                @Html.DisplayFor(model => model.Etat)
             </dd>
     
         </dl>
     </div>
     <p>
         @Html.ActionLink("Modifier", "Modifier", new { id = Model.Id }) |
-        @Html.ActionLink("Retourner sur la liste des ressources", "Index")
+        @Html.ActionLink("Retourner vers la liste des éléments", "Index")
     </p>
 </body>
 </html>
