@@ -1,0 +1,57 @@
+﻿@model IEnumerable<Intranet.Areas.Composants.Models.Operations.Log>
+
+    @{
+        Layout = null;
+    }
+
+    <!DOCTYPE html>
+
+    <html>
+    <head>
+        <meta name="viewport" content="width=device-width" />
+        <title>Voir le détail d'un élément</title>
+    </head>
+    <body>
+        <div>
+            <h4>Détails d'un élément</h4>
+            <hr />
+            <table class="table">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Id)
+                        @Html.DisplayNameFor(model => model.EntityName)
+                        @Html.DisplayNameFor(model => model.PropertyName)
+                        @Html.DisplayNameFor(model => model.PrimaryKeyValue)
+                        @Html.DisplayNameFor(model => model.OldValue)
+                        @Html.DisplayNameFor(model => model.NewValue)
+                        @Html.DisplayNameFor(model => model.DateChanged)
+                    </th>
+                    <th></th>
+                </tr>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Id)
+                            @Html.DisplayFor(modelItem => item.EntityName)
+                            @Html.DisplayFor(modelItem => item.PropertyName)
+                            @DateTime.Parse(Html.DisplayFor(modelItem => item.DateChanged).ToString()).ToShortDateString()
+                            @Html.DisplayFor(modelItem => item.OldValue)
+                            @Html.DisplayFor(modelItem => item.NewValue)
+                            @Html.DisplayFor(modelItem => item.PrimaryKeyValue)
+                        </td>
+                        @*<td>
+                                @Html.ActionLink("Modifier", "Modifier", new { id = item.Id }) |
+                                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                                @Html.ActionLink("Supprimer", "Supprimer", new { id = item.Id })
+                            </td>*@
+                    </tr>
+                }
+            </table>
+        </div>
+        <p>
+            @Html.ActionLink("Retourner vers la liste des éléments", "Index")
+        </p>
+    </body>
+</html>

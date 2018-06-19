@@ -30,7 +30,14 @@
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Id)
-                @Html.DisplayFor(modelItem => item.Collaborateur)
+                @*@if(item.Collaborateur == null)
+                {*@
+                    @*@Html.DisplayFor(modelItem => item.Collaborateur,"Non défini")*@
+                @*}
+                else
+                {*@
+                    @Html.DisplayFor(modelItem => item.Collaborateur)
+                @*}*@
                 @Html.DisplayFor(modelItem => item.Etat)
                 @Html.DisplayFor(modelItem => item.Fraction.Libelle)
             </td>

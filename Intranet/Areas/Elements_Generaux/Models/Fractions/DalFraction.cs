@@ -4,9 +4,11 @@ using System.Linq;
 using System.Web;
 using Intranet.Areas.Composants.Models.BDD;
 using Intranet.Areas.Composants.Models.Elements;
+using Intranet.Areas.Composants.Models.Operations;
 using Intranet.Areas.Elements_Generaux.Models;
 using Intranet.Areas.Elements_Generaux.Models.Categories;
 using Intranet.Models;
+using System.Data.Entity;
 
 namespace Intranet.Areas.Elements_Generaux.Models.Fractions
 {
@@ -30,8 +32,11 @@ namespace Intranet.Areas.Elements_Generaux.Models.Fractions
             
             if (fractionFraction == null)
             {
+                // Création de l'élément de type Fraction
+                Element_General elementFraction = bdd.ElementsGeneraux.Add(new Element_General());
                 // Création de la fraction "Fraction"
-                fractionFraction = bdd.Fractions.Add(new Fraction { Libelle = "Fraction", Element = element });
+                fractionFraction = bdd.Fractions.Add(new Fraction { Libelle = "Fraction", Element = elementFraction });
+                bdd.Operations.Add(new Operation { Element = elementFraction, Type_Operation = Operation.Operations.Création });
                 bdd.SaveChanges();
             }
 
@@ -40,31 +45,34 @@ namespace Intranet.Areas.Elements_Generaux.Models.Fractions
             if (fractionFraction.Libelle != libelle)
             {
                 Fraction fraction = bdd.Fractions.Add(new Fraction { Libelle = libelle, Element = element });
+                bdd.Operations.Add(new Operation { Element = element, Type_Operation = Operation.Operations.Création });
             }
             bdd.SaveChanges();
         }
 
-        public void Modifier(int id, string nouveauLibelle)
+        public void Modifier(Element_General_Objet element)
         {
-            Fraction fractionTrouvee = bdd.Fractions.FirstOrDefault(f => f.Element.Id == id);
-            if (fractionTrouvee != null && fractionTrouvee.Libelle != nouveauLibelle)
-            {
-                fractionTrouvee.Libelle = nouveauLibelle;
-                bdd.SaveChanges();
-            }
+            //Fraction fractionTrouvee = bdd.Fractions.FirstOrDefault(f => f.Element.Id == id);
+            //if (fractionTrouvee != null && fractionTrouvee.Libelle != nouveauLibelle)
+            //{
+            //    fractionTrouvee.Libelle = nouveauLibelle;
+            //    bdd.SaveChanges();
+            //}
         }
 
         public void Supprimer(int id)
         {
-            Fraction fractionASupprimer = bdd.Fractions.FirstOrDefault(f => f.Element.Id == id);
+            Fraction fractionASupprimer = bdd.Fractions.Include(f => f.Element).FirstOrDefault(f => f.Element.Id == id);
+
             //Suppression de la contrainte Fraction liée à l'élément créé pour la catégorie
             Element elementASupprimer = bdd.Elements.FirstOrDefault(e => e.Id == id);
-            Fraction fractionAOter = elementASupprimer.Fraction;
-            fractionAOter = null;
+            Fraction fractionElementAOter = elementASupprimer.Fraction;
+            fractionElementAOter = null;
 
-            //Suppression de la catégorie si elle n'est liee à aucune Ressource, et de son élément lié
-            Element elementTrouve = bdd.Elements.FirstOrDefault(e => e.Fraction.Element.Id == fractionASupprimer.Element.Id);
-            if (elementTrouve == null)
+            Element elementFractionAOter = fractionASupprimer.Element;
+            elementFractionAOter = null;
+
+            if (fractionASupprimer != null && elementFractionAOter == null && fractionElementAOter == null)
             {
                 bdd.Fractions.Remove(fractionASupprimer);
                 bdd.Elements.Remove(elementASupprimer);
@@ -74,7 +82,7 @@ namespace Intranet.Areas.Elements_Generaux.Models.Fractions
 
         public IEnumerable<Element_General_Objet> Lister()
         {
-            return bdd.Fractions.ToList();
+            return bdd.Fractions.Include(f => f.Element).ToList();
         }
 
         public void Dispose()

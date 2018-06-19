@@ -11,7 +11,7 @@ namespace Intranet.Areas.Elements_Generaux.Models
     public interface IDalElement_General : IDisposable
     {
         void Creer(string libelle);
-        void Modifier(int id, string nouveauLibelle);
+        void Modifier(Element_General_Objet element);
         void Masquer(int id);
         void Supprimer(int id);
         Element ExtraireElement(Element_General_Objet element);

@@ -29,8 +29,11 @@ namespace Intranet.Areas.Elements_Communautaires.Models.Medias
             
             if (rechercheMediaDansFractions == null)
             {
+                // Création de l'élément de type Fraction
+                Element_General elementFraction = bdd.ElementsGeneraux.Add(new Element_General());
                 // Création de la fraction "Média"
-                Fraction fraction = bdd.Fractions.Add(new Fraction { Libelle = "Média", Element = element });
+                Fraction fraction = bdd.Fractions.Add(new Fraction { Libelle = "Média", Element = elementFraction });
+                bdd.Operations.Add(new Operation { Element = elementFraction, Type_Operation = Operation.Operations.Création });
                 bdd.SaveChanges();
             }
 

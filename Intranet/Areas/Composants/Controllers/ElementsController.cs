@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using Intranet.Areas.Composants.Models.BDD;
 using Intranet.Areas.Composants.Models.Elements;
+using Intranet.Areas.Elements_Generaux.Models.Fractions;
 
 namespace Intranet.Areas.Composants.Controllers
 {
@@ -34,10 +35,25 @@ namespace Intranet.Areas.Composants.Controllers
             return View(dal.ListerTousLesElementsCommunautaires());
         }
 
-        // GET: Composants/Elements(Fraction)
-        public ActionResult ListeElementsFraction(string fraction)
+        // GET: Composants/Elements->Logs
+        public ActionResult Logs()
         {
-            return View(dal.ListerTousLesElements(fraction));
+            return View(dal.ListerTousLesElementsAvecLog());
+        }
+
+        // GET: Composants/Elements/Fraction
+        public ActionResult ListeElementsFraction(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Fraction fraction = db.Fractions.FirstOrDefault(f => f.Element.Id == id);
+            if (fraction == null)
+            {
+                return HttpNotFound();
+            }
+            return View(dal.ListerTousLesElements(id));
         }
 
         // GET: Composants/Elements/Details/5
@@ -52,16 +68,16 @@ namespace Intranet.Areas.Composants.Controllers
             {
                 return HttpNotFound();
             }
-            return View(element);
+            return View(dal.Details(id));
         }
 
-        // GET: Composants/Elements/Create
+        // GET: Composants/Elements/Creer
         public ActionResult Creer()
         {
             return View();
         }
 
-        // POST: Composants/Elements/Create
+        // POST: Composants/Elements/Creer
         // Afin de déjouer les attaques par sur-validation, activez les propriétés spécifiques que vous voulez lier. Pour 
         // plus de détails, voir  https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -78,7 +94,7 @@ namespace Intranet.Areas.Composants.Controllers
             return View(element);
         }
 
-        // GET: Composants/Elements/Edit/5
+        // GET: Composants/Elements/Modifier/5
         public ActionResult Modifier(int? id)
         {
             if (id == null)
@@ -93,7 +109,7 @@ namespace Intranet.Areas.Composants.Controllers
             return View(element);
         }
 
-        // POST: Composants/Elements/Edit/5
+        // POST: Composants/Elements/Modifier/5
         // Afin de déjouer les attaques par sur-validation, activez les propriétés spécifiques que vous voulez lier. Pour 
         // plus de détails, voir  https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -109,7 +125,7 @@ namespace Intranet.Areas.Composants.Controllers
             return View(element);
         }
 
-        // GET: Composants/Elements/Delete/5
+        // GET: Composants/Elements/Supprimer/5
         public ActionResult Supprimer(int? id)
         {
             if (id == null)
@@ -124,14 +140,12 @@ namespace Intranet.Areas.Composants.Controllers
             return View(element);
         }
 
-        // POST: Composants/Elements/Delete/5
+        // POST: Composants/Elements/Supprimer/5
         [HttpPost, ActionName("Supprimer")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Element element = db.Elements.Find(id);
-            db.Elements.Remove(element);
-            db.SaveChanges();
+            dal.Supprimer(id);
             return RedirectToAction("Index");
         }
 

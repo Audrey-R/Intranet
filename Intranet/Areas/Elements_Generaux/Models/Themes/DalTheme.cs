@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using Intranet.Areas.Composants.Models.BDD;
 using Intranet.Areas.Composants.Models.Elements;
+using Intranet.Areas.Composants.Models.Operations;
 using Intranet.Areas.Elements_Generaux.Models.Fractions;
 using Intranet.Models;
 
@@ -29,13 +30,17 @@ namespace Intranet.Areas.Elements_Generaux.Models.Themes
             
             if (fraction == null)
             {
+                // Création de l'élément de type Fraction
+                Element_General elementFraction = bdd.ElementsGeneraux.Add(new Element_General());
                 // Création de la fraction "Catégorie"
-                fraction = bdd.Fractions.Add(new Fraction { Libelle = "Thème", Element = element });
+                fraction = bdd.Fractions.Add(new Fraction { Libelle = "Thème", Element = elementFraction });
+                bdd.Operations.Add(new Operation { Element = elementFraction, Type_Operation = Operation.Operations.Création });
                 bdd.SaveChanges();
             }
 
             element.Fraction = fraction ;
             bdd.Themes.Add(new Theme { Libelle = libelle, Element = element });
+            bdd.Operations.Add(new Operation { Element = element, Type_Operation = Operation.Operations.Création });
             bdd.SaveChanges();
         }
 
@@ -61,14 +66,14 @@ namespace Intranet.Areas.Elements_Generaux.Models.Themes
             throw new NotImplementedException();
         }
 
-        public void Modifier(int id, string nouveauLibelle)
+        public void Modifier(Element_General_Objet element)
         {
-            Theme themeTrouve = bdd.Themes.FirstOrDefault(t => t.Element.Id == id);
-            if (themeTrouve != null && themeTrouve.Libelle != nouveauLibelle)
-            {
-                themeTrouve.Libelle = nouveauLibelle;
-                bdd.SaveChanges();
-            }
+            //Theme themeTrouve = bdd.Themes.FirstOrDefault(t => t.Element.Id == id);
+            //if (themeTrouve != null && themeTrouve.Libelle != nouveauLibelle)
+            //{
+            //    themeTrouve.Libelle = nouveauLibelle;
+            //    bdd.SaveChanges();
+            //}
         }
 
         public void Supprimer(int id)

@@ -14,6 +14,7 @@ namespace Intranet.Areas.Elements
 
         public override void RegisterArea(AreaRegistrationContext context)
         {
+           
             context.MapRoute(
                 "Composants_default",
                 "{controller}/{action}/{id}",

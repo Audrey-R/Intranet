@@ -11,6 +11,7 @@ using Intranet.Models;
 using Intranet.Areas.Elements_Generaux.Models.Fractions;
 using Intranet.Areas.Elements_Generaux.Models.Themes;
 using Intranet.Areas.Elements_Generaux.Models.Categories;
+using Intranet.Areas.Composants.Models.Operations;
 
 namespace Intranet.Areas.Elements_Communautaires.Models.Ressources
 {
@@ -32,8 +33,11 @@ namespace Intranet.Areas.Elements_Communautaires.Models.Ressources
 
             if (rechercheRessourceDansFractions == null)
             {
-                // Création de la fraction "Ressource"
-                Fraction fraction = bdd.Fractions.Add(new Fraction { Libelle = "Ressource", Element = element });
+                // Création de l'élément de type Fraction
+                Element_General elementFraction = bdd.ElementsGeneraux.Add(new Element_General());
+                // Création de la fraction "Média"
+                Fraction fraction = bdd.Fractions.Add(new Fraction { Libelle = "Ressource", Element = elementFraction });
+                bdd.Operations.Add(new Operation { Element = elementFraction, Type_Operation = Operation.Operations.Création });
                 bdd.SaveChanges();
             }
 
@@ -44,6 +48,7 @@ namespace Intranet.Areas.Elements_Communautaires.Models.Ressources
             {
                 element.Fraction = fractionRessourceTrouvee;
                 Ressource ressource = bdd.Ressources.Add(new Ressource { Titre = titre, Description = description, Element= element, Categorie = categorie});
+                bdd.Operations.Add(new Operation { Element = element, Type_Operation = Operation.Operations.Création });
                 bdd.SaveChanges();
 
                 //Recherche du dernier média créé
