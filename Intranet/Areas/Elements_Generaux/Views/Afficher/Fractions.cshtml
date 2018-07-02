@@ -1,0 +1,49 @@
+﻿@model IEnumerable<Intranet.Areas.Elements_Generaux.Models.Fraction>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Liste des fractions</title>
+</head>
+<body>
+    <p>
+        @Html.ActionLink("Creer une nouvelle fraction", "Fraction", "Creer", null, null)
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Libelle)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Element)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Libelle)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Element.Id)
+                </td>
+                <td>
+                    @Html.ActionLink("Modifier", "Fraction", "Modifier", new { id = item.Element.Id }, null) |
+                    @Html.ActionLink("Details", "Fraction", "Detailler", new { id = item.Element.Id }, null) |
+                    @Html.ActionLink("Masquer", "Fraction", "Masquer", new { id = item.Element.Id }, null) |
+                    @Html.ActionLink("Supprimer", "Fraction", "Supprimer", new { id = item.Element.Id }, null)
+                </td>
+            </tr>
+        }
+
+    </table>
+</body>
+</html>

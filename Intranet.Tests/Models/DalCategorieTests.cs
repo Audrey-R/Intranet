@@ -33,7 +33,7 @@ namespace Intranet.Tests.Models
             Database.SetInitializer(init);
             init.InitializeDatabase(new BddContext());
 
-            using (IDalElement_General dal = new DalCategorie())
+            using (IDal_Element_General_Objet dal = new DalCategorie())
             {
                 dal.Creer("Entreprise");
                 dal.Creer("Communauté");
@@ -50,7 +50,7 @@ namespace Intranet.Tests.Models
         [TestMethod]
         public void ModifierCategorie_LibelleEntrepriseEnLibelleEntrepris_ModificationReussie()
         {
-            using (IDalElement_General dal = new DalCategorie())
+            using (IDal_Element_General_Objet dal = new DalCategorie())
             {
                 dal.Modifier(1, "Entrepris");
 
@@ -79,7 +79,7 @@ namespace Intranet.Tests.Models
         [TestMethod]
         public void MasquerCategorie_EtTousLesElementsLies_MasquageReussi()
         {
-            using (IDalElement_General dal = new DalCategorie())
+            using (IDal_Element_General_Objet dal = new DalCategorie())
             {
                 //dal.Creer("categorieFictive");
                 dal.Masquer(1);

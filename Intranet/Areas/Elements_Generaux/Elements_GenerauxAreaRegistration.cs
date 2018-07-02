@@ -18,7 +18,7 @@ namespace Intranet.Areas.Elements_Generaux
                 "Elements_Generaux_default",
                 "{controller}/{action}/{id}",
                 new { action = "Index", id = UrlParameter.Optional },
-                new { controller = "Categories|Fractions|Themes" },
+                new { controller = "Afficher|Detailler|Modifier|Masquer|Supprimer" },
                 new[] { "Intranet.Areas.Elements_Generaux.Controllers" }
             );
         }

@@ -28,7 +28,7 @@ namespace Intranet.Tests.Models
         [TestMethod]
         public void CreerFraction_TroisNouvellesFractions_ListeToutesLesFractions()
         {
-            using (IDalElement_General dal = new DalFraction())
+            using (IDal_Element_General_Objet dal = new DalFraction())
             {
 
                 dal.Creer("Fraction");
@@ -48,7 +48,7 @@ namespace Intranet.Tests.Models
         [TestMethod]
         public void ModifierFraction_LibelleMédiaEnLibelleMedia_ModificationReussie()
         {
-            using (IDalElement_General dal = new DalFraction())
+            using (IDal_Element_General_Objet dal = new DalFraction())
             {
                 dal.Modifier(4, "Media");
 
@@ -62,7 +62,7 @@ namespace Intranet.Tests.Models
         [TestMethod]
         public void SupprimerFraction_SiNonLieeAUnElement_SuppressionReussie()
         {
-            using (IDalElement_General dal = new DalFraction())
+            using (IDal_Element_General_Objet dal = new DalFraction())
             {
                 dal.Creer("fractionFictive");
                 dal.Supprimer(6);

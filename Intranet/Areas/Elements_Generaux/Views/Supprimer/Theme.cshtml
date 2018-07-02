@@ -1,0 +1,41 @@
+﻿@model Intranet.Areas.Elements_Generaux.Models.Theme
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Supprimer un thème</title>
+</head>
+<body>
+    <h3>Etes-vous certain(e) de vouloir supprimer ce thème ?</h3>
+    <div>
+        <h4>Thème</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Libelle)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Libelle)
+            </dd>
+
+        </dl>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color">
+                <input type="submit" value="Delete" class="btn btn-default" /> |
+                @Html.ActionLink("Revenir sur la liste des thèmes", "Themes", "Afficher", null, null)
+            </div>
+        }
+    </div>
+</body>
+</html>

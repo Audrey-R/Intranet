@@ -192,20 +192,32 @@
     <Reference Include="Microsoft.DotNet.PlatformAbstractions, Version=2.1.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.DotNet.PlatformAbstractions.2.1.0\lib\net45\Microsoft.DotNet.PlatformAbstractions.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Extensions.Caching.Abstractions, Version=2.1.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Extensions.Caching.Abstractions.2.1.0\lib\netstandard2.0\Microsoft.Extensions.Caching.Abstractions.dll</HintPath>
+    <Reference Include="Microsoft.EntityFrameworkCore, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.EntityFrameworkCore.2.1.1\lib\netstandard2.0\Microsoft.EntityFrameworkCore.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Extensions.Caching.Memory, Version=2.1.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Extensions.Caching.Memory.2.1.0\lib\netstandard2.0\Microsoft.Extensions.Caching.Memory.dll</HintPath>
+    <Reference Include="Microsoft.EntityFrameworkCore.Abstractions, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.EntityFrameworkCore.Abstractions.2.1.1\lib\netstandard2.0\Microsoft.EntityFrameworkCore.Abstractions.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Extensions.Configuration.Abstractions, Version=2.1.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Extensions.Configuration.Abstractions.2.1.0\lib\netstandard2.0\Microsoft.Extensions.Configuration.Abstractions.dll</HintPath>
+    <Reference Include="Microsoft.Extensions.Caching.Abstractions, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Caching.Abstractions.2.1.1\lib\netstandard2.0\Microsoft.Extensions.Caching.Abstractions.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Extensions.DependencyInjection, Version=2.1.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Extensions.DependencyInjection.2.1.0\lib\net461\Microsoft.Extensions.DependencyInjection.dll</HintPath>
+    <Reference Include="Microsoft.Extensions.Caching.Memory, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Caching.Memory.2.1.1\lib\netstandard2.0\Microsoft.Extensions.Caching.Memory.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions, Version=2.1.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Extensions.DependencyInjection.Abstractions.2.1.0\lib\netstandard2.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
+    <Reference Include="Microsoft.Extensions.Configuration, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Configuration.2.1.1\lib\netstandard2.0\Microsoft.Extensions.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Configuration.Abstractions, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Configuration.Abstractions.2.1.1\lib\netstandard2.0\Microsoft.Extensions.Configuration.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Configuration.Binder, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Configuration.Binder.2.1.1\lib\netstandard2.0\Microsoft.Extensions.Configuration.Binder.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.DependencyInjection, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.DependencyInjection.2.1.1\lib\net461\Microsoft.Extensions.DependencyInjection.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.DependencyInjection.Abstractions.2.1.1\lib\netstandard2.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Extensions.DependencyModel, Version=2.1.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Extensions.DependencyModel.2.1.0\lib\net451\Microsoft.Extensions.DependencyModel.dll</HintPath>
@@ -225,17 +237,20 @@
     <Reference Include="Microsoft.Extensions.Localization.Abstractions, Version=2.1.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Extensions.Localization.Abstractions.2.1.0\lib\netstandard2.0\Microsoft.Extensions.Localization.Abstractions.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Extensions.Logging.Abstractions, Version=2.1.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Extensions.Logging.Abstractions.2.1.0\lib\netstandard2.0\Microsoft.Extensions.Logging.Abstractions.dll</HintPath>
+    <Reference Include="Microsoft.Extensions.Logging, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Logging.2.1.1\lib\netstandard2.0\Microsoft.Extensions.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Logging.Abstractions, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Logging.Abstractions.2.1.1\lib\netstandard2.0\Microsoft.Extensions.Logging.Abstractions.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Extensions.ObjectPool, Version=2.1.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Extensions.ObjectPool.2.1.0\lib\netstandard2.0\Microsoft.Extensions.ObjectPool.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Extensions.Options, Version=2.1.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Extensions.Options.2.1.0\lib\netstandard2.0\Microsoft.Extensions.Options.dll</HintPath>
+    <Reference Include="Microsoft.Extensions.Options, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Options.2.1.1\lib\netstandard2.0\Microsoft.Extensions.Options.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Extensions.Primitives, Version=2.1.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Extensions.Primitives.2.1.0\lib\netstandard2.0\Microsoft.Extensions.Primitives.dll</HintPath>
+    <Reference Include="Microsoft.Extensions.Primitives, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Primitives.2.1.1\lib\netstandard2.0\Microsoft.Extensions.Primitives.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Extensions.WebEncoders, Version=2.1.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Extensions.WebEncoders.2.1.0\lib\netstandard2.0\Microsoft.Extensions.WebEncoders.dll</HintPath>
@@ -261,6 +276,9 @@
     </Reference>
     <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Remotion.Linq, Version=2.2.0.0, Culture=neutral, PublicKeyToken=fee00910d6e5f53b, processorArchitecture=MSIL">
+      <HintPath>..\packages\Remotion.Linq.2.2.0\lib\net45\Remotion.Linq.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.AppContext, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
@@ -296,6 +314,9 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Interactive.Async, Version=3.0.3000.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Interactive.Async.3.1.1\lib\net46\System.Interactive.Async.dll</HintPath>
+    </Reference>
     <Reference Include="System.IO.Compression, Version=4.1.2.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\System.IO.Compression.4.3.0\lib\net46\System.IO.Compression.dll</HintPath>
       <Private>True</Private>
@@ -309,7 +330,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Memory, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Memory.4.5.0\lib\netstandard2.0\System.Memory.dll</HintPath>
+      <HintPath>..\packages\System.Memory.4.5.1\lib\netstandard2.0\System.Memory.dll</HintPath>
     </Reference>
     <Reference Include="System.Net" />
     <Reference Include="System.Numerics" />
@@ -320,7 +341,7 @@
       <HintPath>..\packages\System.Reflection.Metadata.1.6.0\lib\netstandard2.0\System.Reflection.Metadata.dll</HintPath>
     </Reference>
     <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.0\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.1\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
     </Reference>
     <Reference Include="System.Runtime.InteropServices.RuntimeInformation, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Runtime.InteropServices.RuntimeInformation.4.3.0\lib\net45\System.Runtime.InteropServices.RuntimeInformation.dll</HintPath>
@@ -456,20 +477,21 @@
     <Compile Include="Areas\Elements_Communautaires\Models\Medias\Media.cs" />
     <Compile Include="Areas\Elements_Communautaires\Models\Ressources\DalRessource.cs" />
     <Compile Include="Areas\Elements_Communautaires\ViewModels\Creer\RessourceViewModel.cs" />
-    <Compile Include="Areas\Elements_Generaux\Controllers\CategoriesController.cs" />
-    <Compile Include="Areas\Elements_Generaux\Controllers\FractionsController.cs" />
+    <Compile Include="Areas\Elements_Generaux\Controllers\AfficherController.cs" />
+    <Compile Include="Areas\Elements_Generaux\Controllers\CreerController.cs" />
+    <Compile Include="Areas\Elements_Generaux\Controllers\DetaillerController.cs" />
+    <Compile Include="Areas\Elements_Generaux\Controllers\Element_General_Objet_Controller.cs" />
+    <Compile Include="Areas\Elements_Generaux\Controllers\MasquerController.cs" />
+    <Compile Include="Areas\Elements_Generaux\Controllers\ModifierController.cs" />
     <Compile Include="Areas\Elements_Generaux\Elements_GenerauxAreaRegistration.cs" />
+    <Compile Include="Areas\Elements_Generaux\Models\Dal_Element_General_Objet.cs" />
     <Compile Include="Areas\Elements_Generaux\Models\Element_General_Objet.cs" />
-    <Compile Include="Areas\Elements_Generaux\Models\Themes\Theme.cs" />
-    <Compile Include="Areas\Elements_Generaux\Models\Themes\DalTheme.cs" />
-    <Compile Include="Areas\Elements_Generaux\Models\Categories\Categorie.cs" />
-    <Compile Include="Areas\Elements_Generaux\Models\Categories\DalCategorie.cs" />
+    <Compile Include="Areas\Elements_Generaux\Models\Theme.cs" />
+    <Compile Include="Areas\Elements_Generaux\Models\Categorie.cs" />
     <Compile Include="Areas\Elements_Generaux\Models\Element_General.cs" />
-    <Compile Include="Areas\Elements_Generaux\Models\Fractions\DalFraction.cs" />
-    <Compile Include="Areas\Elements_Generaux\Models\Fractions\Fraction.cs" />
-    <Compile Include="Areas\Elements_Generaux\Models\IDalElement_General.cs" />
-    <Compile Include="Areas\Elements_Generaux\Models\IElement_General.cs" />
-    <Compile Include="Areas\Elements_Generaux\ViewModels\Creer\CategorieViewModel.cs" />
+    <Compile Include="Areas\Elements_Generaux\Models\Fraction.cs" />
+    <Compile Include="Areas\Elements_Generaux\Models\IDal_Element_General_Objet.cs" />
+    <Compile Include="Areas\Elements_Generaux\Controllers\SupprimerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -525,11 +547,11 @@
     <Content Include="Areas\Elements_Communautaires\Views\Ressources\Details.cshtml" />
     <Content Include="Areas\Elements_Communautaires\Views\Ressources\Modifier.cshtml" />
     <Content Include="Areas\Elements_Communautaires\Views\Ressources\Index.cshtml" />
-    <Content Include="Areas\Elements_Generaux\Views\Categories\Creer.cshtml" />
-    <Content Include="Areas\Elements_Generaux\Views\Categories\Supprimer.cshtml" />
-    <Content Include="Areas\Elements_Generaux\Views\Categories\Details.cshtml" />
-    <Content Include="Areas\Elements_Generaux\Views\Categories\Modifier.cshtml" />
-    <Content Include="Areas\Elements_Generaux\Views\Categories\Index.cshtml" />
+    <Content Include="Areas\Elements_Generaux\Views\Creer\Categorie.cshtml" />
+    <Content Include="Areas\Elements_Generaux\Views\Supprimer\Categorie.cshtml" />
+    <Content Include="Areas\Elements_Generaux\Views\Detailler\Categorie.cshtml" />
+    <Content Include="Areas\Elements_Generaux\Views\Modifier\Categorie.cshtml" />
+    <Content Include="Areas\Elements_Generaux\Views\Afficher\Categories.cshtml" />
     <Content Include="Areas\Composants\Views\Elements\Creer.cshtml" />
     <Content Include="Areas\Composants\Views\Elements\Supprimer.cshtml" />
     <Content Include="Areas\Composants\Views\Elements\Details.cshtml" />
@@ -538,12 +560,27 @@
     <Content Include="Areas\Composants\Views\Elements\ListeElementsGeneraux.cshtml" />
     <Content Include="Areas\Composants\Views\Elements\ListeElementsCommunautaires.cshtml" />
     <Content Include="Areas\Composants\Views\Elements\ListeElementsFraction.cshtml" />
-    <Content Include="Areas\Elements_Generaux\Views\Fractions\Creer.cshtml" />
-    <Content Include="Areas\Elements_Generaux\Views\Fractions\Supprimer.cshtml" />
-    <Content Include="Areas\Elements_Generaux\Views\Fractions\Details.cshtml" />
-    <Content Include="Areas\Elements_Generaux\Views\Fractions\Modifier.cshtml" />
-    <Content Include="Areas\Elements_Generaux\Views\Fractions\Index.cshtml" />
+    <Content Include="Areas\Elements_Generaux\Views\Creer\Theme.cshtml" />
+    <Content Include="Areas\Elements_Generaux\Views\Supprimer\Theme.cshtml" />
+    <Content Include="Areas\Elements_Generaux\Views\Detailler\Theme.cshtml" />
+    <Content Include="Areas\Elements_Generaux\Views\Modifier\Theme.cshtml" />
+    <Content Include="Areas\Elements_Generaux\Views\Afficher\Themes.cshtml" />
     <Content Include="Areas\Composants\Views\Elements\Logs.cshtml" />
+    <Content Include="Areas\Composants\Views\Elements\LogsEtat.cshtml" />
+    <Content Include="Areas\Elements_Generaux\Views\Masquer\Categorie.cshtml" />
+    <Content Include="Areas\Elements_Generaux\Views\Creer\Fraction.cshtml" />
+    <Content Include="Areas\Elements_Generaux\Views\Detailler\Fraction.cshtml" />
+    <Content Include="Areas\Elements_Generaux\Views\Afficher\Fractions.cshtml" />
+    <Content Include="Areas\Elements_Generaux\Views\Modifier\Fraction.cshtml" />
+    <Content Include="Areas\Elements_Generaux\Views\Supprimer\Fraction.cshtml" />
+    <Content Include="Areas\Elements_Generaux\Views\Afficher\Index.cshtml" />
+    <Content Include="Areas\Elements_Generaux\Views\Detailler\Index.cshtml" />
+    <Content Include="Areas\Elements_Generaux\Views\Creer\Index.cshtml" />
+    <Content Include="Areas\Elements_Generaux\Views\Modifier\Index.cshtml" />
+    <Content Include="Areas\Elements_Generaux\Views\Masquer\Fraction.cshtml" />
+    <Content Include="Areas\Elements_Generaux\Views\Masquer\Theme.cshtml" />
+    <Content Include="Areas\Elements_Generaux\Views\Masquer\Index.cshtml" />
+    <Content Include="Areas\Elements_Generaux\Views\Supprimer\Index.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />

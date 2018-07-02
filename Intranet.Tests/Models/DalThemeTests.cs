@@ -11,7 +11,7 @@ namespace Intranet.Tests.Models
         [TestMethod]
         public void creertheme_deuxnouveauxthemes_listetouslesthemes()
         {
-            using (IDalElement_General dal = new DalTheme())
+            using (IDal_Element_General_Objet dal = new DalTheme())
             {
                 dal.Creer("Réseau");
                 dal.Creer("Sécurité");
@@ -28,7 +28,7 @@ namespace Intranet.Tests.Models
         [TestMethod]
         public void ModifierTheme_LibelleRéseauEnLibelleReseau_ModificationReussie()
         {
-            using (IDalElement_General dal = new DalTheme())
+            using (IDal_Element_General_Objet dal = new DalTheme())
             {
                 dal.Modifier(9, "Reseau");
 
@@ -42,7 +42,7 @@ namespace Intranet.Tests.Models
         [TestMethod]
         public void SupprimerTheme_SiNonLieAUnElement_SuppressionReussie()
         {
-            using (IDalElement_General dal = new DalTheme())
+            using (IDal_Element_General_Objet dal = new DalTheme())
             {
                 dal.Creer("themeFictif");
                 dal.Supprimer(11);

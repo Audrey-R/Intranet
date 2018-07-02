@@ -1,66 +1,57 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
+﻿using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using Intranet.Areas.Composants.Models.BDD;
-using Intranet.Areas.Elements_Communautaires.Models.Medias;
 using Intranet.Areas.Elements_Communautaires.Models.Ressources;
 using Intranet.Areas.Elements_Communautaires.ViewModels.Creer;
 using Intranet.Areas.Elements_Generaux.Models;
-using Intranet.Areas.Elements_Generaux.Models.Categories;
-using Intranet.Areas.Elements_Generaux.Models.Fractions;
-using Intranet.Areas.Elements_Generaux.Models.Themes;
-using Intranet.Models;
 
 namespace Intranet.Areas.Elements_Communautaires.Controllers
 {
-    
+
     public class RessourcesController :Controller
     {
         private BddContext bdd = new BddContext();
         private DalRessource dalRessource = new DalRessource();
-        private IDalElement_General dalCategorie = new DalCategorie();
-        private IDalElement_General dalTheme = new DalTheme();
+        private IDal_Element_General_Objet dalCategorie = new Dal_Element_General_Objet();
+        private IDal_Element_General_Objet dalTheme = new Dal_Element_General_Objet();
 
-        //Initialisation de la liste des catégories disponibles dans la base de données
-        private IEnumerable<SelectListItem> ListeCategories()
-        {
-            List<SelectListItem> listSelectListItems = new List<SelectListItem>();
-            List<Categorie> listeCategories = (List<Categorie>)dalCategorie.Lister() ;
+        ////Initialisation de la liste des catégories disponibles dans la base de données
+        //private IEnumerable<SelectListItem> ListeCategories()
+        //{
+        //    List<SelectListItem> listSelectListItems = new List<SelectListItem>();
+        //    //List<Categorie> listeCategories = (List<Categorie>)dalCategorie.Lister() ;
 
-            foreach (Categorie categorie in listeCategories)
-            {
-                SelectListItem selectList = new SelectListItem()
-                {
-                    Text = categorie.Libelle,
-                    Value = categorie.Id.ToString()
-                };
-                listSelectListItems.Add(selectList);
-            }
-            return listSelectListItems;
-        }
+        //    //foreach (Categorie categorie in listeCategories)
+        //    //{
+        //    //    SelectListItem selectList = new SelectListItem()
+        //    //    {
+        //    //        Text = categorie.Libelle,
+        //    //        Value = categorie.Id.ToString()
+        //    //    };
+        //    //    listSelectListItems.Add(selectList);
+        //    //}
+        //    //return listSelectListItems;
+        //}
 
-        //Initialisation de la liste des thèmes disponibles dans la base de données
-        private IEnumerable<SelectListItem> ListeThemes()
-        {
-            List<SelectListItem> listSelectListItems = new List<SelectListItem>();
-            List<Theme> listeThemes = (List<Theme>)dalTheme.Lister();
+        ////Initialisation de la liste des thèmes disponibles dans la base de données
+        //private IEnumerable<SelectListItem> ListeThemes()
+        //{
+        //    List<SelectListItem> listSelectListItems = new List<SelectListItem>();
+        //    List<Theme> listeThemes = (List<Theme>)dalTheme.Lister();
 
-            foreach (Theme theme in listeThemes)
-            {
-                SelectListItem selectList = new SelectListItem()
-                {
-                    Text = theme.Libelle,
-                    Value = theme.Id.ToString()
-                };
-                listSelectListItems.Add(selectList);
-            }
-            return listSelectListItems;
-        }
+        //    foreach (Theme theme in listeThemes)
+        //    {
+        //        SelectListItem selectList = new SelectListItem()
+        //        {
+        //            Text = theme.Libelle,
+        //            Value = theme.Id.ToString()
+        //        };
+        //        listSelectListItems.Add(selectList);
+        //    }
+        //    return listSelectListItems;
+        //}
 
         // GET: Elements_Communautaires/Ressources
         public ActionResult Index()
@@ -83,22 +74,22 @@ namespace Intranet.Areas.Elements_Communautaires.Controllers
             return View(ressource);
         }
 
-        // GET: Elements_Communautaires/Ressources/Create
-        public ActionResult Creer()
-        {
-            // Vérification du match entre Id saisi et Id d'auteur
-            if (dalCategorie.Lister() != null && dalTheme.Lister() != null)
-            {
-               RessourceViewModel vm = new RessourceViewModel
-                {
-                    Message = "",
-                    Categorie = ListeCategories(),
-                    Theme = ListeThemes()
-                };
-                return View(vm);
-            }
-            return View("~/Pages_erreur/Erreur");
-        }
+        //// GET: Elements_Communautaires/Ressources/Create
+        //public ActionResult Creer()
+        //{
+        //    // Vérification du match entre Id saisi et Id d'auteur
+        //    if (dalCategorie.Lister() != null && dalTheme.Lister() != null)
+        //    {
+        //       RessourceViewModel vm = new RessourceViewModel
+        //        {
+        //            Message = "",
+        //            Categorie = ListeCategories(),
+        //            Theme = ListeThemes()
+        //        };
+        //        return View(vm);
+        //    }
+        //    return View("~/Pages_erreur/Erreur");
+        //}
 
         // POST: Elements_Communautaires/Ressources/Create
         // Afin de déjouer les attaques par sur-validation, activez les propriétés spécifiques que vous voulez lier. Pour 

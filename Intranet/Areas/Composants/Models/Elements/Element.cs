@@ -1,13 +1,7 @@
 ﻿using System.Collections.Generic;
-using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using Intranet.Areas.Composants.Models.BDD;
 using Intranet.Areas.Composants.Models.Collaborateurs;
 using Intranet.Areas.Elements_Generaux.Models;
-using Intranet.Areas.Elements_Generaux.Models.Fractions;
-using Intranet.Areas.Elements_Generaux.Models.Themes;
 
 namespace Intranet.Areas.Composants.Models.Elements
 {
@@ -16,7 +10,6 @@ namespace Intranet.Areas.Composants.Models.Elements
         [Key]
         public int Id { get; set; }
 
-        
         [DisplayFormat(ConvertEmptyStringToNull = true, NullDisplayText = "Non défini")]
         public Collaborateur Collaborateur { get; set; }
 
@@ -25,7 +18,7 @@ namespace Intranet.Areas.Composants.Models.Elements
 
         public virtual ICollection<Theme> ListeThemesAssocies { get; set; }
 
-        [DisplayFormat(ConvertEmptyStringToNull = true, NullDisplayText = "Fraction")]
+        [DisplayFormat(ConvertEmptyStringToNull = true, NullDisplayText = "[Fraction]")]
         public Fraction Fraction { get; set; }
 
         public Element()

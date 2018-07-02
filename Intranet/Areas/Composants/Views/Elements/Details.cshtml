@@ -19,13 +19,13 @@
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.Id)
-                @Html.DisplayNameFor(model => model.Collaborateur)
+                @*@Html.DisplayNameFor(model => model.Collaborateur)
                 @Html.DisplayNameFor(model => model.Details)
                 @Html.DisplayNameFor(model => model.Date)
                 @Html.DisplayNameFor(model => model.Element.Id)
                 @Html.DisplayNameFor(model => model.Element.Collaborateur)
                 @Html.DisplayNameFor(model => model.Element.Etat)
-                @Html.DisplayNameFor(model => model.Element.Fraction)
+                @Html.DisplayNameFor(model => model.Element.Fraction)*@
             </th>
             <th></th>
         </tr>
@@ -34,13 +34,13 @@
             <tr>
                 <td>
                     @Html.DisplayFor(modelItem => item.Id)
-                    @Html.DisplayFor(modelItem => item.Collaborateur)
+                    @*@Html.DisplayFor(modelItem => item.Collaborateur)
                     @Html.DisplayFor(modelItem => item.Details)
                     @DateTime.Parse(Html.DisplayFor(modelItem => item.Date).ToString()).ToShortDateString()
                     @Html.DisplayFor(modelItem => item.Element.Id)
                     @Html.DisplayFor(modelItem => item.Element.Collaborateur)
                     @Html.DisplayFor(modelItem => item.Element.Etat)
-                    @Html.DisplayFor(modelItem => item.Element.Fraction.Libelle)
+                    @Html.DisplayFor(modelItem => item.Element.Fraction.Libelle)*@
                 </td>
                 @*<td>
                     @Html.ActionLink("Modifier", "Modifier", new { id = item.Id }) |

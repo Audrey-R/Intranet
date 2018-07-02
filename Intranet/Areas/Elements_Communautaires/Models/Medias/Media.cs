@@ -1,9 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Intranet.Areas.Composants.Models.Elements;
-using Intranet.Areas.Elements_Communautaires.Models.Ressources;
+﻿using Intranet.Areas.Elements_Communautaires.Models.Ressources;
 using Intranet.Areas.Elements_Generaux.Models;
-using Intranet.Areas.Elements_Generaux.Models.Fractions;
-using Intranet.Models;
 
 namespace Intranet.Areas.Elements_Communautaires.Models.Medias
 {

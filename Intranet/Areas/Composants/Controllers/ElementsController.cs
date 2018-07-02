@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
+﻿using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using Intranet.Areas.Composants.Models.BDD;
 using Intranet.Areas.Composants.Models.Elements;
-using Intranet.Areas.Elements_Generaux.Models.Fractions;
+using Intranet.Areas.Elements_Generaux.Models;
 
 namespace Intranet.Areas.Composants.Controllers
 {
@@ -39,6 +35,33 @@ namespace Intranet.Areas.Composants.Controllers
         public ActionResult Logs()
         {
             return View(dal.ListerTousLesElementsAvecLog());
+        }
+
+        // GET: Composants/Elements->Logs(etat)
+        public ActionResult LogsEtat(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            EntityState etatEntite = EntityState.Unchanged;
+            if(id == 1)
+            {
+                etatEntite = EntityState.Added;
+            }
+            else if (id == 2)
+            {
+                etatEntite = EntityState.Modified;
+            }
+            if (id == 3)
+            {
+                etatEntite = EntityState.Deleted;
+            }
+            if (etatEntite == EntityState.Unchanged)
+            {
+                return HttpNotFound();
+            }
+            return View(dal.ListerTousLesElementsAvecLogParEtat(etatEntite));
         }
 
         // GET: Composants/Elements/Fraction

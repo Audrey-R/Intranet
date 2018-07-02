@@ -3,15 +3,13 @@ using Intranet.Areas.Elements_Communautaires.Models.Ressources;
 using Intranet.Areas.Elements_Communautaires.Models.Medias;
 using Intranet.Areas.Composants.Models.Elements;
 using Intranet.Areas.Composants.Models.Collaborateurs;
-using Intranet.Areas.Elements_Generaux.Models.Categories;
 using Intranet.Models;
 using Intranet.Areas.Elements_Generaux.Models;
-using Intranet.Areas.Elements_Generaux.Models.Fractions;
 using Intranet.Areas.Composants.Models.Operations;
-using Intranet.Areas.Elements_Generaux.Models.Themes;
 using System.Linq;
 using System;
 using System.Data.Entity.Infrastructure;
+using System.Collections.Generic;
 
 namespace Intranet.Areas.Composants.Models.BDD
 {
@@ -28,12 +26,7 @@ namespace Intranet.Areas.Composants.Models.BDD
         public DbSet<Theme> Themes { get; set; }
         public DbSet<Media> Medias { get; set; }
         public DbSet<Ressource> Ressources { get; set; }
-
-        object GetPrimaryKeyValue(DbEntityEntry entry)
-        {
-            var objectStateEntry = ((IObjectContextAdapter)this).ObjectContext.ObjectStateManager.GetObjectStateEntry(entry.Entity);
-            return objectStateEntry.EntityKey.EntityKeyValues[0].Value;
-        }
+        
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -47,13 +40,9 @@ namespace Intranet.Areas.Composants.Models.BDD
                    et.ToTable("Theme_Element");
                });
 
-            //modelBuilder.Entity<Fraction>()
-            //    .HasOptional(f => f.Element)
-            //    .WithOptionalDependent();
-
             modelBuilder.Entity<Element>()
                 .HasOptional(e => e.Fraction)
-                .WithOptionalDependent()
+                .WithMany()
                 .WillCascadeOnDelete();
 
             modelBuilder.Entity<Operation>()
@@ -64,51 +53,99 @@ namespace Intranet.Areas.Composants.Models.BDD
             modelBuilder.Entity<Categorie>()
                 .HasRequired(c => c.Element)
                 .WithOptional()
-                .WillCascadeOnDelete();
-                
+                .WillCascadeOnDelete(false);
 
-            //modelBuilder.Entity<Fraction>()
-            //    .HasOptional(f => f.Element)
-            //    .WithMany()
-            //    .WillCascadeOnDelete();
+            modelBuilder.Entity<Theme>()
+                .HasRequired(c => c.Element)
+                .WithOptional()
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Fraction>()
+                .HasRequired(c => c.Element)
+                .WithOptional()
+                .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Ressource>()
               .HasMany<Media>(r => r.ListeMediasAssocies);
-            
         }
-        
+
+        public object GetPrimaryKeyValue(DbEntityEntry entry)
+        {
+            var objectStateEntry = ((IObjectContextAdapter)this).ObjectContext.ObjectStateManager.GetObjectStateEntry(entry.Entity);
+            if(objectStateEntry.EntityKey.EntityKeyValues != null)
+                return objectStateEntry.EntityKey.EntityKeyValues[0].Value;
+            return null;
+        }
+
         public override int SaveChanges()
         {
-            var modifiedEntities = ChangeTracker.Entries()
-                .Where(p => p.State == EntityState.Modified).ToList();
+            List<DbEntityEntry> modifiedEntities = ChangeTracker.Entries()
+                .Where(p => p.State == EntityState.Modified || p.State == EntityState.Deleted)
+                .ToList();
             var now = DateTime.UtcNow;
-
-            foreach (var change in modifiedEntities)
+            
+            foreach (DbEntityEntry change in modifiedEntities)
             {
-                var entityName = change.Entity.GetType().Name;
-                var primaryKey = this.GetPrimaryKeyValue(change);
-
-                foreach (var prop in change.OriginalValues.PropertyNames)
+                string entityName = change.Entity.GetType().Name;
+                //Type entityNameType = ObjectContext.GetObjectType(change.Entity.GetType().BaseType);
+                //string entityName = entityNameType.Name;
+                if (entityName.Contains("Element_General"))
                 {
-                    var originalValue = change.OriginalValues[prop].ToString();
-                    var currentValue = change.CurrentValues[prop].ToString();
-                    if (originalValue != currentValue)
+                    entityName = "Element_General";
+                }
+                if (entityName.Contains("Element_Communautaire"))
+                {
+                    entityName = "Element_Communautaire";
+                }
+                Object primaryKey = this.GetPrimaryKeyValue(change);
+                
+                if (change.State == EntityState.Modified)
+                {
+                    string operation = "Modifié";
+                    foreach (string prop in change.OriginalValues.PropertyNames)
                     {
-                        Log log = new Log()
+                        string currentValue = change.CurrentValues[prop].ToString();
+                        string originalValue = change.OriginalValues[prop].ToString();
+                        
+                        if (originalValue != currentValue)
                         {
-                            EntityName = entityName,
-                            PrimaryKeyValue = primaryKey.ToString(),
-                            PropertyName = prop,
-                            OldValue = originalValue,
-                            NewValue = currentValue,
-                            DateChanged = now
-                        };
-                        Logs.Add(log);
+                            if (prop == "Etat" && currentValue == "Masqué")
+                            {
+                                operation = "Masqué";
+                            }
+                            Logs.Add(new Log
+                            {
+                                Entite = entityName,
+                                ClePrimaire = primaryKey.ToString(),
+                                Propriete = prop,
+                                AncienneValeur = originalValue,
+                                NouvelleValeur = currentValue,
+                                Operation = operation,
+                                DateLog = now
+                            });
+                        }
                     }
+                }
+                if (change.State == EntityState.Deleted)
+                {
+                    string operation = "Supprimé";
+
+                    if(change.GetType().GetProperty("Etat") != null)
+                    {
+                        if (change.Property("Etat").CurrentValue.ToString() == "Masqué")
+                            operation = "Masqué";
+                    }
+                    Logs.Add(new Log
+                    {
+                        Entite = entityName,
+                        ClePrimaire = primaryKey.ToString(),Operation = operation,
+                        DateLog = now
+                    });
                 }
             }
             return base.SaveChanges();
         }
-    }
 
+        
+    }
 }

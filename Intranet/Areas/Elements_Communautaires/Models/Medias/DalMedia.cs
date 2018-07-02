@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Intranet.Areas.Composants.Models.BDD;
 using Intranet.Areas.Composants.Models.Elements;
-using Intranet.Areas.Elements_Generaux.Models.Fractions;
-using Intranet.Areas.Composants.Models.Operations ;
 using Intranet.Models;
 using Intranet.Areas.Elements_Generaux.Models;
 
@@ -33,7 +31,7 @@ namespace Intranet.Areas.Elements_Communautaires.Models.Medias
                 Element_General elementFraction = bdd.ElementsGeneraux.Add(new Element_General());
                 // Création de la fraction "Média"
                 Fraction fraction = bdd.Fractions.Add(new Fraction { Libelle = "Média", Element = elementFraction });
-                bdd.Operations.Add(new Operation { Element = elementFraction, Type_Operation = Operation.Operations.Création });
+                //bdd.Operations.Add(new Operation { Element = elementFraction, Type_Operation = Operation.Operations.Création });
                 bdd.SaveChanges();
             }
 
@@ -44,7 +42,7 @@ namespace Intranet.Areas.Elements_Communautaires.Models.Medias
             {
                 element.Fraction = fractionMediaTrouvee;
                 bdd.Medias.Add(new Media { Titre = titre, Description = description, Chemin = chemin, Element = element});
-                bdd.Operations.Add(new Operation { Element = element, Type_Operation = Operation.Operations.Création });
+                //bdd.Operations.Add(new Operation { Element = element, Type_Operation = Operation.Operations.Création });
                 bdd.SaveChanges();
             }
         }

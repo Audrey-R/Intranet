@@ -1,0 +1,41 @@
+﻿@model Intranet.Areas.Elements_Generaux.Models.Fraction
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Supprimer une fraction</title>
+</head>
+<body>
+    <h3>Etes-vous certain(e) de vouloir supprimer cette fraction ?</h3>
+    <div>
+        <h4>Fraction</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Libelle)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Libelle)
+            </dd>
+
+        </dl>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color">
+                <input type="submit" value="Delete" class="btn btn-default" /> |
+                @Html.ActionLink("Revenir sur la liste des fractions", "Fractions", "Afficher", null, null)
+            </div>
+        }
+    </div>
+</body>
+</html>
