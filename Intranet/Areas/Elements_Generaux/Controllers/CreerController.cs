@@ -5,6 +5,8 @@ namespace Intranet.Areas.Elements_Generaux.Controllers
 {
     public class CreerController : Element_General_Objet_Controller
     {
+        private IDal_Element_General_Objet_Controller dalController = new Dal_Element_General_Objet_Controller();
+
         // GET: Elements_Generaux/Creer
         public ActionResult Index()
         {
@@ -12,71 +14,50 @@ namespace Intranet.Areas.Elements_Generaux.Controllers
         }
 
         #region Categorie
-        // GET: Elements_Generaux/Creer/Categorie
+        // GET: Creer/Categorie
         public ActionResult Categorie()
         {
-            return View();
+            return dalController.Creer(categorie.GetType().Name);
         }
-        
-        // POST: Elements_Generaux/Creer/Categorie
-        // Afin de déjouer les attaques par sur-validation, activez les propriétés spécifiques que vous voulez lier. Pour 
-        // plus de détails, voir  https://go.microsoft.com/fwlink/?LinkId=317598.
+
+        // POST: Creer/Categorie
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Categorie([Bind(Include = "Id,Libelle,Element")] Categorie categorieACreer)
         {
-            if (ModelState.IsValid)
-            {
-                dal.Creer(categorieACreer);
-                return RedirectToAction("Categories","Afficher",null);
-            }
-            return View(categorieACreer);
+            return dalController.Creer(categorieACreer);
         }
         #endregion
 
         #region Fraction
-        // GET: Elements_Generaux/Creer/Fraction
+        // GET: Creer/Fraction
         public ActionResult Fraction()
         {
-            return View();
+            return dalController.Creer(fraction.GetType().Name);
         }
 
-        // POST: Elements_Generaux/Creer/Fraction
-        // Afin de déjouer les attaques par sur-validation, activez les propriétés spécifiques que vous voulez lier. Pour 
-        // plus de détails, voir  https://go.microsoft.com/fwlink/?LinkId=317598.
+        // POST: Creer/Fraction
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Fraction([Bind(Include = "Id,Libelle,Element")] Fraction fractionACreer)
         {
-            if (ModelState.IsValid)
-            {
-                dal.Creer(fractionACreer);
-                return RedirectToAction("Fractions", "Afficher", null);
-            }
-            return View(fractionACreer);
+            return dalController.Creer(fractionACreer);
         }
         #endregion
 
         #region Theme
-        // GET: Elements_Generaux/Creer/Theme
+        // GET: Creer/Theme
         public ActionResult Theme()
         {
-            return View();
+            return dalController.Creer(theme.GetType().Name);
         }
 
-        // POST: Elements_Generaux/Creer/Theme
-        // Afin de déjouer les attaques par sur-validation, activez les propriétés spécifiques que vous voulez lier. Pour 
-        // plus de détails, voir  https://go.microsoft.com/fwlink/?LinkId=317598.
+        // POST: Creer/Theme
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Theme([Bind(Include = "Id,Libelle,Element")] Theme themeACreer)
         {
-            if (ModelState.IsValid)
-            {
-                dal.Creer(themeACreer);
-                return RedirectToAction("Themes","Afficher",null);
-            }
-            return View(themeACreer);
+            return dalController.Creer(themeACreer);
         }
         #endregion
     }

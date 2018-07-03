@@ -479,8 +479,10 @@
     <Compile Include="Areas\Elements_Communautaires\ViewModels\Creer\RessourceViewModel.cs" />
     <Compile Include="Areas\Elements_Generaux\Controllers\AfficherController.cs" />
     <Compile Include="Areas\Elements_Generaux\Controllers\CreerController.cs" />
+    <Compile Include="Areas\Elements_Generaux\Controllers\Dal_Element_General_Objet_Controller.cs" />
     <Compile Include="Areas\Elements_Generaux\Controllers\DetaillerController.cs" />
     <Compile Include="Areas\Elements_Generaux\Controllers\Element_General_Objet_Controller.cs" />
+    <Compile Include="Areas\Elements_Generaux\Controllers\IDal_Element_General_Objet_Controller.cs" />
     <Compile Include="Areas\Elements_Generaux\Controllers\MasquerController.cs" />
     <Compile Include="Areas\Elements_Generaux\Controllers\ModifierController.cs" />
     <Compile Include="Areas\Elements_Generaux\Elements_GenerauxAreaRegistration.cs" />

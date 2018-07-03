@@ -1,20 +1,22 @@
 ﻿using System.Web.Mvc;
+using Intranet.Areas.Elements_Generaux.Models;
 
 namespace Intranet.Areas.Elements_Generaux.Controllers
 {
     public class AfficherController : Element_General_Objet_Controller
     {
-        // GET: Elements_Generaux/Afficher
+        private IDal_Element_General_Objet_Controller dalController = new Dal_Element_General_Objet_Controller();
+
         public ActionResult Index()
         {
             return View();
         }
-
+        
         #region Categories
         // GET: Elements_Generaux/Categories
         public ActionResult Categories()
         {
-            return View(dal.Lister(categorie));
+           return dalController.Afficher(categorie);
         }
         #endregion
 
@@ -22,7 +24,7 @@ namespace Intranet.Areas.Elements_Generaux.Controllers
         // GET: Elements_Generaux/Fractions
         public ActionResult Fractions()
         {
-            return View(dal.Lister(fraction));
+            return dalController.Afficher(categorie);
         }
         #endregion
 
@@ -30,7 +32,7 @@ namespace Intranet.Areas.Elements_Generaux.Controllers
         // GET: Elements_Generaux/Fractions
         public ActionResult Themes()
         {
-            return View(dal.Lister(theme));
+            return dalController.Afficher(categorie);
         }
         #endregion
     }

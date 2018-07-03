@@ -7,87 +7,59 @@ namespace Intranet.Areas.Elements_Generaux.Controllers
 {
     public class SupprimerController : Element_General_Objet_Controller
     {
-        // GET: Elements_Generaux/Supprimer
+        private IDal_Element_General_Objet_Controller dalController = new Dal_Element_General_Objet_Controller();
+
+        // GET: Supprimer
         public ActionResult Index()
         {
             return View();
         }
 
         #region Categorie
-        // GET: Elements_Generaux/Supprimer/Categorie/5
+        // GET: Supprimer/Categorie/5
         public ActionResult Categorie(int? id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Element elementCategorieASupprimerTrouve = dal.RetournerElementLie(id);
-            if (elementCategorieASupprimerTrouve == null)
-            {
-                return HttpNotFound();
-            }
-            return View(dal.RetournerElementGeneralTrouve(categorie, id));
+            return dalController.Supprimer(categorie, id);
         }
 
-        // POST: Elements_Generaux/Categories/Supprimer/5
+        // POST: Categories/Supprimer/5
         [HttpPost, ActionName("Categorie")]
         [ValidateAntiForgeryToken]
         public ActionResult ComfirmerSuppression([Bind(Include = "Id,Libelle,Element")] Categorie categorieASupprimer)
         {
-            dal.Supprimer(categorieASupprimer);
-            return RedirectToAction("Categories", "Afficher", null);
+            return dalController.Supprimer(categorieASupprimer);
         }
         #endregion
 
         #region Fraction
-        // GET: Elements_Generaux/Supprimer/Fraction/5
+        // GET: Supprimer/Categorie/5
         public ActionResult Fraction(int? id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Element elementFractionTrouve = dal.RetournerElementLie(id);
-            if (elementFractionTrouve == null)
-            {
-                return HttpNotFound();
-            }
-            return View(dal.RetournerElementGeneralTrouve(fraction, id));
+            return dalController.Supprimer(fraction, id);
         }
 
-        // POST: Elements_Generaux/Supprimer/Fraction/5
+        // POST: Supprimer/Categorie/5
         [HttpPost, ActionName("Fraction")]
         [ValidateAntiForgeryToken]
         public ActionResult ComfirmerSuppression([Bind(Include = "Id,Libelle,Element")] Fraction fractionASupprimer)
         {
-            dal.Supprimer(fractionASupprimer);
-            return RedirectToAction("Fractions", "Afficher", null);
+            return dalController.Supprimer(fractionASupprimer);
         }
         #endregion
 
         #region Theme
-        // GET: Elements_Generaux/Supprimer/Theme/5
+        // GET: Supprimer/Theme/5
         public ActionResult Theme(int? id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Element elementThemeTrouve = dal.RetournerElementLie(id);
-            if (elementThemeTrouve == null)
-            {
-                return HttpNotFound();
-            }
-            return View(dal.RetournerElementGeneralTrouve(theme, id));
+            return dalController.Supprimer(theme, id);
         }
 
-        // POST: Elements_Generaux/Supprimer/Theme/5
+        // POST: Supprimer/Theme/5
         [HttpPost, ActionName("Theme")]
         [ValidateAntiForgeryToken]
         public ActionResult ComfirmerSuppression([Bind(Include = "Id,Libelle,Element")] Theme themeASupprimer)
         {
-            dal.Supprimer(themeASupprimer);
-            return RedirectToAction("Themes", "Afficher", null);
+            return dalController.Supprimer(themeASupprimer);
         }
         #endregion
     }

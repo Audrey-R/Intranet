@@ -10,6 +10,8 @@ namespace Intranet.Areas.Elements_Generaux.Controllers
 {
     public class DetaillerController : Element_General_Objet_Controller
     {
+        private IDal_Element_General_Objet_Controller dalController = new Dal_Element_General_Objet_Controller();
+
         // GET: Elements_Generaux/Detailler
         public ActionResult Index()
         {
@@ -17,53 +19,26 @@ namespace Intranet.Areas.Elements_Generaux.Controllers
         }
 
         #region Categorie
-        // GET: Elements_Generaux/Detailler/Categorie/5
+        // GET: Detailler/Categorie/5
         public ActionResult Categorie(int? id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Element elementCategorieTrouve = dal.RetournerElementLie(id);
-            if (elementCategorieTrouve == null)
-            {
-                return HttpNotFound();
-            }
-            return View(dal.RetournerElementGeneralTrouve(categorie, id));
+            return dalController.Detailler(categorie, id);
         }
         #endregion
 
         #region Fraction
-        // GET: Elements_Generaux/Detailler/Fraction/5
+        // GET: Detailler/Fraction/5
         public ActionResult Fraction(int? id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Element elementFractionTrouve = dal.RetournerElementLie(id);
-            if (elementFractionTrouve == null)
-            {
-                return HttpNotFound();
-            }
-            return View(dal.RetournerElementGeneralTrouve(fraction, id));
+            return dalController.Detailler(fraction, id);
         }
         #endregion
 
         #region Theme
-        // GET: Elements_Generaux/Detailler/Theme/5
+        // GET: Detailler/Theme/5
         public ActionResult Theme(int? id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Element elementThemeTrouve = dal.RetournerElementLie(id);
-            if (elementThemeTrouve == null)
-            {
-                return HttpNotFound();
-            }
-            return View(dal.RetournerElementGeneralTrouve(theme, id));
+            return dalController.Detailler(theme, id);
         }
         #endregion
     }
