@@ -13,10 +13,7 @@ namespace Intranet.Areas.Elements_Generaux.Controllers
             return View();
         }
 
-        /*==================================================================================================//
-        CATEGORIE
-        ===================================================================================================*/
-
+        #region Categorie
         // GET: Elements_Generaux/Masquer/Categorie/5
         public ActionResult Categorie(int? id)
         {
@@ -31,20 +28,18 @@ namespace Intranet.Areas.Elements_Generaux.Controllers
             }
             return View(dal.RetournerElementGeneralTrouve(categorie, id));
         }
-
+        
         // POST: Elements_Generaux/Masquer/Categorie/5
         [HttpPost, ActionName("Categorie")]
         [ValidateAntiForgeryToken]
         public ActionResult ConfirmerMasquage([Bind(Include = "Id,Libelle,Element")] Categorie categorieAMasquer)
         {
             dal.Masquer(categorieAMasquer);
-            return RedirectToAction("Index");
+            return RedirectToAction("Categories", "Afficher", null);
         }
+        #endregion
 
-        /*==================================================================================================//
-        FRACTION
-        ===================================================================================================*/
-
+        #region Fraction
         // GET: Elements_Generaux/Masquer/Fraction/5
         public ActionResult Fraction(int? id)
         {
@@ -66,13 +61,11 @@ namespace Intranet.Areas.Elements_Generaux.Controllers
         public ActionResult ConfirmerMasquage([Bind(Include = "Id,Libelle,Element")] Fraction fractionAMasquer)
         {
             dal.Masquer(fractionAMasquer);
-            return RedirectToAction("Index");
+            return RedirectToAction("Fractions", "Afficher", null);
         }
+        #endregion
 
-        /*==================================================================================================//
-        THEME
-        ===================================================================================================*/
-
+        #region Theme
         // GET: Elements_Generaux/Masquer/Theme/5
         public ActionResult Theme(int? id)
         {
@@ -94,7 +87,8 @@ namespace Intranet.Areas.Elements_Generaux.Controllers
         public ActionResult ConfirmerMasquage([Bind(Include = "Id,Libelle,Element")] Theme themeAMasquer)
         {
             dal.Masquer(themeAMasquer);
-            return RedirectToAction("Index");
+            return RedirectToAction("Themes", "Afficher", null);
         }
+        #endregion
     }
 }

@@ -13,10 +13,7 @@ namespace Intranet.Areas.Elements_Generaux.Controllers
             return View();
         }
 
-        /*==================================================================================================//
-        CATEGORIE
-        ===================================================================================================*/
-
+        #region Categorie
         // GET: Elements_Generaux/Supprimer/Categorie/5
         public ActionResult Categorie(int? id)
         {
@@ -38,13 +35,11 @@ namespace Intranet.Areas.Elements_Generaux.Controllers
         public ActionResult ComfirmerSuppression([Bind(Include = "Id,Libelle,Element")] Categorie categorieASupprimer)
         {
             dal.Supprimer(categorieASupprimer);
-            return RedirectToAction("Index");
+            return RedirectToAction("Categories", "Afficher", null);
         }
+        #endregion
 
-        /*==================================================================================================//
-        FRACTION
-        ===================================================================================================*/
-
+        #region Fraction
         // GET: Elements_Generaux/Supprimer/Fraction/5
         public ActionResult Fraction(int? id)
         {
@@ -66,13 +61,11 @@ namespace Intranet.Areas.Elements_Generaux.Controllers
         public ActionResult ComfirmerSuppression([Bind(Include = "Id,Libelle,Element")] Fraction fractionASupprimer)
         {
             dal.Supprimer(fractionASupprimer);
-            return RedirectToAction("Index");
+            return RedirectToAction("Fractions", "Afficher", null);
         }
+        #endregion
 
-        /*==================================================================================================//
-        THEME
-        ===================================================================================================*/
-
+        #region Theme
         // GET: Elements_Generaux/Supprimer/Theme/5
         public ActionResult Theme(int? id)
         {
@@ -94,7 +87,8 @@ namespace Intranet.Areas.Elements_Generaux.Controllers
         public ActionResult ComfirmerSuppression([Bind(Include = "Id,Libelle,Element")] Theme themeASupprimer)
         {
             dal.Supprimer(themeASupprimer);
-            return RedirectToAction("Index");
+            return RedirectToAction("Themes", "Afficher", null);
         }
+        #endregion
     }
 }

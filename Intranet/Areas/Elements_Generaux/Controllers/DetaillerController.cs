@@ -16,6 +16,7 @@ namespace Intranet.Areas.Elements_Generaux.Controllers
             return View();
         }
 
+        #region Categorie
         // GET: Elements_Generaux/Detailler/Categorie/5
         public ActionResult Categorie(int? id)
         {
@@ -30,7 +31,9 @@ namespace Intranet.Areas.Elements_Generaux.Controllers
             }
             return View(dal.RetournerElementGeneralTrouve(categorie, id));
         }
+        #endregion
 
+        #region Fraction
         // GET: Elements_Generaux/Detailler/Fraction/5
         public ActionResult Fraction(int? id)
         {
@@ -45,7 +48,9 @@ namespace Intranet.Areas.Elements_Generaux.Controllers
             }
             return View(dal.RetournerElementGeneralTrouve(fraction, id));
         }
+        #endregion
 
+        #region Theme
         // GET: Elements_Generaux/Detailler/Theme/5
         public ActionResult Theme(int? id)
         {
@@ -60,5 +65,6 @@ namespace Intranet.Areas.Elements_Generaux.Controllers
             }
             return View(dal.RetournerElementGeneralTrouve(theme, id));
         }
+        #endregion
     }
 }

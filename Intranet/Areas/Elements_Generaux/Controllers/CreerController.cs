@@ -11,10 +11,7 @@ namespace Intranet.Areas.Elements_Generaux.Controllers
             return View();
         }
 
-        /*=================================================================================================//
-        CATEGORIE
-        ===================================================================================================*/
-        
+        #region Categorie
         // GET: Elements_Generaux/Creer/Categorie
         public ActionResult Categorie()
         {
@@ -31,15 +28,13 @@ namespace Intranet.Areas.Elements_Generaux.Controllers
             if (ModelState.IsValid)
             {
                 dal.Creer(categorieACreer);
-                return RedirectToAction("Index");
+                return RedirectToAction("Categories","Afficher",null);
             }
             return View(categorieACreer);
         }
+        #endregion
 
-        /*=================================================================================================//
-        FRACTION
-        ===================================================================================================*/
-
+        #region Fraction
         // GET: Elements_Generaux/Creer/Fraction
         public ActionResult Fraction()
         {
@@ -56,17 +51,15 @@ namespace Intranet.Areas.Elements_Generaux.Controllers
             if (ModelState.IsValid)
             {
                 dal.Creer(fractionACreer);
-                return RedirectToAction("Index");
+                return RedirectToAction("Fractions", "Afficher", null);
             }
             return View(fractionACreer);
         }
+        #endregion
 
-        /*==================================================================================================//
-        THEME
-        ===================================================================================================*/
-        
+        #region Theme
         // GET: Elements_Generaux/Creer/Theme
-        public ActionResult Creer()
+        public ActionResult Theme()
         {
             return View();
         }
@@ -76,14 +69,15 @@ namespace Intranet.Areas.Elements_Generaux.Controllers
         // plus de détails, voir  https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Creer([Bind(Include = "Id,Libelle,Element")] Theme themeACreer)
+        public ActionResult Theme([Bind(Include = "Id,Libelle,Element")] Theme themeACreer)
         {
             if (ModelState.IsValid)
             {
                 dal.Creer(themeACreer);
-                return RedirectToAction("Index");
+                return RedirectToAction("Themes","Afficher",null);
             }
             return View(themeACreer);
         }
+        #endregion
     }
 }

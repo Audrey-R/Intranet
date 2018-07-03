@@ -13,10 +13,7 @@ namespace Intranet.Areas.Elements_Generaux.Controllers
             return View();
         }
 
-        /*==================================================================================================//
-        CATEGORIE
-        ===================================================================================================*/
-
+        #region Categorie
         // GET: Elements_Generaux/Modifier/Categorie/5
         [HttpGet]
         public ActionResult Categorie(int? id)
@@ -43,15 +40,13 @@ namespace Intranet.Areas.Elements_Generaux.Controllers
             if (ModelState.IsValid)
             {
                 dal.Modifier(categorieAModifier);
-                return RedirectToAction("Index");
+                return RedirectToAction("Categories", "Afficher", null);
             }
             return View(categorieAModifier);
         }
+        #endregion
 
-        /*==================================================================================================//
-        FRACTION
-        ===================================================================================================*/
-
+        #region Fraction
         // GET: Elements_Generaux/Modifier/Fraction/5
         [HttpGet]
         public ActionResult Fraction(int? id)
@@ -78,18 +73,16 @@ namespace Intranet.Areas.Elements_Generaux.Controllers
             if (ModelState.IsValid)
             {
                 dal.Modifier(fractionAModifier);
-                return RedirectToAction("Index");
+                return RedirectToAction("Fractions", "Afficher", null);
             }
             return View(fractionAModifier);
         }
+        #endregion
 
-        /*==================================================================================================//
-        THEME
-        ===================================================================================================*/
-
+        #region Theme
         // GET: Elements_Generaux/Modifier/Theme/5
         [HttpGet]
-        public ActionResult Modifier(int? id)
+        public ActionResult Theme(int? id)
         {
             if (id == null)
             {
@@ -108,14 +101,15 @@ namespace Intranet.Areas.Elements_Generaux.Controllers
         // plus de détails, voir  https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Modifier([Bind(Include = "Id, Libelle,Element")] Theme themeAModifier)
+        public ActionResult Theme([Bind(Include = "Id, Libelle,Element")] Theme themeAModifier)
         {
             if (ModelState.IsValid)
             {
                 dal.Modifier(themeAModifier);
-                return RedirectToAction("Index");
+                return RedirectToAction("Themes", "Afficher", null);
             }
             return View(themeAModifier);
         }
+        #endregion
     }
 }
