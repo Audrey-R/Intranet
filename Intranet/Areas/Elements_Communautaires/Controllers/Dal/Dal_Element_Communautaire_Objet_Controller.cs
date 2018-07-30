@@ -22,8 +22,7 @@ namespace Intranet.Areas.Elements_Communautaires.Controllers.Dal
         {
             return View();
         }
-
-
+        
         #region Afficher
         // GET: Afficher/Entite
         public ActionResult Afficher<Entite>(Entite element) where Entite : Element_Communautaire_Objet
@@ -33,30 +32,14 @@ namespace Intranet.Areas.Elements_Communautaires.Controllers.Dal
         #endregion
 
         #region Creer
-        // GET: Creer/Entite
-        //public ActionResult Creer(string element)
-        //{
-        //    //RessourceViewModel vm = new RessourceViewModel()
-        //    //{
-        //        element.CategorieSelectionnee = ListeCategories(),
-        //        ThemeSelectionne = ListeThemes()
-        //    //};
-        //    return View(vm);
-        //}
 
-        //public ActionResult Creer<Entite>(string element, Entite entite) where Entite : Element_Communautaire_Objet
-        //{
-        //    //dynamic instanceElement = System.Reflection.Assembly.GetExecutingAssembly().CreateInstance(element);
-        //    //RessourceViewModel vm = new RessourceViewModel()
-        //    //{
-        //    entite.CategorieSelectionnee = ListeCategories();
-        //    entite.ThemeSelectionne = ListeThemes();
-        //    //};
-        //    return View(entite);
-        //}
+        // GET: Creer/Element_Communautaire
+        public ActionResult Creer<ViewModel>(ViewModel model) where ViewModel : Element_Communautaire_ViewModel
+        {
+            return View(model);  
+        }
 
         // POST: Creer/Entite
-        //public ActionResult Creer<Entite>([Bind(Include = "Id,Titre,Description,CategorieSelectionnee,ThemeSelectionne,FichierMedia,UrlMedia,DescriptionMedia,Element")] Entite ressourceACreer) where Entite : Element_Communautaire_Objet
         [HttpPost]
         public ActionResult Creer<ViewModel>(ViewModel elementACreer, Element_Communautaire_Objet entite) where ViewModel : Element_Communautaire_ViewModel
         {

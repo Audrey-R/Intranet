@@ -9,6 +9,7 @@ using Intranet.Areas.Composants.Models.BDD;
 using Intranet.Areas.Composants.Models.Elements;
 using Intranet.Areas.Composants.Models.Operations;
 using Intranet.Areas.Elements_Communautaires.Models.Medias;
+using Intranet.Areas.Elements_Communautaires.Models.Ressources;
 using Intranet.Areas.Elements_Communautaires.ViewModels;
 using Intranet.Areas.Elements_Communautaires.ViewModels.Creer;
 using Intranet.Areas.Elements_Generaux.Models;
@@ -165,6 +166,14 @@ namespace Intranet.Areas.Elements_Communautaires.Models.Dal
                     // Enregistrement du log de création du média
                     if (mediaCree != null) { }
                         AjouterLog(mediaCree);
+
+                    // Si l'élément à créer est une ressource : association du media à cette ressource
+                    Ressource ressourceTest = new Ressource();
+                    if (instanceElementACreer.getType() == ressourceTest.GetType())
+                    {
+                        mediaCree.Ressource = instanceElementACreer;
+                        //instanceElementACreer.ListeMediasAssocies.Add(mediaCree);
+                    }
                 }
                 #endregion
 
@@ -189,11 +198,7 @@ namespace Intranet.Areas.Elements_Communautaires.Models.Dal
                         AjouterLog(fractionACreer);
                 }
                 #endregion
-
-                #region Themes associés à l'élément communautaire à créer et à lier
                 
-                #endregion
-
                 #region Création de l'élément dans la BDD
                 // Création de l'élément communautaire auquel sera liée le futur élément créée
                 Element_Communautaire element = Bdd.ElementsCommunautaires.Add(new Element_Communautaire());
@@ -225,9 +230,8 @@ namespace Intranet.Areas.Elements_Communautaires.Models.Dal
                     AjouterLog((Element_Communautaire_Objet)instanceElementACreer);
                 #endregion
 
-                #region association de l'élément et des thèmes à l'élément créé
-                mediaCree.Ressource = instanceElementACreer;
-                instanceElementACreer.ListeMediasAssocies.Add(mediaCree);
+                #region association des thèmes à l'élément créé
+                
                 Element elementALier = Bdd.Elements.Single(u => u.Id == element.Id);
                 foreach (var theme in model.ListeThemesSelectionnes)
                 {

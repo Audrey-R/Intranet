@@ -5,6 +5,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Intranet.Areas.Composants.Models.Elements;
+using Intranet.Areas.Elements_Communautaires.Models;
 using Intranet.Areas.Elements_Generaux.Models;
 
 namespace Intranet.Areas.Elements_Generaux.Controllers
@@ -12,6 +13,13 @@ namespace Intranet.Areas.Elements_Generaux.Controllers
     public class Dal_Element_General_Objet_Controller : Element_General_Objet_Controller, 
                                                         IDal_Element_General_Objet_Controller
     {
+        private string RetournerRedirection<Entite>(Entite entite) where Entite : Element_General_Objet
+        {
+            string nomEntite = entite.GetType().Name;
+            string redirection = nomEntite + "s";
+            return redirection;
+        }
+
         #region Afficher
         // GET: Afficher/Entite
         public ActionResult Afficher<Entite>(Entite element) where Entite : Element_General_Objet
@@ -33,7 +41,7 @@ namespace Intranet.Areas.Elements_Generaux.Controllers
             if (ModelState.IsValid)
             {
                 dal.Creer(elementACreer);
-                return RedirectToAction("Categories", "Afficher", null);
+                return RedirectToAction(RetournerRedirection(elementACreer), "Afficher", null);
             }
             return View(elementACreer);
         }
@@ -78,7 +86,7 @@ namespace Intranet.Areas.Elements_Generaux.Controllers
             if (ModelState.IsValid)
             {
                 dal.Modifier(elementAModifier);
-                return RedirectToAction("Categories", "Afficher", null);
+                return RedirectToAction(RetournerRedirection(elementAModifier), "Afficher", null);
             }
             return View(elementAModifier);
         }
@@ -104,7 +112,7 @@ namespace Intranet.Areas.Elements_Generaux.Controllers
         public ActionResult Masquer<Entite>([Bind(Include = "Id,Libelle,Element")] Entite elementAMasquer) where Entite : Element_General_Objet
         {
             dal.Masquer(elementAMasquer);
-            return RedirectToAction("Categories", "Afficher", null);
+            return RedirectToAction(RetournerRedirection(elementAMasquer), "Afficher", null);
         }
         #endregion
 
@@ -128,7 +136,7 @@ namespace Intranet.Areas.Elements_Generaux.Controllers
         public ActionResult Supprimer<Entite>([Bind(Include = "Id,Libelle,Element")] Entite elementASupprimer) where Entite : Element_General_Objet
         {
             dal.Supprimer(elementASupprimer);
-            return RedirectToAction("Categories", "Afficher", null);
+            return RedirectToAction(RetournerRedirection(elementASupprimer), "Afficher", null);
         }
         #endregion
     }

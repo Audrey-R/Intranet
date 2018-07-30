@@ -17,6 +17,7 @@ namespace Intranet.Areas.Elements_Communautaires.Controllers.Dal
         //ActionResult Creer<Entite>(string element, Entite entite) where Entite : Element_Communautaire_Objet;
         //ActionResult Creer<Entite>(Entite element) where Entite : Element_Communautaire_Objet;
         //ActionResult Creer<Entite>([Bind(Include = "Id,TitreRessource,Element")] Entite elementACreer) where Entite : Element_Communautaire_Objet;
+        ActionResult Creer<ViewModel>(ViewModel element) where ViewModel : Element_Communautaire_ViewModel;
         ActionResult Creer<ViewModel>(ViewModel element, Element_Communautaire_Objet entite) where ViewModel : Element_Communautaire_ViewModel;
         ActionResult Detailler<Entite>(Entite element, int? id) where Entite : Element_Communautaire_Objet;
         ActionResult Modifier<Entite>(Entite element, int? id) where Entite : Element_Communautaire_Objet;
