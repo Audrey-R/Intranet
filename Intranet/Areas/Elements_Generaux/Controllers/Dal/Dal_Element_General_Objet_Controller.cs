@@ -97,7 +97,7 @@ namespace Intranet.Areas.Elements_Generaux.Controllers
             {
                 return HttpNotFound();
             }
-            return View(dal.RetournerElementGeneralTrouve(categorie, id));
+            return View(dal.RetournerElementGeneralTrouve(element, id));
         }
 
         // POST: Masquer/Entite/5

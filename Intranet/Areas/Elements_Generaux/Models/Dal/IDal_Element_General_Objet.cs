@@ -12,6 +12,7 @@ namespace Intranet.Areas.Elements_Generaux.Models
 {
     public interface IDal_Element_General_Objet : IDisposable
     {
+        BddContext RetournerBdd();
         IEnumerable<Entity> Lister<Entity>(Entity table) where Entity : Element_General_Objet;
         void Creer(Element_General_Objet elementACreer);
         void Modifier(Element_General_Objet element);
@@ -19,5 +20,6 @@ namespace Intranet.Areas.Elements_Generaux.Models
         void Supprimer(Element_General_Objet element);
         Entite RetournerElementGeneralTrouve<Entite>(Entite element, int? id) where Entite : Element_General_Objet;
         Element RetournerElementLie(int? id);
+        //Entite RetournerEntite<Entite>(Entite entite, string libelle) where Entite : Element_General_Objet;
     }
 }

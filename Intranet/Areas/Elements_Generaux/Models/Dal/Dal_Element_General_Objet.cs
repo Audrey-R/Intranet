@@ -7,6 +7,7 @@ using Intranet.Areas.Composants.Models.BDD;
 using Intranet.Areas.Composants.Models.Elements;
 using Intranet.Areas.Composants.Models.Operations;
 using Intranet.Areas.Elements_Communautaires.Models.Ressources;
+using Intranet.Areas.Elements_Generaux.Models.Ressources;
 
 namespace Intranet.Areas.Elements_Generaux.Models
 {
@@ -17,6 +18,11 @@ namespace Intranet.Areas.Elements_Generaux.Models
         public Dal_Element_General_Objet()
         {
             Bdd = new BddContext();
+        }
+
+        public BddContext RetournerBdd()
+        {
+            return Bdd;
         }
 
         public virtual IEnumerable<Entity> Lister<Entity>(Entity table)
@@ -61,7 +67,6 @@ namespace Intranet.Areas.Elements_Generaux.Models
         {
             try
             {
-                //RetournerElementLie(elementGeneralObjet.Element);
                 //Création d'une instance de l'élément à créer (type dynamique)
                 dynamic instanceElementACreer = Activator.CreateInstance(elementGeneralObjet.GetType());
                 instanceElementACreer.GetType().GetProperty("Libelle").SetValue(instanceElementACreer, elementGeneralObjet.Libelle, null);
@@ -232,6 +237,16 @@ namespace Intranet.Areas.Elements_Generaux.Models
         //    throw new NotImplementedException();
         //}
 
+        //public Entite RetournerEntite<Entite>(Entite entite, string libelle)
+        //    where Entite : Element_General_Objet
+        //{
+        //    return Bdd.Set<Entite>()
+        //        .Include(x => x.Element)
+        //        .Where(x => x.Libelle == libelle)
+        //        .Select(x => x)
+        //        .FirstOrDefault();
+        //}
+
         public Entite RetournerElementGeneralTrouve<Entite>(Entite element, int? id)
         where Entite : Element_General_Objet
         {
@@ -245,6 +260,15 @@ namespace Intranet.Areas.Elements_Generaux.Models
             }
             return null;
         }
+
+        //public Element RetournerElementLie<Entite>(Entite element)
+        //    where Entite : Element_General_Objet
+        //{
+        //    return Bdd.Set<Entite>()
+        //        .Include(x=> x.Element)
+        //        .Select(x => x.Element)
+        //        .FirstOrDefault();
+        //}
 
         public Element RetournerElementLie(int? id)
         {

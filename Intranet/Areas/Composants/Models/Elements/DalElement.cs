@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using Intranet.Areas.Composants.Models.BDD;
 using Intranet.Areas.Elements_Generaux.Models;
-using Intranet.Models;
 using System.Data.Entity;
 using Intranet.Areas.Composants.Models.Operations;
 using System.Data.Entity.Infrastructure;
+using Intranet.Areas.Elements_Communautaires.Models;
 
 namespace Intranet.Areas.Composants.Models.Elements
 {

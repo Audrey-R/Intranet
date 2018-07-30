@@ -1,4 +1,5 @@
 ﻿using System.Web.Mvc;
+using Intranet.Areas.Elements_Generaux.Controllers;
 using Intranet.Areas.Elements_Generaux.Models;
 
 namespace Intranet.Areas.Elements_Generaux.Controllers
@@ -24,7 +25,7 @@ namespace Intranet.Areas.Elements_Generaux.Controllers
         // GET: Elements_Generaux/Fractions
         public ActionResult Fractions()
         {
-            return dalController.Afficher(categorie);
+            return dalController.Afficher(fraction);
         }
         #endregion
 
@@ -32,7 +33,7 @@ namespace Intranet.Areas.Elements_Generaux.Controllers
         // GET: Elements_Generaux/Fractions
         public ActionResult Themes()
         {
-            return dalController.Afficher(categorie);
+            return dalController.Afficher(theme);
         }
         #endregion
     }

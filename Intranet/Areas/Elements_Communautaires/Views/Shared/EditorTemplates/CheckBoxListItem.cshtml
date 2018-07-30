@@ -1,0 +1,6 @@
+﻿@model Intranet.Areas.Elements_Communautaires.Models.CheckBoxListItem
+
+@Html.HiddenFor(x => x.ID)
+@Html.CheckBoxFor(x => x.EstCoche)
+@Html.LabelFor(x => x.EstCoche, Model.Visible)
+<br />

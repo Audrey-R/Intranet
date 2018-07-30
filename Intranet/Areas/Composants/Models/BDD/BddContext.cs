@@ -1,15 +1,17 @@
 ﻿using System.Data.Entity;
-using Intranet.Areas.Elements_Communautaires.Models.Ressources;
-using Intranet.Areas.Elements_Communautaires.Models.Medias;
+using Intranet.Areas.Elements_Generaux.Models.Ressources;
+using Intranet.Areas.Elements_Generaux.Models.Medias;
 using Intranet.Areas.Composants.Models.Elements;
 using Intranet.Areas.Composants.Models.Collaborateurs;
-using Intranet.Models;
 using Intranet.Areas.Elements_Generaux.Models;
 using Intranet.Areas.Composants.Models.Operations;
 using System.Linq;
 using System;
 using System.Data.Entity.Infrastructure;
 using System.Collections.Generic;
+using Intranet.Areas.Elements_Communautaires.Models;
+using Intranet.Areas.Elements_Communautaires.Models.Medias;
+using Intranet.Areas.Elements_Communautaires.Models.Ressources;
 
 namespace Intranet.Areas.Composants.Models.BDD
 {
@@ -26,20 +28,20 @@ namespace Intranet.Areas.Composants.Models.BDD
         public DbSet<Theme> Themes { get; set; }
         public DbSet<Media> Medias { get; set; }
         public DbSet<Ressource> Ressources { get; set; }
-        
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            //Relation many to many entre Element et Theme
             modelBuilder.Entity<Element>()
                .HasMany<Theme>(e => e.ListeThemesAssocies)
                .WithMany(t => t.ListeElementsAssocies)
                .Map(et =>
                {
                    et.MapLeftKey("Element_Id");
-                   et.MapRightKey("Theme_Id");
+                   et.MapRightKey("Theme_Element_Id");
                    et.ToTable("Theme_Element");
                });
-
+            
             modelBuilder.Entity<Element>()
                 .HasOptional(e => e.Fraction)
                 .WithMany()
@@ -87,8 +89,6 @@ namespace Intranet.Areas.Composants.Models.BDD
             foreach (DbEntityEntry change in modifiedEntities)
             {
                 string entityName = change.Entity.GetType().Name;
-                //Type entityNameType = ObjectContext.GetObjectType(change.Entity.GetType().BaseType);
-                //string entityName = entityNameType.Name;
                 if (entityName.Contains("Element_General"))
                 {
                     entityName = "Element_General";
@@ -145,7 +145,5 @@ namespace Intranet.Areas.Composants.Models.BDD
             }
             return base.SaveChanges();
         }
-
-        
     }
 }

@@ -2,11 +2,11 @@
 
 namespace Intranet.Areas.Elements_Communautaires
 {
-    public class Elements_CommunautairesAreaRegistration : AreaRegistration 
+    public class Elements_CommunautairesAreaRegistration : AreaRegistration
     {
-        public override string AreaName 
+        public override string AreaName
         {
-            get 
+            get
             {
                 return "Elements_Communautaires";
             }
@@ -16,11 +16,14 @@ namespace Intranet.Areas.Elements_Communautaires
         {
             context.MapRoute(
                 "Elements_Communautaires_default",
-                "{controller}/{action}/{id}",
-                new { action = "Index", id = UrlParameter.Optional },
-                new { controller = "Ressources|Medias" },
-                new[] { "Intranet.Areas.Elements_Communautaires.Controllers" }
-            );
+                "Elements_Communautaires/{controller}/{action}/{id}",
+                new
+                {
+                    controller = "Afficher|Creer|Detailler|Modifier|Masquer|Supprimer",
+                    action = "Index",
+                    id = UrlParameter.Optional
+                },
+                new[] { "Intranet.Areas.Elements_Communautaires.Controllers" });
         }
     }
 }

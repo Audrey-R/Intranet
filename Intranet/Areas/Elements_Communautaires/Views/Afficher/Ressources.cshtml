@@ -1,0 +1,55 @@
+﻿@model IEnumerable<Intranet.Areas.Elements_Communautaires.Models.Ressources.Ressource>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Voir le détail d'une ressource</title>
+</head>
+<body>
+    <p>
+        @Html.ActionLink("Créer", "Ressource", "Creer", null, null)
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Titre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Element)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Titre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Element.Id)
+            </td>
+            <td>
+                @Html.ActionLink("Modifier", "Ressource", "Modifier", new { id = item.Element.Id }, null) |
+                @Html.ActionLink("Details", "Ressource", "Detailler", new { id = item.Element.Id }, null) |
+                @Html.ActionLink("Masquer", "Ressource", "Masquer", new { id = item.Element.Id }, null) |
+                @Html.ActionLink("Supprimer", "Ressource", "Supprimer", new { id = item.Element.Id }, null)
+            </td>
+        </tr>
+        }
+
+    </table>
+</body>
+</html>

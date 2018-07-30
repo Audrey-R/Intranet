@@ -16,11 +16,11 @@ namespace Intranet.Areas.Elements_Generaux
         {
             context.MapRoute(
                 "Elements_Generaux_default",
-                "{controller}/{action}/{id}",
-                new { action = "Index", id = UrlParameter.Optional },
-                new { controller = "Afficher|Creer|Detailler|Modifier|Masquer|Supprimer" },
-                new[] { "Intranet.Areas.Elements_Generaux.Controllers" }
-            );
+                "Elements_Generaux/{controller}/{action}/{id}",
+                new{controller = "Afficher|Creer|Detailler|Modifier|Masquer|Supprimer",
+                    action = "Index",
+                    id = UrlParameter.Optional},
+                new[] { "Intranet.Areas.Elements_Generaux.Controllers" });
         }
     }
 }
