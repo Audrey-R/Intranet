@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -11,7 +12,7 @@ using Intranet.Areas.Composants.Models.Operations;
 using Intranet.Areas.Elements_Communautaires.Models.Medias;
 using Intranet.Areas.Elements_Communautaires.Models.Ressources;
 using Intranet.Areas.Elements_Communautaires.ViewModels;
-using Intranet.Areas.Elements_Communautaires.ViewModels.Creer;
+using Intranet.Areas.Elements_Communautaires.ViewModels.Afficher;
 using Intranet.Areas.Elements_Generaux.Models;
 
 namespace Intranet.Areas.Elements_Communautaires.Models.Dal
@@ -30,10 +31,12 @@ namespace Intranet.Areas.Elements_Communautaires.Models.Dal
         {
             try
             {
-                return Bdd.Set<Entity>()
-                    .Include(c => c.Element)
-                    .Where(c => c.Element.Etat != Element.Etats.Masqué)
-                    .ToList();
+                    return Bdd.Set<Entity>()
+                            .Include(c => c.Element)
+                            .Include(c => c.Categorie)
+                            .Include(x => x.ListeMediasAssocies)
+                            .Where(c => c.Element.Etat != Element.Etats.Masqué)
+                            .ToList();
             }
             catch (Exception ex)
             {
@@ -120,7 +123,7 @@ namespace Intranet.Areas.Elements_Communautaires.Models.Dal
                 }
                 #endregion
 
-                #region Media associé à l'élément à créer
+                #region Media à créer
                 //Gestion du média lié, si il existe
                 HttpPostedFileBase fichierMedia = viewModelEntite.FichierMedia;
                 string urlMedia = viewModelEntite.UrlMedia;
@@ -152,8 +155,16 @@ namespace Intranet.Areas.Elements_Communautaires.Models.Dal
                     mediaACreer.Element = elementMedia;
                     if(viewModelEntite.FichierMedia != null)
                     {
+                        // Extraction du nom du fichier joint
+                        var nomFichier = Path.GetFileName(viewModelEntite.FichierMedia.FileName);
+                        // Enregistrement du fichier dans ~/App_Data/uploads 
+                        var chemin = HttpContext.Current.Server.MapPath("~/App_Data/uploads/"+nomFichier);
+                        viewModelEntite.FichierMedia.SaveAs(chemin);
+                       
                         //Enregistrement du fichier joint dans la BDD
-                        mediaACreer.Chemin = viewModelEntite.FichierMedia.FileName;
+                        //mediaACreer.Chemin = viewModelEntite.FichierMedia.FileName;
+                        mediaACreer.Chemin = chemin;
+                        mediaACreer.Titre = nomFichier;
                     }
                     else if(viewModelEntite.UrlMedia != null)
                     {
@@ -166,14 +177,6 @@ namespace Intranet.Areas.Elements_Communautaires.Models.Dal
                     // Enregistrement du log de création du média
                     if (mediaCree != null) { }
                         AjouterLog(mediaCree);
-
-                    // Si l'élément à créer est une ressource : association du media à cette ressource
-                    Ressource ressourceTest = new Ressource();
-                    if (instanceElementACreer.getType() == ressourceTest.GetType())
-                    {
-                        mediaCree.Ressource = instanceElementACreer;
-                        //instanceElementACreer.ListeMediasAssocies.Add(mediaCree);
-                    }
                 }
                 #endregion
 
@@ -206,9 +209,6 @@ namespace Intranet.Areas.Elements_Communautaires.Models.Dal
                 instanceElementACreer.Element = element;
                 instanceElementACreer.Titre = viewModelEntite.Titre;
                 instanceElementACreer.Description = viewModelEntite.Description;
-                //instanceElementACreer.GetType().GetProperty("Element").SetValue(instanceElementACreer, element, null);
-                //instanceElementACreer.GetType().GetProperty("Titre").SetValue(instanceElementACreer, viewModelEntite.Titre, null);
-                //instanceElementACreer.GetType().GetProperty("Description").SetValue(instanceElementACreer, viewModelEntite.Description, null);
                 
                 //Enregistrement de l'élément créé dans la BDD
                 DbSet tableElementACreerEnBdd = Bdd.Set(instanceElementACreer.GetType());
@@ -221,7 +221,6 @@ namespace Intranet.Areas.Elements_Communautaires.Models.Dal
                 {
                     string result = prop;
                     instanceElementACreer.GetType().GetProperty(prop).SetValue(instanceElementACreer, tuple.CurrentValues[prop], null);
-
                 }
                 Bdd.SaveChanges();
 
@@ -230,8 +229,18 @@ namespace Intranet.Areas.Elements_Communautaires.Models.Dal
                     AjouterLog((Element_Communautaire_Objet)instanceElementACreer);
                 #endregion
 
+                #region Association du média créé à l'élément créé
+                int id = instanceElementACreer.Element.Id;
+                Element_Communautaire_Objet elementCommunautaireALier = Bdd.Ressources.Single(u => u.Element.Id == id);
+                if (mediaCree != null && instanceElementACreer != null)
+                {
+                    instanceElementACreer.ListeMediasAssocies.Add(mediaCree);
+                    //Media mediaALier = Bdd.Medias.Single(u => u.Element.Id == mediaCree.Element.Id);
+                    //elementCommunautaireALier.ListeMediasAssocies.Add(mediaALier);
+                }
+                #endregion
+
                 #region association des thèmes à l'élément créé
-                
                 Element elementALier = Bdd.Elements.Single(u => u.Id == element.Id);
                 foreach (var theme in model.ListeThemesSelectionnes)
                 {
@@ -364,6 +373,8 @@ namespace Intranet.Areas.Elements_Communautaires.Models.Dal
             {
                 return Bdd.Set<Entite>()
                 .Include(x => x.Element)
+                .Include(x=> x.Categorie)
+                .Include(x=> x.ListeMediasAssocies)
                 .Where(x => x.Element.Id == id)
                 .Select(x => x)
                 .FirstOrDefault();
@@ -378,6 +389,20 @@ namespace Intranet.Areas.Elements_Communautaires.Models.Dal
                 .Select(x => x)
                 .FirstOrDefault();
         }
+
+        //public List<Theme> RetournerListeThemesLies<Entite>(Entite element, int? id)
+        //where Entite : Element_Communautaire_Objet
+        //{
+        //    if (element != null && id != null)
+        //    {
+        //        return Bdd.Set<Entite>()
+        //       .Include(x => x.Element)
+        //       .Where(x => x.Element.Id == id)
+        //       .SelectMany(x => x.Element.ListeThemesAssocies)
+        //       .ToList();
+        //    }
+        //    return null;
+        //}
 
         private DbEntityEntry<Entite> RetournerTupleElement<Entite>(Entite element)
             where Entite : Element_Communautaire_Objet

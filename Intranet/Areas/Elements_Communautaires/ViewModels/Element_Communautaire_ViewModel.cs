@@ -9,15 +9,10 @@ using Intranet.Areas.Elements_Generaux.Models;
 
 namespace Intranet.Areas.Elements_Communautaires.ViewModels
 {
-    public class Element_Communautaire_ViewModel : IValidatableObject
+    public class Element_Communautaire_ViewModel : Element_Communautaire_Objet, IValidatableObject
     {
-        [Required(ErrorMessage = "Donnez un titre à votre ressource")]
-        public string Titre { get; set; }
-        [Required(ErrorMessage = "Décrivez votre ressource")]
-        public string Description { get; set; }
-
         [Required(ErrorMessage = "Sélectionnez une catégorie")]
-        public int Categorie { get; set; }
+        public new int Categorie { get; set; }
         public IEnumerable<SelectListItem> CategorieSelectionnee { get; set; }
 
         //[Required(ErrorMessage = "Sélectionnez au moins un thème")]

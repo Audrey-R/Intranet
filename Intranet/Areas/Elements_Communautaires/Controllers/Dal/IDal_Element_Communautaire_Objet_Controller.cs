@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Web.Mvc;
 using Intranet.Areas.Elements_Communautaires.Models;
 using Intranet.Areas.Elements_Generaux.Models;
-using Intranet.Areas.Elements_Communautaires.ViewModels.Creer;
+using Intranet.Areas.Elements_Communautaires.ViewModels.Afficher;
 using Intranet.Areas.Elements_Communautaires.ViewModels;
 
 namespace Intranet.Areas.Elements_Communautaires.Controllers.Dal

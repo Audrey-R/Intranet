@@ -1,0 +1,115 @@
+﻿@model Intranet.Areas.Elements_Communautaires.Models.Ressources.Ressource
+@{
+    //Layout = null;
+
+    //if (Model.ListeMediasAssocies.Count() > 0)
+    //{
+        //foreach (var photo in Model.ListeMediasAssocies)
+        //{
+            //photo.ResizeImage(photo, 60, 60);
+       // }
+    //}
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link type="text/css" href="~/Content/Site.css" rel="stylesheet" />
+    <link type="text/css" href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link type="text/css" href="~/Content/bootstrap-grid.css" rel="stylesheet" />
+    <link type="text/css" href="~/Content/bootstrap-reboot.css" rel="stylesheet" />
+    <script type="text/javascript" src="~/Scripts/jquery-3.3.1.js"></script>
+    <script type="text/javascript" src="~/Scripts/jquery.validate-vsdoc.js"></script>
+    <script type="text/javascript" src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+    <script type="text/javascript" src="~/Scripts/bootstrap.js"></script>
+
+    <title>Afficher le détail d'une ressource</title>
+</head>
+<body>
+    <div class="container">
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Titre)
+            </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.Description)
+            </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.Categorie)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Titre)
+            </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Description)
+            </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Categorie.Id)
+            </dd>
+        </dl>
+    </div>
+
+    <div class="container">
+        <table class="table">
+            <tr>
+                <th>
+                    Libelle
+                </th>
+                <th>
+                    Element_Id
+                </th>
+                <th></th>
+            </tr>
+            @foreach (var item in Model.Element.ListeThemesAssocies)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Libelle)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Id)
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+
+    <div class="container">
+        <table class="table">
+            <tr>
+                <th>
+                    Chemin
+                </th>
+                <th>
+                    Titre
+                </th>
+                <th>
+                    Description
+                </th>
+                <th></th>
+            </tr>
+            @foreach (var item in Model.ListeMediasAssocies)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Titre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    <img src="@item.Chemin" alt="Image" width="300" height="300" />
+                </td>
+            </tr>
+            }
+        </table>
+    </div>
+    <p>
+        @Html.ActionLink("Modifier", "Ressource", "Modifier", new { id = Model.Element.Id }, null)|
+        @Html.ActionLink("Revenir sur la liste des ressources", "Ressources", "Afficher", null, null)
+    </p>
+</body>
+</html>

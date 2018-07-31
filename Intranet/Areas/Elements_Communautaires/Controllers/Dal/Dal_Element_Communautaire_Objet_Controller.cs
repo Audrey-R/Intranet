@@ -9,7 +9,7 @@ using Intranet.Areas.Elements_Communautaires.Controllers.Parent;
 using Intranet.Areas.Elements_Communautaires.Models;
 using Intranet.Areas.Elements_Communautaires.Models.Ressources;
 using Intranet.Areas.Elements_Communautaires.ViewModels;
-using Intranet.Areas.Elements_Communautaires.ViewModels.Creer;
+using Intranet.Areas.Elements_Communautaires.ViewModels.Afficher;
 using Intranet.Areas.Elements_Generaux.Models;
 
 namespace Intranet.Areas.Elements_Communautaires.Controllers.Dal
@@ -65,7 +65,11 @@ namespace Intranet.Areas.Elements_Communautaires.Controllers.Dal
             {
                 return HttpNotFound();
             }
-            return View(dalElementCommunautaire.RetournerElementCommunautaireTrouve(element, id));
+            var elementARetourner = dalElementCommunautaire.RetournerElementCommunautaireTrouve(element, id);
+            
+            //elementARetourner.Element.ListeThemesAssocies = dalElementCommunautaire.RetournerListeThemesLies(elementARetourner, id);
+
+            return View(elementARetourner);
         }
         #endregion
 

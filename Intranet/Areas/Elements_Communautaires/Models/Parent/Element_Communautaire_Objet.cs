@@ -7,6 +7,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Intranet.Areas.Composants.Models.Elements;
+using Intranet.Areas.Elements_Communautaires.Models.Medias;
 using Intranet.Areas.Elements_Generaux.Models;
 
 namespace Intranet.Areas.Elements_Communautaires.Models
@@ -16,10 +17,15 @@ namespace Intranet.Areas.Elements_Communautaires.Models
     {
         [Key]
         public int Id { get; set; }
+        [Required(ErrorMessage = "Ajoutez un titre")]
         public string Titre { get; set; }
+        [Required(ErrorMessage = "Ajoutez une description")]
         public string Description { get; set; }
         [DisplayName("Element_Id")]
         public Element Element { get; set; }
+
+        public ICollection<Media> ListeMediasAssocies { get; set; }
+        public Categorie Categorie { get; set; }
 
         //[Required(ErrorMessage = "Sélectionnez une catégorie")]
         //public int Categorie { get; set; }

@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Intranet.Areas.Composants.Models.Elements;
 using Intranet.Areas.Elements_Communautaires.ViewModels;
-using Intranet.Areas.Elements_Communautaires.ViewModels.Creer;
+using Intranet.Areas.Elements_Communautaires.ViewModels.Afficher;
 using Intranet.Areas.Elements_Generaux.Models;
 
 namespace Intranet.Areas.Elements_Communautaires.Models.Dal
@@ -20,5 +20,7 @@ namespace Intranet.Areas.Elements_Communautaires.Models.Dal
         void Supprimer(Element_Communautaire_Objet element);
         Entite RetournerElementCommunautaireTrouve<Entite>(Entite element, int? id) where Entite : Element_Communautaire_Objet;
         Element RetournerElementLie(int? id);
+        //List<Theme> RetournerListeThemesLies<Entite>(Entite element, int? id)
+        //where Entite : Element_Communautaire_Objet;
     }
 }

@@ -473,6 +473,7 @@
     <Compile Include="Areas\Elements_Communautaires\Controllers\CreerController.cs" />
     <Compile Include="Areas\Elements_Communautaires\Controllers\Dal\Dal_Element_Communautaire_Objet_Controller.cs" />
     <Compile Include="Areas\Elements_Communautaires\Controllers\Dal\IDal_Element_Communautaire_Objet_Controller.cs" />
+    <Compile Include="Areas\Elements_Communautaires\Controllers\DetaillerController.cs" />
     <Compile Include="Areas\Elements_Communautaires\Controllers\RessourcesController.cs" />
     <Compile Include="Areas\Elements_Communautaires\Elements_CommunautairesAreaRegistration.cs" />
     <Compile Include="Areas\Elements_Communautaires\Models\CheckBoxListItem.cs" />
@@ -483,6 +484,7 @@
     <Compile Include="Areas\Elements_Communautaires\Models\Medias\Media.cs" />
     <Compile Include="Areas\Elements_Communautaires\Controllers\Parent\Element_Communautaire_Objet_Controller.cs" />
     <Compile Include="Areas\Elements_Communautaires\Models\Ressources\DalRessource.cs" />
+    <Compile Include="Areas\Elements_Communautaires\ViewModels\Afficher\RessourceViewModel.cs" />
     <Compile Include="Areas\Elements_Communautaires\ViewModels\Creer\RessourceViewModel.cs" />
     <Compile Include="Areas\Elements_Communautaires\ViewModels\Element_Communautaire_ViewModel.cs" />
     <Compile Include="Areas\Elements_Generaux\Controllers\AfficherController.cs" />
@@ -594,6 +596,7 @@
     <Content Include="Content\bootstrap-grid.css.map" />
     <Content Include="Areas\Elements_Communautaires\Views\Creer\Index.cshtml" />
     <Content Include="Areas\Elements_Communautaires\Views\Afficher\Index.cshtml" />
+    <Content Include="Areas\Elements_Communautaires\Views\Detailler\Ressource.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -641,7 +644,7 @@
     <Content Include="Scripts\popper-utils.js.map" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
+    <Folder Include="App_Data\uploads\" />
     <Folder Include="Areas\Composants\Views\Shared\" />
     <Folder Include="Areas\Elements_Communautaires\Views\Dal_Element_Communautaire_Objet_\" />
     <Folder Include="Areas\Elements_Generaux\Views\Shared\" />
