@@ -158,11 +158,10 @@ namespace Intranet.Areas.Elements_Communautaires.Models.Dal
                         // Extraction du nom du fichier joint
                         var nomFichier = Path.GetFileName(viewModelEntite.FichierMedia.FileName);
                         // Enregistrement du fichier dans ~/App_Data/uploads 
-                        var chemin = HttpContext.Current.Server.MapPath("~/App_Data/uploads/"+nomFichier);
+                        var chemin = HttpContext.Current.Server.MapPath("~/Content/Img/"+nomFichier);
                         viewModelEntite.FichierMedia.SaveAs(chemin);
                        
                         //Enregistrement du fichier joint dans la BDD
-                        //mediaACreer.Chemin = viewModelEntite.FichierMedia.FileName;
                         mediaACreer.Chemin = chemin;
                         mediaACreer.Titre = nomFichier;
                     }
