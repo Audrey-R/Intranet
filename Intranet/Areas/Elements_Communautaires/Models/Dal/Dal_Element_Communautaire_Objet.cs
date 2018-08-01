@@ -157,13 +157,12 @@ namespace Intranet.Areas.Elements_Communautaires.Models.Dal
                     {
                         // Extraction du nom du fichier joint
                         var nomFichier = Path.GetFileName(viewModelEntite.FichierMedia.FileName);
-                        // Enregistrement du fichier dans ~/App_Data/uploads 
-                        var chemin = HttpContext.Current.Server.MapPath("~/Content/Img/"+nomFichier);
+                        // Enregistrement du fichier dans ~/Content/Img
+                        string chemin = HttpContext.Current.Server.MapPath("~/Content/Img/"+ nomFichier);
                         viewModelEntite.FichierMedia.SaveAs(chemin);
-                       
-                        //Enregistrement du fichier joint dans la BDD
-                        mediaACreer.Chemin = chemin;
-                        mediaACreer.Titre = nomFichier;
+                        Uri uri = new Uri(chemin);
+                        string dernierSegmentChemin = uri.Segments.Last();
+                        mediaACreer.Chemin = dernierSegmentChemin;
                     }
                     else if(viewModelEntite.UrlMedia != null)
                     {

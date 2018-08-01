@@ -47,7 +47,7 @@
                 @Html.DisplayFor(model => model.Description)
             </dd>
             <dd>
-                @Html.DisplayFor(model => model.Categorie.Id)
+                @Html.DisplayFor(model => model.Categorie.Libelle)
             </dd>
         </dl>
     </div>
@@ -81,13 +81,13 @@
         <table class="table">
             <tr>
                 <th>
-                    Chemin
-                </th>
-                <th>
                     Titre
                 </th>
                 <th>
                     Description
+                </th>
+                <th>
+                    Aperçu
                 </th>
                 <th></th>
             </tr>
@@ -101,7 +101,7 @@
                     @Html.DisplayFor(modelItem => item.Description)
                 </td>
                 <td>
-                    <img src="@item.Chemin" alt="Image" width="300" height="300" />
+                    <img src="~/Content/Img/@item.Chemin" alt="Image" width="300" height="300" />
                 </td>
             </tr>
             }
