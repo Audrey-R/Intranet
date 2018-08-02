@@ -20,8 +20,9 @@ namespace Intranet.Areas.Elements_Communautaires.Controllers.Dal
         ActionResult Creer<ViewModel>(ViewModel element) where ViewModel : Element_Communautaire_ViewModel;
         ActionResult Creer<ViewModel>(ViewModel element, Element_Communautaire_Objet entite) where ViewModel : Element_Communautaire_ViewModel;
         ActionResult Detailler<Entite>(Entite element, int? id) where Entite : Element_Communautaire_Objet;
-        ActionResult Modifier<Entite>(Entite element, int? id) where Entite : Element_Communautaire_Objet;
-        ActionResult Modifier<Entite>([Bind(Include = "Id,Libelle,Element")] Entite elementAModifier) where Entite : Element_Communautaire_Objet;
+        ActionResult Modifier<ViewModel>(ViewModel model) where ViewModel : Element_Communautaire_ViewModel;
+        //ActionResult Modifier<Entite>(Entite element, int? id) where Entite : Element_Communautaire_Objet;
+        //ActionResult Modifier<Entite>([Bind(Include = "Id,Libelle,Element")] Entite elementAModifier) where Entite : Element_Communautaire_Objet;
         ActionResult Masquer<Entite>(Entite element, int? id) where Entite : Element_Communautaire_Objet;
         ActionResult Masquer<Entite>([Bind(Include = "Id,Libelle,Element")] Entite elementAMasquer) where Entite : Element_Communautaire_Objet;
         ActionResult Supprimer<Entite>(Entite element, int? id) where Entite : Element_Communautaire_Objet;

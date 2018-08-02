@@ -21,9 +21,9 @@ namespace Intranet.Areas.Elements_Communautaires.Controllers.Parent
         protected Media media = new Media();
 
         //Initialisation de la liste des catégories disponibles dans la base de données
-        protected IEnumerable<SelectListItem> ListeCategories()
+        protected IEnumerable<SelectListItem> ListeCategories(int? id)
         {
-            List<SelectListItem> listSelectListItems = new List<SelectListItem>();
+            ICollection<SelectListItem> listSelectListItems = new List<SelectListItem>();
             IEnumerable<Categorie> listeCategories = dalElementGeneral.Lister(categorie);
 
             foreach (Categorie categorie in listeCategories)
@@ -33,24 +33,24 @@ namespace Intranet.Areas.Elements_Communautaires.Controllers.Parent
                     Text = categorie.Libelle,
                     Value = categorie.Id.ToString()
                 };
+                if (id != null)
+                {
+                    if (selectList.Value == id.ToString())
+                        selectList.Selected = true;
+                }
                 listSelectListItems.Add(selectList);
             }
             return listSelectListItems;
         }
 
         //Initialisation de la liste des thèmes disponibles dans la base de données
-        protected IEnumerable<CheckBoxListItem> ListeThemes(List<Theme> themesSelectionnes)
+        protected IEnumerable<CheckBoxListItem> ListeThemes(ICollection<Theme> themesSelectionnes)
         {
             List<CheckBoxListItem> checkBoxListItems = new List<CheckBoxListItem>();
             IEnumerable<Theme> listeThemes = dalElementGeneral.Lister(theme);
-            bool estcoche = false;
             int id = 0;
-            if (themesSelectionnes.Count() > 0)
-            {
-                listeThemes = themesSelectionnes;
-                estcoche = true;
-            }
-            foreach (Element_General_Objet theme in listeThemes)
+            
+            foreach (Theme theme in listeThemes)
             {
                 if (theme.Element != null)
                     id = theme.Element.Id;
@@ -59,8 +59,16 @@ namespace Intranet.Areas.Elements_Communautaires.Controllers.Parent
                     ID = id,
                     Visible = theme.Libelle,
                     Element = theme,
-                    EstCoche = estcoche
+                    EstCoche = false
                 };
+                if (themesSelectionnes.Count() > 0)
+                {
+                    Theme themeTrouve = themesSelectionnes.FirstOrDefault(t => t.Libelle == theme.Libelle);
+                    if (themeTrouve != null)
+                    {
+                        checkBoxList.EstCoche = true;
+                    }
+                }
                 checkBoxListItems.Add(checkBoxList);
             }
             return checkBoxListItems;

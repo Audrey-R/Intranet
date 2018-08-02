@@ -16,7 +16,7 @@ namespace Intranet.Areas.Elements_Communautaires.ViewModels
         public IEnumerable<SelectListItem> CategorieSelectionnee { get; set; }
 
         //[Required(ErrorMessage = "Sélectionnez au moins un thème")]
-        public List<Theme> ListeThemesSelectionnes { get; set; }
+        public ICollection<Theme> ListeThemesSelectionnes { get; set; }
         public IEnumerable<CheckBoxListItem> Themes { get; set; }
         
         [Display(Name ="Téléverser un fichier à partager")]

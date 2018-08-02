@@ -1,0 +1,129 @@
+﻿@model Intranet.Areas.Elements_Communautaires.ViewModels.Creer.RessourceViewModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link type="text/css" href="~/Content/Site.css" rel="stylesheet" />
+    <link type="text/css" href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link type="text/css" href="~/Content/bootstrap-grid.css" rel="stylesheet" />
+    <link type="text/css" href="~/Content/bootstrap-reboot.css" rel="stylesheet" />
+    <script type="text/javascript" src="~/Scripts/jquery-3.3.1.js"></script>
+    <script type="text/javascript" src="~/Scripts/jquery.validate-vsdoc.js"></script>
+    <script type="text/javascript" src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+    <script type="text/javascript" src="~/Scripts/bootstrap.js"></script>
+    <script type="text/javascript">
+        jQuery.validator.addMethod("verifMedia",
+            function (value, element, params) {
+                var fichier = $("#" + params.parametre1).val();
+                var url = $("#" + params.parametre2).val();
+                return fichier != '' || url != '';
+            });
+        jQuery.validator.unobtrusive.adapters.add
+            ("verifMedia", ["parametre1", "parametre2"], function (options) {
+                options.rules["verifMedia"] = options.params;
+                options.messages["verifMedia"] = options.message;
+            });
+    </script>
+    
+    <title>Modifier une ressource</title>
+</head>
+<body>
+    @using (Html.BeginForm("Ressource", "Modifier", FormMethod.Post,
+                             new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.Titre, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Titre, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Titre, "", new { @class = "text-danger" })
+                </div>
+
+                @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextAreaFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="container">
+                    <table class="table">
+                        <tr>
+                            <th>
+                                Titre
+                            </th>
+                            <th>
+                                Description
+                            </th>
+                            <th>
+                                Aperçu
+                            </th>
+                            <th></th>
+                        </tr>
+                        @foreach (var item in Model.ListeMediasAssocies)
+                        {
+                        <tr>
+                            <td>
+                                @Html.TextAreaFor(modelItem => item.Titre, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(modelItem => item.Titre, "", new { @class = "text-danger" })
+
+                            </td>
+                            <td>
+                                @Html.TextAreaFor(modelItem => item.Description, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(modelItem => item.Description, "", new { @class = "text-danger" })
+                            </td>
+                            <td>
+                                <img src="~/Content/Img/@item.Chemin" alt="Image" width="60" height="60" />
+                            </td>
+                            <td>
+                                @Html.TextBoxFor(model => model.FichierMedia, new { type = "file", @class = "form-control", data_val = "true", data_val_verifMedia = "Vous devez lier un media à la ressource. Soit en le téléversant, soit en indiquant son URL.", data_val_verifMedia_parametre1 = "FichierMedia", data_val_verifMedia_parametre2 = "UrlMedia" })
+                                @Html.ValidationMessageFor(model => model.FichierMedia, "", new { @class = "text-danger" })
+                            </td>
+                        </tr>
+                        }
+                    </table>
+                </div>
+
+                @Html.LabelFor(model => model.Themes, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Themes)
+                    @Html.ValidationMessageFor(model => model.ListeThemesSelectionnes)
+                </div>
+
+                @Html.LabelFor(model => model.Categorie, htmlAttributes: new { @class = "control-label col-md-2", name = "Categorie" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.Categorie,
+                     Model.CategorieSelectionnee,
+                     "Choisissez une catégorie",
+                     new { @placeholder = "Choisissez une categorie dans la liste" }
+                     )
+                    @Html.ValidationMessageFor(model => model.Categorie)
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Creer" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    }
+
+    <div>
+        @Html.ActionLink("Revenir sur la liste des ressources", "Ressources", "Afficher", null, null)
+    </div>
+
+    @section Scripts
+    {
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+</body>
+</html>

@@ -474,6 +474,7 @@
     <Compile Include="Areas\Elements_Communautaires\Controllers\Dal\Dal_Element_Communautaire_Objet_Controller.cs" />
     <Compile Include="Areas\Elements_Communautaires\Controllers\Dal\IDal_Element_Communautaire_Objet_Controller.cs" />
     <Compile Include="Areas\Elements_Communautaires\Controllers\DetaillerController.cs" />
+    <Compile Include="Areas\Elements_Communautaires\Controllers\ModifierController.cs" />
     <Compile Include="Areas\Elements_Communautaires\Controllers\RessourcesController.cs" />
     <Compile Include="Areas\Elements_Communautaires\Elements_CommunautairesAreaRegistration.cs" />
     <Compile Include="Areas\Elements_Communautaires\Models\CheckBoxListItem.cs" />
@@ -597,6 +598,8 @@
     <Content Include="Areas\Elements_Communautaires\Views\Creer\Index.cshtml" />
     <Content Include="Areas\Elements_Communautaires\Views\Afficher\Index.cshtml" />
     <Content Include="Areas\Elements_Communautaires\Views\Detailler\Ressource.cshtml" />
+    <Content Include="Areas\Elements_Communautaires\Views\Modifier\Index.cshtml" />
+    <Content Include="Areas\Elements_Communautaires\Views\Modifier\Ressource.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />

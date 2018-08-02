@@ -65,40 +65,47 @@ namespace Intranet.Areas.Elements_Communautaires.Controllers.Dal
             {
                 return HttpNotFound();
             }
-            var elementARetourner = dalElementCommunautaire.RetournerElementCommunautaireTrouve(element, id);
-            
-            //elementARetourner.Element.ListeThemesAssocies = dalElementCommunautaire.RetournerListeThemesLies(elementARetourner, id);
-
-            return View(elementARetourner);
+            return View(dalElementCommunautaire.RetournerElementCommunautaireTrouve(element, id));
         }
         #endregion
 
         #region Modifier
         // GET: Modifier/Entite/5
-        public ActionResult Modifier<Entite>(Entite element, int? id) where Entite : Element_Communautaire_Objet
+        public ActionResult Modifier<ViewModel>(ViewModel model) where ViewModel : Element_Communautaire_ViewModel
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Element elementLieElementAModifierTrouve = dalElementCommunautaire.RetournerElementLie(id);
-            if (elementLieElementAModifierTrouve == null)
-            {
-                return HttpNotFound();
-            }
-            return View(dalElementCommunautaire.RetournerElementCommunautaireTrouve(element, id));
+            return View(model);
         }
 
+
+
+
+
+
+
+        //public ActionResult Modifier<Entite>(Entite element, int? id) where Entite : Element_Communautaire_Objet
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    Element elementLieElementAModifierTrouve = dalElementCommunautaire.RetournerElementLie(id);
+        //    if (elementLieElementAModifierTrouve == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(dalElementCommunautaire.RetournerElementCommunautaireTrouve(element, id));
+        //}
+
         // POST: Modifier/Entite/5
-        public ActionResult Modifier<Entite>([Bind(Include = "Id,Libelle,Element")] Entite elementAModifier) where Entite : Element_Communautaire_Objet
-        {
-            if (ModelState.IsValid)
-            {
-                dalElementCommunautaire.Modifier(elementAModifier);
-                return RedirectToAction("Categories", "Afficher", null);
-            }
-            return View(elementAModifier);
-        }
+        //public ActionResult Modifier<Entite>([Bind(Include = "Id,Libelle,Element")] Entite elementAModifier) where Entite : Element_Communautaire_Objet
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        dalElementCommunautaire.Modifier(elementAModifier);
+        //        return RedirectToAction("Categories", "Afficher", null);
+        //    }
+        //    return View(elementAModifier);
+        //}
         #endregion
 
         #region Masquer

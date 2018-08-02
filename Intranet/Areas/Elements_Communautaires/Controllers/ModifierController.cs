@@ -1,55 +1,98 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Intranet.Areas.Composants.Models.Elements;
 using Intranet.Areas.Elements_Communautaires.Controllers.Dal;
 using Intranet.Areas.Elements_Communautaires.Controllers.Parent;
-using Intranet.Areas.Elements_Communautaires.Models;
-using Intranet.Areas.Elements_Communautaires.Models.Medias;
 using Intranet.Areas.Elements_Communautaires.Models.Ressources;
 using Intranet.Areas.Elements_Communautaires.ViewModels.Creer;
 using Intranet.Areas.Elements_Generaux.Models;
 
 namespace Intranet.Areas.Elements_Communautaires.Controllers
 {
-    public class CreerController : Element_Communautaire_Objet_Controller
+    public class ModifierController : Element_Communautaire_Objet_Controller
     {
         private IDal_Element_Communautaire_Objet_Controller dalController = new Dal_Element_Communautaire_Objet_Controller();
 
-        // GET: Elements_Generaux/Creer
+        // GET: Elements_Communautaires/Modifier
         public ActionResult Index()
         {
             return View();
         }
 
         #region Ressource
-        // GET: Creer/Ressource
-        public ActionResult Ressource()
+        // GET: Modifier/Ressource
+        public ActionResult Ressource(int? id)
         {
-            if (dalElementGeneral.Lister(categorie) != null && dalElementGeneral.Lister(theme) != null)
+            if (id == null)
             {
-                RessourceViewModel model = new RessourceViewModel
-                {
-                    CategorieSelectionnee = ListeCategories(null)
-                };
-                model.Themes = ListeThemes(model.ListeThemesSelectionnes);
-
-                return dalController.Creer(model);
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Element elementLieElementTrouve = dalElementCommunautaire.RetournerElementLie(id);
+            if (elementLieElementTrouve == null)
+            {
+                return HttpNotFound();
             }
             else
             {
-                return View("Error");
+                Ressource ressourceTrouvee = dalElementCommunautaire.RetournerElementCommunautaireTrouve(ressource, id);
+                RessourceViewModel model = new RessourceViewModel
+                {
+                    Titre = ressourceTrouvee.Titre,
+                    Description = ressourceTrouvee.Description,
+                    ListeMediasAssocies = ressourceTrouvee.ListeMediasAssocies,
+                    ListeThemesSelectionnes = ressourceTrouvee.Element.ListeThemesAssocies,
+                    CategorieSelectionnee = ListeCategories(ressourceTrouvee.Categorie.Id),
+                    Categorie = ressourceTrouvee.Categorie.Id
+                };
+                model.Themes = ListeThemes(model.ListeThemesSelectionnes);
+                return View(model);
+                // Position de la catégorie courante dans la liste déroulante
             }
+
+
+
+
+            //if (dalElementGeneral.Lister(categorie) != null && dalElementGeneral.Lister(theme) != null)
+            //{
+            //    RessourceViewModel model = new RessourceViewModel
+            //    {
+            //        CategorieSelectionnee = ListeCategories(null)
+            //    };
+            //    model.Themes = ListeThemes(model.ListeThemesSelectionnes);
+
+            //    return dalController.Creer(model);
+            //}
+            //else
+            //{
+            //    return View("Error");
+            //}
         }
 
-        // POST: Creer/Ressource
+        // POST: Modifier/Ressource
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Ressource(RessourceViewModel ressourceACreer)
+        public ActionResult Ressource(RessourceViewModel ressourceACreer, int? id)
         {
+            
+            
+
+
+
+
+
+
+
+
+
+
+
+
             //Initialisation des listes de thèmes et catégories
-            if(ressourceACreer.Themes.Count() > 0)
+            if (ressourceACreer.Themes.Count() > 0)
             {
                 foreach (var themeACoche in ressourceACreer.Themes)
                 {
@@ -63,7 +106,7 @@ namespace Intranet.Areas.Elements_Communautaires.Controllers
             }
             ressourceACreer.CategorieSelectionnee = ListeCategories(null);
             ressourceACreer.Themes = ListeThemes(ressourceACreer.ListeThemesSelectionnes);
-            
+
             //Traitement
             if (!ModelState.IsValid)
             {
@@ -73,7 +116,7 @@ namespace Intranet.Areas.Elements_Communautaires.Controllers
             else
             {
                 return dalController.Creer(ressourceACreer, ressource);
-            } 
+            }
         }
         #endregion
 
@@ -92,6 +135,5 @@ namespace Intranet.Areas.Elements_Communautaires.Controllers
         //    return dalController.Creer(mediaACreer);
         //}
         #endregion
-        
     }
 }
