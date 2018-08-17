@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace Intranet.Areas.Composants.Models.Collaborateurs
+﻿namespace Intranet.Areas.Composants.Models
 {
     public class Collaborateur
     {

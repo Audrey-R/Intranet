@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using Intranet.Areas.Elements_Communautaires.Models;
 using Intranet.Areas.Elements_Communautaires.Models.Dal;
-using Intranet.Areas.Elements_Communautaires.Models.Medias;
-using Intranet.Areas.Elements_Communautaires.Models.Ressources;
 using Intranet.Areas.Elements_Generaux.Models;
 
 namespace Intranet.Areas.Elements_Communautaires.Controllers.Parent

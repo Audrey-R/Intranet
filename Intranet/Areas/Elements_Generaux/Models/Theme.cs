@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Intranet.Areas.Composants.Models.Elements;
+using Intranet.Areas.Composants.Models;
 
 namespace Intranet.Areas.Elements_Generaux.Models
 {

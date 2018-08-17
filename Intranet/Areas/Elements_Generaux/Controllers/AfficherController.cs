@@ -1,6 +1,4 @@
 ﻿using System.Web.Mvc;
-using Intranet.Areas.Elements_Generaux.Controllers;
-using Intranet.Areas.Elements_Generaux.Models;
 
 namespace Intranet.Areas.Elements_Generaux.Controllers
 {

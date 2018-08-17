@@ -17,9 +17,9 @@ namespace Intranet.Areas.Elements
            
             context.MapRoute(
                 "Composants_default",
-                "{controller}/{action}/{id}",
+                "Composants/{controller}/{action}/{id}",
                 new { action = "Index", id = UrlParameter.Optional },
-                new { controller = "Elements|Operations" },
+                new { controller = "Afficher" },
                 new[] { "Intranet.Areas.Composants.Controllers" }
             );
         }

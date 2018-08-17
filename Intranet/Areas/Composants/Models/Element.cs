@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using Intranet.Areas.Composants.Models.Collaborateurs;
 using Intranet.Areas.Elements_Generaux.Models;
 
-namespace Intranet.Areas.Composants.Models.Elements
+namespace Intranet.Areas.Composants.Models
 {
     public class Element
     {

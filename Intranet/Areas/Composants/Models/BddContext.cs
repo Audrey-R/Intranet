@@ -1,23 +1,15 @@
 ﻿using System.Data.Entity;
-using Intranet.Areas.Elements_Generaux.Models.Ressources;
-using Intranet.Areas.Elements_Generaux.Models.Medias;
-using Intranet.Areas.Composants.Models.Elements;
-using Intranet.Areas.Composants.Models.Collaborateurs;
 using Intranet.Areas.Elements_Generaux.Models;
-using Intranet.Areas.Composants.Models.Operations;
 using System.Linq;
 using System;
 using System.Data.Entity.Infrastructure;
 using System.Collections.Generic;
 using Intranet.Areas.Elements_Communautaires.Models;
-using Intranet.Areas.Elements_Communautaires.Models.Medias;
-using Intranet.Areas.Elements_Communautaires.Models.Ressources;
 
-namespace Intranet.Areas.Composants.Models.BDD
+namespace Intranet.Areas.Composants.Models
 {
     public class BddContext : DbContext
     {
-        public DbSet<Operation> Operations { get; set; }
         public DbSet<Log> Logs { get; set; }
         public DbSet<Collaborateur> Collaborateurs { get; set; }
         public DbSet<Element> Elements { get; set; }
@@ -44,11 +36,6 @@ namespace Intranet.Areas.Composants.Models.BDD
             
             modelBuilder.Entity<Element>()
                 .HasOptional(e => e.Fraction)
-                .WithMany()
-                .WillCascadeOnDelete();
-
-            modelBuilder.Entity<Operation>()
-                .HasRequired(o => o.Element)
                 .WithMany()
                 .WillCascadeOnDelete();
 

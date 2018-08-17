@@ -5,7 +5,7 @@ namespace Intranet.Migrations
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<Intranet.Areas.Composants.Models.BDD.BddContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<Intranet.Areas.Composants.Models.BddContext>
     {
         public Configuration()
         {
@@ -13,7 +13,7 @@ namespace Intranet.Migrations
             ContextKey = "Intranet.Areas.Composants.Models.BDD.BddContext";
         }
 
-        protected override void Seed(Intranet.Areas.Composants.Models.BDD.BddContext context)
+        protected override void Seed(Intranet.Areas.Composants.Models.BddContext context)
         {
             //  This method will be called after migrating to the latest version.
 

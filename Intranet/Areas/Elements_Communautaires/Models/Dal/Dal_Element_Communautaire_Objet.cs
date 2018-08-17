@@ -5,14 +5,8 @@ using System.Data.Entity.Infrastructure;
 using System.IO;
 using System.Linq;
 using System.Web;
-using System.Web.Mvc;
-using Intranet.Areas.Composants.Models.BDD;
-using Intranet.Areas.Composants.Models.Elements;
-using Intranet.Areas.Composants.Models.Operations;
-using Intranet.Areas.Elements_Communautaires.Models.Medias;
-using Intranet.Areas.Elements_Communautaires.Models.Ressources;
+using Intranet.Areas.Composants.Models;
 using Intranet.Areas.Elements_Communautaires.ViewModels;
-using Intranet.Areas.Elements_Communautaires.ViewModels.Afficher;
 using Intranet.Areas.Elements_Generaux.Models;
 
 namespace Intranet.Areas.Elements_Communautaires.Models.Dal
@@ -26,12 +20,12 @@ namespace Intranet.Areas.Elements_Communautaires.Models.Dal
             Bdd = new BddContext();
         }
 
-        public virtual IEnumerable<Entity> Lister<Entity>(Entity table)
-            where Entity : Element_Communautaire_Objet
+        public virtual IEnumerable<Entite> Lister<Entite>(Entite table)
+            where Entite : Element_Communautaire_Objet
         {
             try
             {
-                    return Bdd.Set<Entity>()
+                    return Bdd.Set<Entite>()
                             .Include(c => c.Element)
                             .Include(c => c.Categorie)
                             .Include(x => x.ListeMediasAssocies)
@@ -255,30 +249,77 @@ namespace Intranet.Areas.Elements_Communautaires.Models.Dal
             }
         }
 
-        public virtual void Modifier(Element_Communautaire_Objet element)
+        public virtual void Modifier<ViewModel>(ViewModel model, Element_Communautaire_Objet elementCommunautaireAModifier) where ViewModel : Element_Communautaire_ViewModel
         {
             try
             {
                 //Création d'une instance de l'élément à comparer (type dynamique)
-                dynamic instanceElementAComparer = Activator.CreateInstance(element.GetType());
-                dynamic elementAModifier = RetournerElementCommunautaireTrouve(instanceElementAComparer, element.Id);
-
+                dynamic instanceElementAComparer = Activator.CreateInstance(elementCommunautaireAModifier.GetType());
+                dynamic elementAModifier = RetournerElementCommunautaireTrouve(instanceElementAComparer, elementCommunautaireAModifier.Element.Id);
+                
                 if (elementAModifier != null)
                 {
-                    //Récupération du tuple de l'élément visé dans sa table
-                    dynamic tupleElement = RetournerTupleElement(elementAModifier);
-                    //Traitement uniquement si le libellé a changé
-                    if (tupleElement.Property("Titre").CurrentValue != element.Titre)
+                    //Modification du titre
+                    if (elementAModifier.Titre != model.Titre)
+                        elementAModifier.Titre = model.Titre;
+                        
+
+                    //Modification de la description
+                    if (elementAModifier.Description != model.Description)
+                        elementAModifier.Description = model.Description;
+                        
+
+                    //Modification de la categorie
+                    if (elementAModifier.Categorie.Id != model.Categorie)
                     {
-                        tupleElement.CurrentValues.SetValues(element);
-                        //Récupération du tuple de l'élément lié dans sa table
-                        dynamic tupleElementLieElement = RetournerTupleElementLieElement(elementAModifier.Element);
+                        Categorie CategorieViewModel = Bdd.Categories.FirstOrDefault(c => c.Id == model.Categorie);
+                        elementAModifier.Categorie = CategorieViewModel;
+                    }
+
+                    //Modification des thèmes associés
+                    if (elementAModifier.Element.ListeThemesAssocies != model.ListeThemesSelectionnes)
+                    {
+                        elementAModifier.Element.ListeThemesAssocies.Clear();
+                        elementAModifier.Element.ListeThemesAssocies = model.ListeThemesSelectionnes;
+                    }
+
+                    //Modification des médias associés
+                    foreach(Media media in model.ListeMediasAssocies)
+                    {
+                        //Modification des médias existants
+                        if (elementAModifier.ListeMediasAssocies.Contains(media))
+                        {
+                            Media mediaTrouve = Bdd.Medias.FirstOrDefault(m=> m.Id == media.Id);
+                            if (mediaTrouve.Titre != media.Titre)
+                                mediaTrouve.Titre = media.Titre;
+
+                            if (mediaTrouve.Description != media.Description)
+                                mediaTrouve.Description = media.Description;
+
+                            if (mediaTrouve.Chemin != media.Chemin)
+                                mediaTrouve.Chemin = media.Chemin;
+                        }
+
+                        //Suppression d'un média
+
+                        
+
+                        //Ajout d'un média
+
+
+                    }
+                    //Récupération du tuple de l'élément visé dans sa table
+                    DbEntityEntry tupleElement = RetournerTupleElement(elementAModifier);
+                    //Récupération du tuple de l'élément lié dans sa table
+                        Element elementLie = elementAModifier.Element;
+                        Element elementLieTrouve = Bdd.Elements.FirstOrDefault(e=> e.Id == elementLie.Id);
+                        DbEntityEntry tupleElementLieElement = Bdd.Entry(elementLieTrouve);
                         //Modification des états trackés dans la sauvegarde de données, pour chaque tuple
                         tupleElement.State = EntityState.Modified;
                         tupleElementLieElement.State = EntityState.Modified;
 
                         Bdd.SaveChanges();
-                    }
+                   // }
                 }
             }
             catch (Exception ex)
@@ -292,37 +333,7 @@ namespace Intranet.Areas.Elements_Communautaires.Models.Dal
         {
             try
             {
-                //Création d'une instance de l'élément général objet à supprimer (type dynamique)
-                dynamic instanceElementAComparer = Activator.CreateInstance(element.GetType());
-                //Recherche de l'élément général objet
-                dynamic instanceElementASupprimer = RetournerElementCommunautaireTrouve(instanceElementAComparer, element.Id);
-
-                //Suppression de la contrainte Fraction liée à l'élément créé pour l'élément général objet
-                Element elementLieASupprimer = Bdd.Elements.FirstOrDefault(e => e.Id == element.Id);
-                if (elementLieASupprimer != null)
-                {
-                    Fraction fractionElementAOter = elementLieASupprimer.Fraction;
-                    fractionElementAOter = null;
-                }
-                //Suppression de la contrainte Element liée à l'élément général objet
-                if (instanceElementASupprimer != null)
-                {
-                    Element ElementLieElementAOter = instanceElementASupprimer.Element;
-                    ElementLieElementAOter = null;
-                }
-
-                ////Recherche d'une ressource éventuellement liée à cet élément général objet
-                //int idElementASupprimer = instanceElementASupprimer.Element.Id;
-                //Ressource ressourceTrouvee = Bdd.Ressources.Include(r => r.Element).FirstOrDefault(r => r.Categorie.Element.Id == idElementASupprimer);
-
-                //Traitement
-                if (instanceElementAComparer != null)
-                {
-                    DbSet tableElementASupprimerEnBdd = Bdd.Set(instanceElementASupprimer.GetType());
-                    tableElementASupprimerEnBdd.Remove(instanceElementASupprimer);
-                    Bdd.Elements.Remove(elementLieASupprimer);
-                    Bdd.SaveChanges();
-                }
+               
             }
             catch (Exception ex)
             {
@@ -335,27 +346,7 @@ namespace Intranet.Areas.Elements_Communautaires.Models.Dal
         {
             try
             {
-                //Création d'une instance de l'élément général objet à masquer (type dynamique)
-                dynamic instanceElementAComparer = Activator.CreateInstance(element.GetType());
-                //Recherche de l'élément général objet
-                dynamic instanceElementAMasquer = RetournerElementCommunautaireTrouve(instanceElementAComparer, element.Id);
-                ////Recherche de l'élément lié
-                Element elementLieAMasquer = Bdd.Elements.FirstOrDefault(e => e.Id == element.Id);
-                int idElementAMasquer = instanceElementAMasquer.Element.Id;
-                ////Recherche d'une ressource éventuellement liée à cet élément général objet
-                //Ressource ressourceTrouvee = Bdd.Ressources.Include(r => r.Element).FirstOrDefault(r => r.Categorie.Element.Id == idElementAMasquer);
-
-                //Traitement
-                if (instanceElementAComparer != null)
-                {
-                    elementLieAMasquer.Etat = Element.Etats.Masqué;
-                    Bdd.SaveChanges();
-                    if (elementLieAMasquer.Etat == Element.Etats.Masqué)
-                    {
-                        DbEntityEntry<Element> entryElement = Bdd.Entry(elementLieAMasquer);
-                        entryElement.State = EntityState.Deleted;
-                    }
-                }
+               
             }
             catch (Exception ex)
             {
@@ -388,23 +379,10 @@ namespace Intranet.Areas.Elements_Communautaires.Models.Dal
                 .FirstOrDefault();
         }
 
-        //public List<Theme> RetournerListeThemesLies<Entite>(Entite element, int? id)
-        //where Entite : Element_Communautaire_Objet
-        //{
-        //    if (element != null && id != null)
-        //    {
-        //        return Bdd.Set<Entite>()
-        //       .Include(x => x.Element)
-        //       .Where(x => x.Element.Id == id)
-        //       .SelectMany(x => x.Element.ListeThemesAssocies)
-        //       .ToList();
-        //    }
-        //    return null;
-        //}
-
         private DbEntityEntry<Entite> RetournerTupleElement<Entite>(Entite element)
             where Entite : Element_Communautaire_Objet
         {
+            
             return Bdd.Entry(element);
         }
 

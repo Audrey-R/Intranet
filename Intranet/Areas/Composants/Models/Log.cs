@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Web;
 
-namespace Intranet.Areas.Composants.Models.Operations
+namespace Intranet.Areas.Composants.Models
 {
     public class Log
     {

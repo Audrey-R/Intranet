@@ -3,11 +3,8 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
-using Intranet.Areas.Composants.Models.BDD;
-using Intranet.Areas.Composants.Models.Elements;
-using Intranet.Areas.Composants.Models.Operations;
-using Intranet.Areas.Elements_Communautaires.Models.Ressources;
-using Intranet.Areas.Elements_Generaux.Models.Ressources;
+using Intranet.Areas.Composants.Models;
+using Intranet.Areas.Elements_Communautaires.Models;
 
 namespace Intranet.Areas.Elements_Generaux.Models
 {
@@ -25,12 +22,12 @@ namespace Intranet.Areas.Elements_Generaux.Models
             return Bdd;
         }
 
-        public virtual IEnumerable<Entity> Lister<Entity>(Entity table)
-            where Entity : Element_General_Objet
+        public virtual IEnumerable<Entite> Lister<Entite>(Entite table)
+            where Entite : Element_General_Objet
         {
             try
             {
-                return Bdd.Set<Entity>()
+                return Bdd.Set<Entite>()
                     .Include(c => c.Element)
                     .Where(c => c.Element.Etat != Element.Etats.Masqué)
                     .ToList();

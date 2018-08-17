@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Linq;
 using System.Web.Mvc;
 using Intranet.Areas.Elements_Communautaires.Controllers.Dal;
 using Intranet.Areas.Elements_Communautaires.Controllers.Parent;
-using Intranet.Areas.Elements_Communautaires.Models;
-using Intranet.Areas.Elements_Communautaires.Models.Medias;
-using Intranet.Areas.Elements_Communautaires.Models.Ressources;
 using Intranet.Areas.Elements_Communautaires.ViewModels.Creer;
 using Intranet.Areas.Elements_Generaux.Models;
 

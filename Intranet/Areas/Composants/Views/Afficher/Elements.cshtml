@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Intranet.Areas.Composants.Models.Elements.Element>
+﻿@model IEnumerable<Intranet.Areas.Composants.Models.Element>
 
 @{
     Layout = null;
@@ -30,14 +30,14 @@
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Id)
-                @*@if(item.Collaborateur == null)
-                {*@
-                    @*@Html.DisplayFor(modelItem => item.Collaborateur,"Non défini")*@
-                @*}
+                @if(item.Collaborateur == null)
+                {
+                    @Html.DisplayFor(modelItem => item.Collaborateur,"Non défini")
+                }
                 else
-                {*@
+                {
                     @Html.DisplayFor(modelItem => item.Collaborateur)
-                @*}*@
+                }
                 @Html.DisplayFor(modelItem => item.Etat)
                 @Html.DisplayFor(modelItem => item.Fraction.Libelle)
             </td>

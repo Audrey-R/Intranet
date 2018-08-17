@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Web;
+﻿using System.Net;
 using System.Web.Mvc;
-using Intranet.Areas.Composants.Models.Elements;
-using Intranet.Areas.Elements_Communautaires.Models;
+using Intranet.Areas.Composants.Models;
 using Intranet.Areas.Elements_Generaux.Models;
 
 namespace Intranet.Areas.Elements_Generaux.Controllers

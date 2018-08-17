@@ -1,12 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Web;
-using Intranet.Areas.Composants.Models.BDD;
-using Intranet.Areas.Composants.Models.Elements;
-using Intranet.Areas.Elements_Generaux;
-using Intranet.Areas.Elements_Generaux.Models;
+using Intranet.Areas.Composants.Models;
 
 namespace Intranet.Areas.Elements_Generaux.Models
 {

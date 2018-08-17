@@ -1,11 +1,8 @@
-﻿using Intranet.Areas.Elements_Generaux.Models.Ressources;
-using Intranet.Areas.Elements_Generaux.Models;
-using Intranet.Areas.Elements_Communautaires.Models.Ressources;
-using System.Drawing;
+﻿using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 
-namespace Intranet.Areas.Elements_Communautaires.Models.Medias
+namespace Intranet.Areas.Elements_Communautaires.Models
 {
     public class Media : Element_Communautaire_Objet
     {

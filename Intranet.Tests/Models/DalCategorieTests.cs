@@ -1,14 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Intranet.Areas.Composants.Models.BDD;
-using Intranet.Areas.Composants.Models.Elements;
-using Intranet.Areas.Elements_Generaux;
-using Intranet.Areas.Elements_Generaux.Models;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Intranet.Tests.Models
 {
